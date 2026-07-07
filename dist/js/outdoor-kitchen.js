@@ -60,6 +60,7 @@
   var DEFAULT_IMAGE = 'images/lifestyle/hero-evening-garden-pizza.jpg';
   var HERO_IMAGE = 'images/lifestyle/garden-living-hero-final-photo.png';
   var STORAGE_KEY = 'garden_living_saved_products_v1';
+  var SITE_ORIGIN = 'https://gardenliving-ex.net';
 
   var state = {
     products: [],
@@ -199,7 +200,7 @@
       install: text(product.installation && product.installation.installation_method),
       priority: 80,
       order: index,
-      detailUrl: 'garden-products/' + encodeURIComponent(product.id) + '.html',
+      detailUrl: SITE_ORIGIN + '/garden-products/' + encodeURIComponent(product.id) + '.html',
     };
   }
 
@@ -249,7 +250,7 @@
       install: text(product.install_type),
       priority: product.sales_priority === 'A' ? 100 : product.sales_priority === 'B' ? 70 : 40,
       order: 10000 + index,
-      detailUrl: 'outdoor-kitchen-detail.html?id=' + encodeURIComponent(product.product_id),
+      detailUrl: SITE_ORIGIN + '/outdoor-kitchen-detail.html?id=' + encodeURIComponent(product.product_id),
     };
   }
 

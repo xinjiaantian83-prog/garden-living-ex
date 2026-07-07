@@ -6,6 +6,7 @@
   var DEFAULT_IMAGE = 'images/lifestyle/hero-evening-garden-pizza.jpg';
   var LINE_URL = 'https://line.me/R/ti/p/@953wnidc';
   var STORAGE_KEY = 'garden_living_saved_products_v1';
+  var SITE_ORIGIN = 'https://gardenliving-ex.net';
 
   function text(value) {
     return value === null || value === undefined || value === '' ? '未確認' : String(value);
@@ -260,6 +261,13 @@
 
   function renderProduct(product) {
     document.title = product.name + '｜Garden Living by EXた組';
+    var detailUrl = SITE_ORIGIN + '/outdoor-kitchen-detail.html?id=' + encodeURIComponent(product.id);
+    var canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.href = detailUrl;
+    var ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute('content', detailUrl);
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', product.name + '｜Garden Living by EXた組');
     setText('detail-category', 'Garden Living / ' + product.category);
     setText('detail-title', product.name);
     setText('detail-lead', product.description);
