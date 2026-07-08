@@ -38,6 +38,7 @@
   var simulatorGeneratedImageWrap = document.getElementById('simulator-generated-image-wrap');
   var simulatorGeneratedImage = document.getElementById('simulator-generated-image');
   var simulatorGeneratedCaption = document.getElementById('simulator-generated-caption');
+  var simulatorGeneratedWatermark = document.querySelector('.generated-watermark');
   var simulatorLoading = document.getElementById('simulator-loading');
   var simulatorErrorBox = document.getElementById('simulator-error-box');
   var simulatorErrorMessage = document.getElementById('simulator-error-message');
@@ -59,7 +60,6 @@
     '防草シート',
     'ピザ窯',
   ];
-  var LINE_URL = 'https://line.me/R/ti/p/@953wnidc';
   var CATEGORY_META = {
     '車止め': '愛車を美しく守るデザイン車止め',
     'サイクルスタンド': '自転車置き場をすっきり整えるスタンド',
@@ -91,77 +91,105 @@
   var HERO_IMAGE = 'images/lifestyle/garden-living-hero-final-photo.png';
   var STORAGE_KEY = 'garden_living_saved_products_v1';
   var SITE_ORIGIN = 'https://gardenliving-ex.net';
-  var ITEM_PRICE_MASTER = window.GARDEN_LIVING_ITEM_PRICE_MASTER || {};
-  var SIMULATOR_MAX_ITEMS = 5;
-  var SIMULATOR_SCENES = ['裏庭', '前庭・駐車場', 'ドッグラン', 'アウトドアリビング'];
-  var SIMULATOR_ITEMS = [
-    'ピザ窯',
-    'BBQスペース',
-    'タイルデッキ',
-    '人工芝',
-    'ウッドデッキ',
-    '目隠しフェンス',
-    'エコモックフェンス',
-    'アメリカンフェンス',
-    'カーポート',
-    'サイクルポート',
-    'ガーデンファニチャー',
-    '植栽',
-    '照明',
-    'サウナ',
-    '物置',
-    '宅配ボックス',
-  ];
-  var SIMULATOR_SCENE_PRIORITY = {
-    '裏庭': ['タイルデッキ', '人工芝', 'ピザ窯', 'BBQスペース', 'ウッドデッキ', 'ガーデンファニチャー', '植栽', '照明', '目隠しフェンス'],
-    '前庭・駐車場': ['カーポート', 'サイクルポート', '宅配ボックス', '目隠しフェンス', 'エコモックフェンス', '植栽', '照明', '物置', 'アメリカンフェンス'],
-    'ドッグラン': ['人工芝', 'アメリカンフェンス', '立水栓', '目隠しフェンス', '植栽', '照明', 'ガーデンファニチャー', '物置'],
-    'アウトドアリビング': ['ピザ窯', 'BBQスペース', 'タイルデッキ', 'ガーデンファニチャー', '照明', 'サウナ', 'ウッドデッキ', '植栽', '目隠しフェンス'],
+  var GARDEN_SIMULATOR_CONFIG = {
+    id: 'garden-living',
+    title: 'AIガーデンシミュレーター β版',
+    description: 'お庭の写真をもとに、ピザ窯・タイルデッキ・人工芝などを配置した完成イメージを作成できます。',
+    watermark: 'Garden Living by EXた組',
+    lineUrl: 'https://line.me/R/ti/p/@953wnidc',
+    consultTitle: '【Garden Living AIシミュレーター相談】',
+    concept: '庭で過ごす時間、アウトドアリビング、ピザ窯、サウナ、ドッグランなど',
+    promptPolicy: '既存の建物・窓・外壁・敷地形状はできるだけ維持し、現実的な外構施工として違和感のない完成イメージにしてください。写真全体の明るさ、素材感、植栽の自然さを整え、Garden Livingらしい温かい庭時間が伝わる雰囲気にしてください。',
+    maxItems: 5,
+    priceMaster: window.GARDEN_SIMULATOR_PRICE_MASTER || window.GARDEN_LIVING_ITEM_PRICE_MASTER || {},
+    scenes: ['裏庭', '前庭・駐車場', 'ドッグラン', 'アウトドアリビング'],
+    scenePurposes: {
+      '裏庭': '家族で楽しめる落ち着いた裏庭',
+      '前庭・駐車場': '玄関まわりと駐車場が使いやすい外構空間',
+      'ドッグラン': '犬が安心して遊べるドッグラン',
+      'アウトドアリビング': '食事やくつろぎを楽しめるアウトドアリビング',
+    },
+    items: [
+      'ピザ窯',
+      'BBQスペース',
+      'タイルデッキ',
+      '人工芝',
+      'ウッドデッキ',
+      '目隠しフェンス',
+      'エコモックフェンス',
+      'アメリカンフェンス',
+      'カーポート',
+      'サイクルポート',
+      'ガーデンファニチャー',
+      '植栽',
+      '照明',
+      'サウナ',
+      '物置',
+      '宅配ボックス',
+    ],
+    scenePriority: {
+      '裏庭': ['タイルデッキ', '人工芝', 'ピザ窯', 'BBQスペース', 'ウッドデッキ', 'ガーデンファニチャー', '植栽', '照明', '目隠しフェンス'],
+      '前庭・駐車場': ['カーポート', 'サイクルポート', '宅配ボックス', '目隠しフェンス', 'エコモックフェンス', '植栽', '照明', '物置', 'アメリカンフェンス'],
+      'ドッグラン': ['人工芝', 'アメリカンフェンス', '立水栓', '目隠しフェンス', '植栽', '照明', 'ガーデンファニチャー', '物置'],
+      'アウトドアリビング': ['ピザ窯', 'BBQスペース', 'タイルデッキ', 'ガーデンファニチャー', '照明', 'サウナ', 'ウッドデッキ', '植栽', '目隠しフェンス'],
+    },
+    areaCodes: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
+    areaLabels: {
+      A: '左奥',
+      B: '中央奥',
+      C: '右奥',
+      D: '左中央',
+      E: '中央',
+      F: '右中央',
+      G: '左手前',
+      H: '中央手前',
+      I: '右手前',
+    },
+    sampleGardens: [
+      {
+        id: 'modern-house',
+        title: '新築住宅（モダン）',
+        description: '新築外構に庭アイテムを足す想定。',
+        image: HERO_IMAGE,
+      },
+      {
+        id: 'simple-backyard',
+        title: 'シンプルな裏庭',
+        description: '人工芝やデッキを考えやすい庭。',
+        image: 'images/lifestyle/categories/category-american-fence.png',
+      },
+      {
+        id: 'outdoor-living',
+        title: 'アウトドアリビング',
+        description: '食事やくつろぎを中心に検討。',
+        image: 'images/lifestyle/hero-evening-garden-pizza.jpg',
+      },
+      {
+        id: 'dog-run',
+        title: 'ドッグラン向けの庭',
+        description: 'フェンスと人工芝の相性を確認。',
+        image: HERO_IMAGE,
+      },
+      {
+        id: 'parking-house',
+        title: '駐車場付き住宅',
+        description: '前庭と駐車場まわりの相談向け。',
+        image: 'images/g20-material/carstop-flute-six.webp',
+      },
+    ],
   };
-  var SIMULATOR_AREA_CODES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
-  var SIMULATOR_AREA_LABELS = {
-    A: '左奥',
-    B: '中央奥',
-    C: '右奥',
-    D: '左中央',
-    E: '中央',
-    F: '右中央',
-    G: '左手前',
-    H: '中央手前',
-    I: '右手前',
-  };
-  var SAMPLE_GARDENS = [
-    {
-      id: 'modern-house',
-      title: '新築住宅（モダン）',
-      description: '新築外構に庭アイテムを足す想定。',
-      image: HERO_IMAGE,
-    },
-    {
-      id: 'simple-backyard',
-      title: 'シンプルな裏庭',
-      description: '人工芝やデッキを考えやすい庭。',
-      image: 'images/lifestyle/categories/category-american-fence.png',
-    },
-    {
-      id: 'outdoor-living',
-      title: 'アウトドアリビング',
-      description: '食事やくつろぎを中心に検討。',
-      image: 'images/lifestyle/hero-evening-garden-pizza.jpg',
-    },
-    {
-      id: 'dog-run',
-      title: 'ドッグラン向けの庭',
-      description: 'フェンスと人工芝の相性を確認。',
-      image: HERO_IMAGE,
-    },
-    {
-      id: 'parking-house',
-      title: '駐車場付き住宅',
-      description: '前庭と駐車場まわりの相談向け。',
-      image: 'images/g20-material/carstop-flute-six.webp',
-    },
-  ];
+  // EXた組HPへ移植するときは、同じ形の EX_TAKUMI_SIMULATOR_CONFIG を先に読み込めば差し替えられます。
+  window.GARDEN_SIMULATOR_CONFIG = window.GARDEN_SIMULATOR_CONFIG || GARDEN_SIMULATOR_CONFIG;
+  var SIMULATOR_CONFIG = window.EX_TAKUMI_SIMULATOR_CONFIG || window.GARDEN_SIMULATOR_CONFIG || GARDEN_SIMULATOR_CONFIG;
+  var LINE_URL = SIMULATOR_CONFIG.lineUrl || 'https://line.me/R/ti/p/@953wnidc';
+  var ITEM_PRICE_MASTER = SIMULATOR_CONFIG.priceMaster || {};
+  var SIMULATOR_MAX_ITEMS = SIMULATOR_CONFIG.maxItems || 5;
+  var SIMULATOR_SCENES = SIMULATOR_CONFIG.scenes || [];
+  var SIMULATOR_ITEMS = SIMULATOR_CONFIG.items || [];
+  var SIMULATOR_SCENE_PRIORITY = SIMULATOR_CONFIG.scenePriority || {};
+  var SIMULATOR_AREA_CODES = SIMULATOR_CONFIG.areaCodes || [];
+  var SIMULATOR_AREA_LABELS = SIMULATOR_CONFIG.areaLabels || {};
+  var SAMPLE_GARDENS = SIMULATOR_CONFIG.sampleGardens || [];
 
   var state = {
     products: [],
@@ -655,13 +683,8 @@
   }
 
   function scenePurpose() {
-    var map = {
-      '裏庭': '家族で楽しめる落ち着いた裏庭',
-      '前庭・駐車場': '玄関まわりと駐車場が使いやすい外構空間',
-      'ドッグラン': '犬が安心して遊べるドッグラン',
-      'アウトドアリビング': '食事やくつろぎを楽しめるアウトドアリビング',
-    };
-    return map[simulatorState.scene] || '庭まわりの外構空間';
+    var scenePurposes = SIMULATOR_CONFIG.scenePurposes || {};
+    return scenePurposes[simulatorState.scene] || '庭まわりの外構空間';
   }
 
   function photoPromptLabel() {
@@ -715,8 +738,7 @@
 
     return photoPromptLabel() + 'をもとに、' + simulatorState.scene + 'を' + scenePurpose() + 'にしてください。' +
       itemText +
-      '既存の建物・窓・外壁・敷地形状はできるだけ維持し、現実的な外構施工として違和感のない完成イメージにしてください。' +
-      '写真全体の明るさ、素材感、植栽の自然さを整え、Garden Livingらしい温かい庭時間が伝わる雰囲気にしてください。';
+      (SIMULATOR_CONFIG.promptPolicy || '既存の建物・窓・外壁・敷地形状はできるだけ維持し、現実的な外構施工として違和感のない完成イメージにしてください。');
   }
 
   function renderSimulatorSources() {
@@ -824,7 +846,7 @@
       }).join('\n')
       : '・未選択';
 
-    return '【Garden Living AIシミュレーター相談】\n\n' +
+    return (SIMULATOR_CONFIG.consultTitle || '【AIガーデンシミュレーター相談】') + '\n\n' +
       'シーン：' + simulatorState.scene + '\n' +
       '使用写真：' + consultPhotoLabel() + '\n\n' +
       '選択商品：\n' + selectedLines + '\n\n' +
@@ -843,6 +865,7 @@
     return {
       image_url: simulatorSourceImage(),
       image_source: simulatorState.source,
+      simulator_id: SIMULATOR_CONFIG.id || 'garden-simulator',
       prompt: buildSimulatorPrompt(),
       selected_items: simulatorState.selectedItems.slice(),
       placements: Object.assign({}, simulatorState.placements),
@@ -999,6 +1022,9 @@
 
   function initSimulator() {
     if (!simulatorItemList || !simulatorPrompt) return;
+    if (simulatorGeneratedWatermark) {
+      simulatorGeneratedWatermark.textContent = SIMULATOR_CONFIG.watermark || 'Garden Living by EXた組';
+    }
     renderSimulator();
 
     simulatorSourceInputs.forEach(function (input) {

@@ -67,4 +67,5 @@
       note: 'AIガーデンシミュレーター用の税込参考価格',
     },
   };
+  window.GARDEN_SIMULATOR_PRICE_MASTER = window.GARDEN_LIVING_ITEM_PRICE_MASTER;
 })();
