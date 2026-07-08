@@ -34,7 +34,6 @@
   var simulatorPrompt = document.getElementById('simulator-prompt');
   var simulatorCopy = document.getElementById('simulator-copy');
   var simulatorGenerate = document.getElementById('simulator-generate');
-  var simulatorRemainingCount = document.getElementById('simulator-remaining-count');
   var simulatorResult = document.getElementById('simulator-result');
   var simulatorGeneratedImageWrap = document.getElementById('simulator-generated-image-wrap');
   var simulatorGeneratedImage = document.getElementById('simulator-generated-image');
@@ -91,12 +90,9 @@
   var DEFAULT_IMAGE = 'images/lifestyle/hero-evening-garden-pizza.jpg';
   var HERO_IMAGE = 'images/lifestyle/garden-living-hero-final-photo.png';
   var STORAGE_KEY = 'garden_living_saved_products_v1';
-  var SIMULATOR_USAGE_STORAGE_KEY = 'garden_living_ai_simulator_usage_v1';
   var SITE_ORIGIN = 'https://gardenliving-ex.net';
   var ITEM_PRICE_MASTER = window.GARDEN_LIVING_ITEM_PRICE_MASTER || {};
   var SIMULATOR_MAX_ITEMS = 5;
-  var SIMULATOR_DAILY_LIMIT = 3;
-  var SIMULATOR_LIMIT_MESSAGE = '本日のシミュレーション回数上限に達しました。続きはLINE相談よりお問い合わせください。';
   var SIMULATOR_SCENES = ['裏庭', '前庭・駐車場', 'ドッグラン', 'アウトドアリビング'];
   var SIMULATOR_ITEMS = [
     'ピザ窯',
@@ -185,7 +181,6 @@
     selectedItems: [],
     placements: {},
     lastGenerationInput: null,
-    isGenerating: false,
   };
 
   function text(value) {
@@ -226,67 +221,6 @@
     });
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state.savedIds));
     updateSavedCount();
-  }
-
-  function simulatorTodayKey() {
-    var today = new Date();
-    var month = String(today.getMonth() + 1).padStart(2, '0');
-    var date = String(today.getDate()).padStart(2, '0');
-    return today.getFullYear() + '-' + month + '-' + date;
-  }
-
-  function readSimulatorUsage() {
-    var today = simulatorTodayKey();
-    try {
-      var parsed = JSON.parse(window.localStorage.getItem(SIMULATOR_USAGE_STORAGE_KEY) || '{}');
-      if (!parsed || parsed.date !== today) {
-        return { date: today, count: 0 };
-      }
-      return {
-        date: today,
-        count: Math.max(0, Number(parsed.count) || 0),
-      };
-    } catch (error) {
-      return { date: today, count: 0 };
-    }
-  }
-
-  function writeSimulatorUsage(usage) {
-    window.localStorage.setItem(SIMULATOR_USAGE_STORAGE_KEY, JSON.stringify({
-      date: usage.date || simulatorTodayKey(),
-      count: Math.max(0, Number(usage.count) || 0),
-    }));
-  }
-
-  function simulatorRemainingGenerations() {
-    var usage = readSimulatorUsage();
-    return Math.max(0, SIMULATOR_DAILY_LIMIT - usage.count);
-  }
-
-  function updateSimulatorUsageDisplay(options) {
-    var remaining = simulatorRemainingGenerations();
-    if (simulatorRemainingCount) {
-      simulatorRemainingCount.textContent = '本日の残り生成回数：' + remaining + '回';
-      simulatorRemainingCount.classList.toggle('is-empty', remaining <= 0);
-    }
-    if (simulatorGenerate) {
-      simulatorGenerate.disabled = simulatorState.isGenerating || remaining <= 0;
-    }
-    if (simulatorRetry) {
-      simulatorRetry.disabled = simulatorState.isGenerating || remaining <= 0;
-    }
-    if (remaining <= 0 && simulatorResult && !(options && options.preserveResult) && !simulatorState.isGenerating) {
-      simulatorResult.textContent = SIMULATOR_LIMIT_MESSAGE;
-    }
-  }
-
-  function consumeSimulatorGeneration() {
-    var usage = readSimulatorUsage();
-    if (usage.count >= SIMULATOR_DAILY_LIMIT) return false;
-    usage.count += 1;
-    writeSimulatorUsage(usage);
-    updateSimulatorUsageDisplay({ preserveResult: true });
-    return true;
   }
 
   function isSaved(productId) {
@@ -920,6 +854,7 @@
     simulatorState.lastGenerationInput = input;
 
     // ここに画像生成APIを接続
+    // TODO: Generation logging
     // input.image_url / input.prompt / input.selected_items / input.placements / input.scene を送信し、
     // 返却された画像URLまたはBase64画像を result.image_url として表示する想定です。
     return new Promise(function (resolve) {
@@ -933,8 +868,8 @@
   }
 
   function setSimulatorGenerating(isGenerating) {
-    simulatorState.isGenerating = isGenerating;
-    updateSimulatorUsageDisplay({ preserveResult: true });
+    if (simulatorGenerate) simulatorGenerate.disabled = isGenerating;
+    if (simulatorRetry) simulatorRetry.disabled = isGenerating;
     if (simulatorLoading) simulatorLoading.hidden = !isGenerating;
     if (isGenerating && simulatorResult) {
       simulatorResult.textContent = 'AIが完成イメージを作成中です…';
@@ -953,11 +888,6 @@
 
   function startGardenImageGeneration(input) {
     var generationInput = input || simulatorGenerationInput();
-    if (!consumeSimulatorGeneration()) {
-      updateSimulatorUsageDisplay();
-      if (simulatorResult) simulatorResult.textContent = SIMULATOR_LIMIT_MESSAGE;
-      return;
-    }
     hideSimulatorGenerationError();
     setSimulatorGenerating(true);
 
@@ -978,7 +908,6 @@
       })
       .finally(function () {
         setSimulatorGenerating(false);
-        updateSimulatorUsageDisplay();
       });
   }
 
@@ -1003,7 +932,6 @@
     renderSimulatorPlacements();
     renderSimulatorPriceSummary();
     updateSimulatorPrompt();
-    updateSimulatorUsageDisplay({ preserveResult: true });
   }
 
   function toggleSimulatorItem(item) {
