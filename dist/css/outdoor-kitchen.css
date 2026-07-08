@@ -1364,11 +1364,43 @@ h1 {
   background: #fff;
 }
 
-.simulator-generated-preview img {
+.simulator-generated-image-wrap {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.simulator-generated-image-wrap img {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   background: #f4f1ec;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.generated-watermark {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  max-width: calc(100% - 28px);
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.34);
+  color: rgba(23, 23, 23, 0.52);
+  font-size: clamp(10px, 3vw, 12px);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.72);
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
 }
 
 .simulator-generated-preview figcaption {

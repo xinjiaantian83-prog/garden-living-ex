@@ -35,6 +35,7 @@
   var simulatorCopy = document.getElementById('simulator-copy');
   var simulatorGenerate = document.getElementById('simulator-generate');
   var simulatorResult = document.getElementById('simulator-result');
+  var simulatorGeneratedImageWrap = document.getElementById('simulator-generated-image-wrap');
   var simulatorGeneratedImage = document.getElementById('simulator-generated-image');
   var simulatorGeneratedCaption = document.getElementById('simulator-generated-caption');
   var simulatorLoading = document.getElementById('simulator-loading');
@@ -1079,6 +1080,18 @@
 
     if (simulatorLineConsult) {
       simulatorLineConsult.href = LINE_URL || '#contact';
+    }
+
+    if (simulatorGeneratedImageWrap) {
+      simulatorGeneratedImageWrap.addEventListener('contextmenu', function (event) {
+        event.preventDefault();
+      });
+      simulatorGeneratedImageWrap.addEventListener('dragstart', function (event) {
+        event.preventDefault();
+      });
+      simulatorGeneratedImageWrap.addEventListener('selectstart', function (event) {
+        event.preventDefault();
+      });
     }
 
     if (simulatorGenerate) {
