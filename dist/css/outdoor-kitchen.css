@@ -811,6 +811,16 @@ h1 {
   font-weight: 700;
 }
 
+.simulator-intro .simulator-usage-note {
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(23, 23, 23, 0.08);
+  color: rgba(23, 23, 23, 0.58);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
 .simulator-step {
   display: grid;
   gap: 16px;
@@ -1319,8 +1329,27 @@ h1 {
 }
 
 .btn:disabled {
-  cursor: wait;
+  cursor: not-allowed;
   opacity: 0.58;
+}
+
+.simulator-remaining {
+  margin: 0;
+  width: fit-content;
+  padding: 7px 11px;
+  border: 1px solid rgba(143, 63, 42, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--text-soft);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.simulator-remaining.is-empty {
+  border-color: rgba(143, 63, 42, 0.28);
+  background: rgba(143, 63, 42, 0.08);
+  color: #8f3f2a;
 }
 
 .simulator-generation-card {
