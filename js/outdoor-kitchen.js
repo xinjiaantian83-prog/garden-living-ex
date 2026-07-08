@@ -23,6 +23,7 @@
   var simulatorItemList = document.getElementById('simulator-item-list');
   var simulatorCount = document.getElementById('simulator-count');
   var simulatorLimitMessage = document.getElementById('simulator-limit-message');
+  var placementReferenceImage = document.getElementById('placement-reference-image');
   var simulatorPlacementList = document.getElementById('simulator-placement-list');
   var simulatorSelectedPriceList = document.getElementById('simulator-selected-price-list');
   var simulatorTotalPrice = document.getElementById('simulator-total-price');
@@ -116,7 +117,18 @@
     'ドッグラン': ['人工芝', 'アメリカンフェンス', '立水栓', '目隠しフェンス', '植栽', '照明', 'ガーデンファニチャー', '物置'],
     'アウトドアリビング': ['ピザ窯', 'BBQスペース', 'タイルデッキ', 'ガーデンファニチャー', '照明', 'サウナ', 'ウッドデッキ', '植栽', '目隠しフェンス'],
   };
-  var SIMULATOR_PLACEMENTS = ['おまかせ', '左奥', '中央奥', '右奥', '左手前', '中央', '右手前'];
+  var SIMULATOR_AREA_CODES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+  var SIMULATOR_AREA_LABELS = {
+    A: '左奥',
+    B: '中央奥',
+    C: '右奥',
+    D: '左中央',
+    E: '中央',
+    F: '右中央',
+    G: '左手前',
+    H: '中央手前',
+    I: '右手前',
+  };
   var SAMPLE_GARDENS = [
     {
       id: 'modern-house',
@@ -661,6 +673,27 @@
     return 'アップロード予定の庭写真';
   }
 
+  function areaLabel(code) {
+    return SIMULATOR_AREA_LABELS[code] || code;
+  }
+
+  function areaDisplay(codes) {
+    if (!Array.isArray(codes) || !codes.length) return 'おまかせ';
+    return codes.map(function (code) {
+      return code + '（' + areaLabel(code) + '）';
+    }).join('・');
+  }
+
+  function areaPromptText(item, codes) {
+    if (!Array.isArray(codes) || !codes.length) return item + 'を自然な位置に';
+    if (codes.length === 1) {
+      return item + 'をエリア' + codes[0] + '（' + areaLabel(codes[0]) + '）へ';
+    }
+    return item + 'をエリア' + codes.map(function (code) {
+      return code + '（' + areaLabel(code) + '）';
+    }).join('・') + 'へ';
+  }
+
   function consultPhotoLabel() {
     if (simulatorState.source === 'sample') {
       return 'サンプル庭（' + simulatorSample().title + '）';
@@ -675,8 +708,7 @@
     var selected = simulatorState.selectedItems;
     var itemText = selected.length
       ? selected.map(function (item) {
-        var placement = simulatorState.placements[item] || 'おまかせ';
-        return placement === 'おまかせ' ? item + 'を自然な位置に' : placement + 'に' + item;
+        return areaPromptText(item, simulatorState.placements[item]);
       }).join('、') + '配置してください。'
       : '必要な庭アイテムを自然に提案して配置してください。';
 
@@ -694,6 +726,11 @@
       input.checked = input.value === simulatorState.source;
       if (method) method.classList.toggle('is-active', input.checked);
     });
+  }
+
+  function updatePlacementReferenceImage() {
+    if (!placementReferenceImage) return;
+    placementReferenceImage.src = simulatorSourceImage();
   }
 
   function renderSampleGardens() {
@@ -733,15 +770,21 @@
       return;
     }
     simulatorPlacementList.innerHTML = simulatorState.selectedItems.map(function (item) {
-      var current = simulatorState.placements[item] || 'おまかせ';
-      return '<label class="placement-row">' +
-        '<span>' + escapeHtml(item) + '</span>' +
-        '<select data-placement-item="' + escapeHtml(item) + '">' +
-          SIMULATOR_PLACEMENTS.map(function (placement) {
-            return '<option value="' + escapeHtml(placement) + '"' + (placement === current ? ' selected' : '') + '>' + escapeHtml(placement) + '</option>';
+      var current = Array.isArray(simulatorState.placements[item]) ? simulatorState.placements[item] : [];
+      return '<div class="placement-row">' +
+        '<div class="placement-row-head">' +
+          '<span>' + escapeHtml(item) + '</span>' +
+          '<small>配置：' + escapeHtml(areaDisplay(current)) + '</small>' +
+        '</div>' +
+        '<div class="placement-button-grid" data-placement-item="' + escapeHtml(item) + '">' +
+          '<button type="button" class="placement-area-button placement-auto' + (!current.length ? ' is-selected' : '') + '" data-area="">おまかせ</button>' +
+          SIMULATOR_AREA_CODES.map(function (code) {
+            return '<button type="button" class="placement-area-button' + (current.indexOf(code) !== -1 ? ' is-selected' : '') + '" data-area="' + escapeHtml(code) + '">' +
+              '<strong>' + escapeHtml(code) + '</strong><small>' + escapeHtml(areaLabel(code)) + '</small>' +
+            '</button>';
           }).join('') +
-        '</select>' +
-      '</label>';
+        '</div>' +
+      '</div>';
     }).join('');
   }
 
@@ -775,8 +818,8 @@
   function buildSimulatorConsultText() {
     var selectedLines = simulatorState.selectedItems.length
       ? simulatorState.selectedItems.map(function (item) {
-        var placement = simulatorState.placements[item] || 'おまかせ';
-        return '・' + item + '　' + placement + '　' + formatSimulatorYen(simulatorItemPrice(item));
+        var placement = areaDisplay(simulatorState.placements[item]);
+        return '・' + item + '　配置：' + placement + '　' + formatSimulatorYen(simulatorItemPrice(item));
       }).join('\n')
       : '・未選択';
 
@@ -880,6 +923,7 @@
 
   function renderSimulator() {
     renderSimulatorSources();
+    updatePlacementReferenceImage();
     renderSampleGardens();
     renderSimulatorScenes();
     renderSimulatorItems();
@@ -902,7 +946,7 @@
       return;
     }
     simulatorState.selectedItems.push(item);
-    simulatorState.placements[item] = 'おまかせ';
+    simulatorState.placements[item] = [];
     if (simulatorLimitMessage) simulatorLimitMessage.textContent = '';
     renderSimulator();
   }
@@ -979,6 +1023,7 @@
           simulatorUploadPreview.hidden = false;
         }
         updateSimulatorPrompt();
+        updatePlacementReferenceImage();
       });
     }
 
@@ -1007,10 +1052,15 @@
     });
 
     if (simulatorPlacementList) {
-      simulatorPlacementList.addEventListener('change', function (event) {
-        var select = event.target.closest('select[data-placement-item]');
-        if (!select) return;
-        simulatorState.placements[select.dataset.placementItem] = select.value;
+      simulatorPlacementList.addEventListener('click', function (event) {
+        var button = event.target.closest('.placement-area-button');
+        if (!button) return;
+        var group = button.closest('[data-placement-item]');
+        if (!group) return;
+        var item = group.dataset.placementItem;
+        var area = button.dataset.area || '';
+        simulatorState.placements[item] = area ? [area] : [];
+        renderSimulatorPlacements();
         updateSimulatorPrompt();
       });
     }

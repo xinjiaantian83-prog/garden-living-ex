@@ -1021,30 +1021,141 @@ h1 {
   gap: 10px;
 }
 
+.placement-photo-map {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 18px;
+  background: #f4f1ec;
+}
+
+.placement-photo-map img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.placement-photo-map figcaption {
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.placement-map-grid {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  aspect-ratio: 16 / 10;
+  height: auto;
+  pointer-events: none;
+}
+
+.placement-map-grid span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(23, 23, 23, 0.1);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(18px, 6vw, 28px);
+  font-weight: 900;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.38);
+}
+
+.placement-map-grid span:nth-child(3n) {
+  border-right: 0;
+}
+
+.placement-map-grid span:nth-last-child(-n + 3) {
+  border-bottom: 0;
+}
+
 .placement-row {
   display: grid;
-  gap: 8px;
+  gap: 12px;
   min-width: 0;
-  padding: 12px;
+  padding: 14px;
   border: 1px solid var(--line-soft);
   border-radius: 14px;
   background: #fff;
 }
 
-.placement-row span {
+.placement-row-head {
+  display: grid;
+  gap: 2px;
+}
+
+.placement-row-head span {
   font-weight: 900;
 }
 
-.placement-row select {
-  width: 100%;
-  min-height: 42px;
-  padding: 8px 10px;
+.placement-row-head small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.placement-button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.placement-area-button {
+  display: grid;
+  align-content: center;
+  gap: 1px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 7px 6px;
   border: 1px solid var(--line);
   border-radius: 10px;
   background: #fbfaf7;
   color: var(--text);
   font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.placement-area-button strong,
+.placement-area-button small {
+  display: block;
+  line-height: 1.15;
+}
+
+.placement-area-button strong {
+  font-size: 14px;
+}
+
+.placement-area-button small {
+  color: var(--muted);
+  font-size: 10px;
   font-weight: 800;
+}
+
+.placement-area-button.is-selected {
+  border-color: rgba(143, 63, 42, 0.44);
+  background: #fbf4ef;
+  color: var(--brick);
+  box-shadow: 0 0 0 3px rgba(143, 63, 42, 0.08);
+}
+
+.placement-area-button.is-selected small {
+  color: var(--brick);
+}
+
+.placement-auto {
+  grid-column: 1 / -1;
+  min-height: 42px;
 }
 
 .simulator-prompt-card {
@@ -1894,9 +2005,8 @@ h1 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .placement-row {
-    grid-template-columns: minmax(0, 1fr) 180px;
-    align-items: center;
+  .placement-button-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .simulator-actions {
