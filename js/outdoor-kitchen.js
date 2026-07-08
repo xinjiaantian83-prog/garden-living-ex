@@ -24,6 +24,8 @@
   var simulatorCount = document.getElementById('simulator-count');
   var simulatorLimitMessage = document.getElementById('simulator-limit-message');
   var simulatorPlacementList = document.getElementById('simulator-placement-list');
+  var simulatorSelectedPriceList = document.getElementById('simulator-selected-price-list');
+  var simulatorTotalPrice = document.getElementById('simulator-total-price');
   var simulatorPrompt = document.getElementById('simulator-prompt');
   var simulatorCopy = document.getElementById('simulator-copy');
   var simulatorGenerate = document.getElementById('simulator-generate');
@@ -77,6 +79,7 @@
   var HERO_IMAGE = 'images/lifestyle/garden-living-hero-final-photo.png';
   var STORAGE_KEY = 'garden_living_saved_products_v1';
   var SITE_ORIGIN = 'https://gardenliving-ex.net';
+  var ITEM_PRICE_MASTER = window.GARDEN_LIVING_ITEM_PRICE_MASTER || {};
   var SIMULATOR_MAX_ITEMS = 5;
   var SIMULATOR_SCENES = ['裏庭', '前庭・駐車場', 'ドッグラン', 'アウトドアリビング'];
   var SIMULATOR_ITEMS = [
@@ -227,6 +230,17 @@
     if (label) return label;
     if (typeof value !== 'number' || !isFinite(value) || value <= 0) return '相談価格';
     return 'EXた組価格 ' + formatYen(value);
+  }
+
+  function formatSimulatorYen(value) {
+    if (typeof value !== 'number' || !isFinite(value) || value < 0) return '価格未設定';
+    return '¥' + value.toLocaleString('ja-JP');
+  }
+
+  function simulatorItemPrice(itemName) {
+    var priceData = ITEM_PRICE_MASTER[itemName] || {};
+    var price = priceData.reference_price_tax_included;
+    return typeof price === 'number' && isFinite(price) ? price : null;
   }
 
   function loadJson(sources) {
@@ -709,6 +723,26 @@
     }).join('');
   }
 
+  function renderSimulatorPriceSummary() {
+    if (!simulatorSelectedPriceList || !simulatorTotalPrice) return;
+    if (!simulatorState.selectedItems.length) {
+      simulatorSelectedPriceList.innerHTML = '<p class="empty-message">商品を選ぶと、参考価格が表示されます。</p>';
+      simulatorTotalPrice.textContent = '¥0';
+      return;
+    }
+
+    var total = 0;
+    simulatorSelectedPriceList.innerHTML = simulatorState.selectedItems.map(function (item) {
+      var price = simulatorItemPrice(item);
+      if (price !== null) total += price;
+      return '<div class="selected-price-row">' +
+        '<span>' + escapeHtml(item) + '</span>' +
+        '<strong>' + escapeHtml(formatSimulatorYen(price)) + '</strong>' +
+      '</div>';
+    }).join('');
+    simulatorTotalPrice.textContent = formatSimulatorYen(total);
+  }
+
   function updateSimulatorPrompt() {
     if (simulatorCount) {
       simulatorCount.textContent = '選択中：' + simulatorState.selectedItems.length + ' / ' + SIMULATOR_MAX_ITEMS;
@@ -724,6 +758,7 @@
     renderSimulatorScenes();
     renderSimulatorItems();
     renderSimulatorPlacements();
+    renderSimulatorPriceSummary();
     updateSimulatorPrompt();
   }
 
