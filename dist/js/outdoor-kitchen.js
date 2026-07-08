@@ -26,6 +26,10 @@
   var simulatorPlacementList = document.getElementById('simulator-placement-list');
   var simulatorSelectedPriceList = document.getElementById('simulator-selected-price-list');
   var simulatorTotalPrice = document.getElementById('simulator-total-price');
+  var simulatorConsultText = document.getElementById('simulator-consult-text');
+  var simulatorCopyConsult = document.getElementById('simulator-copy-consult');
+  var simulatorConsultResult = document.getElementById('simulator-consult-result');
+  var simulatorLineConsult = document.getElementById('simulator-line-consult');
   var simulatorPrompt = document.getElementById('simulator-prompt');
   var simulatorCopy = document.getElementById('simulator-copy');
   var simulatorGenerate = document.getElementById('simulator-generate');
@@ -649,6 +653,16 @@
     return 'アップロード予定の庭写真';
   }
 
+  function consultPhotoLabel() {
+    if (simulatorState.source === 'sample') {
+      return 'サンプル庭（' + simulatorSample().title + '）';
+    }
+    if (simulatorState.uploadedName) {
+      return '自宅写真（' + simulatorState.uploadedName + '）';
+    }
+    return '自宅写真';
+  }
+
   function buildSimulatorPrompt() {
     var selected = simulatorState.selectedItems;
     var itemText = selected.length
@@ -743,12 +757,40 @@
     simulatorTotalPrice.textContent = formatSimulatorYen(total);
   }
 
+  function simulatorTotalAmount() {
+    return simulatorState.selectedItems.reduce(function (sum, item) {
+      var price = simulatorItemPrice(item);
+      return sum + (price !== null ? price : 0);
+    }, 0);
+  }
+
+  function buildSimulatorConsultText() {
+    var selectedLines = simulatorState.selectedItems.length
+      ? simulatorState.selectedItems.map(function (item) {
+        var placement = simulatorState.placements[item] || 'おまかせ';
+        return '・' + item + '　' + placement + '　' + formatSimulatorYen(simulatorItemPrice(item));
+      }).join('\n')
+      : '・未選択';
+
+    return '【Garden Living AIシミュレーター相談】\n\n' +
+      'シーン：' + simulatorState.scene + '\n' +
+      '使用写真：' + consultPhotoLabel() + '\n\n' +
+      '選択商品：\n' + selectedLines + '\n\n' +
+      '商品代合計（税込参考）：' + formatSimulatorYen(simulatorTotalAmount()) + '\n\n' +
+      '※施工費・基礎工事・運搬費等は含まれていません。\n\n' +
+      'AI生成用指示文：\n' + buildSimulatorPrompt() + '\n\n' +
+      'この内容で相談したいです。';
+  }
+
   function updateSimulatorPrompt() {
     if (simulatorCount) {
       simulatorCount.textContent = '選択中：' + simulatorState.selectedItems.length + ' / ' + SIMULATOR_MAX_ITEMS;
     }
     if (simulatorPrompt) {
       simulatorPrompt.value = buildSimulatorPrompt();
+    }
+    if (simulatorConsultText) {
+      simulatorConsultText.value = buildSimulatorConsultText();
     }
   }
 
@@ -800,6 +842,29 @@
       document.execCommand('copy');
       if (simulatorResult) simulatorResult.textContent = '指示文をコピーしました。';
     }
+  }
+
+  function copyTextToClipboard(value, callback) {
+    var fallbackCopy = function () {
+      var helper = document.createElement('textarea');
+      helper.value = value;
+      helper.setAttribute('readonly', '');
+      helper.style.position = 'fixed';
+      helper.style.top = '-999px';
+      document.body.appendChild(helper);
+      helper.select();
+      document.execCommand('copy');
+      document.body.removeChild(helper);
+      if (callback) callback();
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(value).then(function () {
+        if (callback) callback();
+      }).catch(fallbackCopy);
+      return;
+    }
+    fallbackCopy();
   }
 
   function initSimulator() {
@@ -864,6 +929,18 @@
 
     if (simulatorCopy) {
       simulatorCopy.addEventListener('click', copySimulatorPrompt);
+    }
+
+    if (simulatorCopyConsult) {
+      simulatorCopyConsult.addEventListener('click', function () {
+        copyTextToClipboard(buildSimulatorConsultText(), function () {
+          if (simulatorConsultResult) simulatorConsultResult.textContent = '相談内容をコピーしました';
+        });
+      });
+    }
+
+    if (simulatorLineConsult) {
+      simulatorLineConsult.href = LINE_URL || '#contact';
     }
 
     if (simulatorGenerate) {

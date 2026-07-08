@@ -1146,6 +1146,46 @@ h1 {
   line-height: 1.7;
 }
 
+.simulator-consult-box {
+  display: grid;
+  gap: 12px;
+  margin-top: 4px;
+  padding: 16px;
+  border: 1px solid rgba(23, 23, 23, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.simulator-consult-box h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  line-height: 1.35;
+  font-weight: 900;
+}
+
+.simulator-consult-box p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+.simulator-consult-box textarea {
+  width: 100%;
+  min-height: 190px;
+  resize: vertical;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--text-soft);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.75;
+}
+
 .simulator-prompt-card textarea {
   width: 100%;
   min-height: 220px;

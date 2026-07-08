@@ -202,6 +202,18 @@
             <strong id="simulator-total-price">¥0</strong>
           </div>
           <p class="simulator-price-note">※商品代の参考価格です。施工費・基礎工事・運搬費等は含まれておりません。現場状況により価格は変動します。</p>
+          <div class="simulator-consult-box">
+            <div>
+              <h3>この内容で相談する</h3>
+              <p>相談内容をコピーして、LINEで貼り付けて送ってください。</p>
+            </div>
+            <textarea id="simulator-consult-text" readonly></textarea>
+            <div class="simulator-actions">
+              <button class="btn btn-secondary" type="button" id="simulator-copy-consult">相談内容をコピー</button>
+              <a class="btn btn-primary js-line-track" id="simulator-line-consult" href="https://line.me/R/ti/p/@953wnidc" target="_blank" rel="noopener noreferrer" data-source="ai_simulator">LINEで相談する</a>
+            </div>
+            <p class="simulator-result" id="simulator-consult-result" aria-live="polite"></p>
+          </div>
         </div>
 
         <div class="simulator-prompt-card">
