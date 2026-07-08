@@ -34,6 +34,12 @@
   var simulatorCopy = document.getElementById('simulator-copy');
   var simulatorGenerate = document.getElementById('simulator-generate');
   var simulatorResult = document.getElementById('simulator-result');
+  var simulatorGeneratedImage = document.getElementById('simulator-generated-image');
+  var simulatorGeneratedCaption = document.getElementById('simulator-generated-caption');
+  var simulatorLoading = document.getElementById('simulator-loading');
+  var simulatorErrorBox = document.getElementById('simulator-error-box');
+  var simulatorErrorMessage = document.getElementById('simulator-error-message');
+  var simulatorRetry = document.getElementById('simulator-retry');
   var sampleGardenGrid = document.getElementById('sample-garden-grid');
 
   var PRODUCT_SOURCES = [];
@@ -157,9 +163,11 @@
     source: 'upload',
     scene: '裏庭',
     uploadedName: '',
+    uploadedImageUrl: '',
     selectedSample: SAMPLE_GARDENS[0].id,
     selectedItems: [],
     placements: {},
+    lastGenerationInput: null,
   };
 
   function text(value) {
@@ -782,6 +790,82 @@
       'この内容で相談したいです。';
   }
 
+  function simulatorSourceImage() {
+    if (simulatorState.source === 'sample') return simulatorSample().image;
+    return simulatorState.uploadedImageUrl || HERO_IMAGE;
+  }
+
+  function simulatorGenerationInput() {
+    return {
+      image_url: simulatorSourceImage(),
+      image_source: simulatorState.source,
+      prompt: buildSimulatorPrompt(),
+      selected_items: simulatorState.selectedItems.slice(),
+      placements: Object.assign({}, simulatorState.placements),
+      scene: simulatorState.scene,
+    };
+  }
+
+  function generateGardenImage(input) {
+    simulatorState.lastGenerationInput = input;
+
+    // ここに画像生成APIを接続
+    // input.image_url / input.prompt / input.selected_items / input.placements / input.scene を送信し、
+    // 返却された画像URLまたはBase64画像を result.image_url として表示する想定です。
+    return new Promise(function (resolve) {
+      window.setTimeout(function () {
+        resolve({
+          image_url: input.image_url || HERO_IMAGE,
+          message: 'API未接続のため、選択した写真を仮の完成イメージとして表示しています。',
+        });
+      }, 1800);
+    });
+  }
+
+  function setSimulatorGenerating(isGenerating) {
+    if (simulatorGenerate) simulatorGenerate.disabled = isGenerating;
+    if (simulatorRetry) simulatorRetry.disabled = isGenerating;
+    if (simulatorLoading) simulatorLoading.hidden = !isGenerating;
+    if (isGenerating && simulatorResult) {
+      simulatorResult.textContent = 'AIが完成イメージを作成中です…';
+    }
+  }
+
+  function showSimulatorGenerationError(message) {
+    if (simulatorErrorBox) simulatorErrorBox.hidden = false;
+    if (simulatorErrorMessage) simulatorErrorMessage.textContent = message || '生成に失敗しました。時間をおいて再試行してください。';
+  }
+
+  function hideSimulatorGenerationError() {
+    if (simulatorErrorBox) simulatorErrorBox.hidden = true;
+    if (simulatorErrorMessage) simulatorErrorMessage.textContent = '';
+  }
+
+  function startGardenImageGeneration(input) {
+    var generationInput = input || simulatorGenerationInput();
+    hideSimulatorGenerationError();
+    setSimulatorGenerating(true);
+
+    generateGardenImage(generationInput)
+      .then(function (result) {
+        if (simulatorGeneratedImage) {
+          simulatorGeneratedImage.src = result.image_url || HERO_IMAGE;
+        }
+        if (simulatorGeneratedCaption) {
+          simulatorGeneratedCaption.textContent = result.message || '完成イメージの生成が完了しました。';
+        }
+        if (simulatorResult) {
+          simulatorResult.textContent = '仮の完成イメージを表示しました。API接続後はここに生成画像が表示されます。';
+        }
+      })
+      .catch(function () {
+        showSimulatorGenerationError('生成に失敗しました。時間をおいて再試行してください。');
+      })
+      .finally(function () {
+        setSimulatorGenerating(false);
+      });
+  }
+
   function updateSimulatorPrompt() {
     if (simulatorCount) {
       simulatorCount.textContent = '選択中：' + simulatorState.selectedItems.length + ' / ' + SIMULATOR_MAX_ITEMS;
@@ -887,7 +971,11 @@
         if (simulatorUploadName) simulatorUploadName.textContent = file.name;
         if (simulatorUploadPreview) {
           var img = simulatorUploadPreview.querySelector('img');
-          if (img) img.src = URL.createObjectURL(file);
+          if (img) {
+            if (simulatorState.uploadedImageUrl) URL.revokeObjectURL(simulatorState.uploadedImageUrl);
+            simulatorState.uploadedImageUrl = URL.createObjectURL(file);
+            img.src = simulatorState.uploadedImageUrl;
+          }
           simulatorUploadPreview.hidden = false;
         }
         updateSimulatorPrompt();
@@ -945,9 +1033,13 @@
 
     if (simulatorGenerate) {
       simulatorGenerate.addEventListener('click', function () {
-        if (simulatorResult) {
-          simulatorResult.textContent = '現在準備中です。まずは選択内容をもとにスタッフがイメージ確認します。';
-        }
+        startGardenImageGeneration();
+      });
+    }
+
+    if (simulatorRetry) {
+      simulatorRetry.addEventListener('click', function () {
+        startGardenImageGeneration(simulatorState.lastGenerationInput || simulatorGenerationInput());
       });
     }
   }

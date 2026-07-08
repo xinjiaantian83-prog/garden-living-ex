@@ -228,6 +228,28 @@
           </div>
           <p class="simulator-result" id="simulator-result" aria-live="polite"></p>
         </div>
+
+        <div class="simulator-generation-card" id="simulator-generation-card">
+          <div class="simulator-generation-head">
+            <div>
+              <p class="eyebrow">Generated Image</p>
+              <h3>生成された完成イメージ</h3>
+            </div>
+            <span>API接続準備中</span>
+          </div>
+          <figure class="simulator-generated-preview">
+            <img id="simulator-generated-image" src="images/lifestyle/garden-living-hero-final-photo.png" alt="AIガーデンシミュレーターの生成結果プレビュー">
+            <figcaption id="simulator-generated-caption">まだAPI未接続のため、仮画像を表示しています。</figcaption>
+          </figure>
+          <div class="simulator-loading" id="simulator-loading" hidden>
+            <span class="loading-dot" aria-hidden="true"></span>
+            <p>AIが完成イメージを作成中です…</p>
+          </div>
+          <div class="simulator-error-box" id="simulator-error-box" hidden>
+            <p id="simulator-error-message">生成に失敗しました。</p>
+            <button class="btn btn-secondary" type="button" id="simulator-retry">再試行する</button>
+          </div>
+        </div>
       </div>
     </section>
 
