@@ -110,6 +110,97 @@
       </div>
     </section>
 
+    <section class="section simulator-section" id="ai-simulator">
+      <div class="section-head">
+        <p class="eyebrow">AI Garden <span class="beta-pill">Beta</span></p>
+        <h2>AIガーデンシミュレーター β版</h2>
+        <p>お庭の写真をもとに、ピザ窯・タイルデッキ・人工芝などを配置した完成イメージを作成できます。</p>
+      </div>
+      <div class="simulator-panel" aria-label="AIガーデンシミュレーター">
+        <div class="simulator-intro">
+          <span class="simulator-status-badge">β版・準備中</span>
+          <h3>写真とアイテムを選んで、完成イメージ用の指示文を作る。</h3>
+          <p>今はAI画像生成APIには未接続です。選んだ内容はプロンプトとしてコピーでき、LINE相談時のイメージ共有にも使えます。</p>
+        </div>
+
+        <div class="simulator-step">
+          <div class="simulator-step-head">
+            <span>1</span>
+            <h3>使う写真を選ぶ</h3>
+          </div>
+          <div class="simulator-methods" role="radiogroup" aria-label="シミュレーション方法">
+            <label class="simulator-method is-active">
+              <input type="radio" name="simulator-source" value="upload" checked>
+              <strong>自宅の写真を使う</strong>
+              <small>推奨。実際の庭写真から考えます。</small>
+            </label>
+            <label class="simulator-method">
+              <input type="radio" name="simulator-source" value="sample">
+              <strong>サンプルの庭を使う</strong>
+              <small>写真がなくても試せます。</small>
+            </label>
+          </div>
+
+          <div class="simulator-source-panel" id="simulator-upload-panel">
+            <label class="upload-box" for="garden-photo-input">
+              <input id="garden-photo-input" type="file" accept="image/*">
+              <span>庭写真をアップロード</span>
+              <small>1枚だけ選択できます。スマホの写真でもOKです。</small>
+            </label>
+            <figure class="simulator-preview" id="simulator-upload-preview" hidden>
+              <img alt="アップロードした庭写真のプレビュー">
+              <figcaption id="simulator-upload-name"></figcaption>
+            </figure>
+          </div>
+
+          <div class="simulator-source-panel" id="simulator-sample-panel" hidden>
+            <div class="sample-garden-grid" id="sample-garden-grid"></div>
+          </div>
+        </div>
+
+        <div class="simulator-step">
+          <div class="simulator-step-head">
+            <span>2</span>
+            <h3>シーンを選ぶ</h3>
+          </div>
+          <div class="scene-choice-grid" id="simulator-scene-list"></div>
+        </div>
+
+        <div class="simulator-step">
+          <div class="simulator-step-head">
+            <span>3</span>
+            <h3>追加したいアイテムを選ぶ</h3>
+          </div>
+          <div class="selection-counter" id="simulator-count">選択中：0 / 5</div>
+          <p class="simulator-message" id="simulator-limit-message" aria-live="polite"></p>
+          <div class="simulator-item-grid" id="simulator-item-list"></div>
+        </div>
+
+        <div class="simulator-step">
+          <div class="simulator-step-head">
+            <span>4</span>
+            <h3>大まかな配置を指定する</h3>
+          </div>
+          <div class="placement-list" id="simulator-placement-list">
+            <p class="empty-message">アイテムを選ぶと、配置指定が表示されます。</p>
+          </div>
+        </div>
+
+        <div class="simulator-prompt-card">
+          <div>
+            <p class="eyebrow">Prompt</p>
+            <h3>AI生成用の指示文</h3>
+          </div>
+          <textarea id="simulator-prompt" readonly></textarea>
+          <div class="simulator-actions">
+            <button class="btn btn-secondary" type="button" id="simulator-copy">指示文をコピー</button>
+            <button class="btn btn-primary" type="button" id="simulator-generate">完成イメージを作成する</button>
+          </div>
+          <p class="simulator-result" id="simulator-result" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
     <section class="section section-warm" id="catalog">
       <div class="section-head">
         <p class="eyebrow">Products</p>

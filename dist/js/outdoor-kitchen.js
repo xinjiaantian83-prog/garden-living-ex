@@ -13,6 +13,22 @@
   var savedCount = document.getElementById('saved-count');
   var resultCount = document.getElementById('result-count');
   var heroVisual = document.getElementById('hero-visual');
+  var simulatorSourceInputs = document.querySelectorAll('input[name="simulator-source"]');
+  var simulatorUploadPanel = document.getElementById('simulator-upload-panel');
+  var simulatorSamplePanel = document.getElementById('simulator-sample-panel');
+  var gardenPhotoInput = document.getElementById('garden-photo-input');
+  var simulatorUploadPreview = document.getElementById('simulator-upload-preview');
+  var simulatorUploadName = document.getElementById('simulator-upload-name');
+  var simulatorSceneList = document.getElementById('simulator-scene-list');
+  var simulatorItemList = document.getElementById('simulator-item-list');
+  var simulatorCount = document.getElementById('simulator-count');
+  var simulatorLimitMessage = document.getElementById('simulator-limit-message');
+  var simulatorPlacementList = document.getElementById('simulator-placement-list');
+  var simulatorPrompt = document.getElementById('simulator-prompt');
+  var simulatorCopy = document.getElementById('simulator-copy');
+  var simulatorGenerate = document.getElementById('simulator-generate');
+  var simulatorResult = document.getElementById('simulator-result');
+  var sampleGardenGrid = document.getElementById('sample-garden-grid');
 
   var PRODUCT_SOURCES = [];
   var G20_SOURCES = ['json/g20-material-candidates.json'];
@@ -61,6 +77,65 @@
   var HERO_IMAGE = 'images/lifestyle/garden-living-hero-final-photo.png';
   var STORAGE_KEY = 'garden_living_saved_products_v1';
   var SITE_ORIGIN = 'https://gardenliving-ex.net';
+  var SIMULATOR_MAX_ITEMS = 5;
+  var SIMULATOR_SCENES = ['裏庭', '前庭・駐車場', 'ドッグラン', 'アウトドアリビング'];
+  var SIMULATOR_ITEMS = [
+    'ピザ窯',
+    'BBQスペース',
+    'タイルデッキ',
+    '人工芝',
+    'ウッドデッキ',
+    '目隠しフェンス',
+    'エコモックフェンス',
+    'アメリカンフェンス',
+    'カーポート',
+    'サイクルポート',
+    'ガーデンファニチャー',
+    '植栽',
+    '照明',
+    'サウナ',
+    '物置',
+    '宅配ボックス',
+  ];
+  var SIMULATOR_SCENE_PRIORITY = {
+    '裏庭': ['タイルデッキ', '人工芝', 'ピザ窯', 'BBQスペース', 'ウッドデッキ', 'ガーデンファニチャー', '植栽', '照明', '目隠しフェンス'],
+    '前庭・駐車場': ['カーポート', 'サイクルポート', '宅配ボックス', '目隠しフェンス', 'エコモックフェンス', '植栽', '照明', '物置', 'アメリカンフェンス'],
+    'ドッグラン': ['人工芝', 'アメリカンフェンス', '立水栓', '目隠しフェンス', '植栽', '照明', 'ガーデンファニチャー', '物置'],
+    'アウトドアリビング': ['ピザ窯', 'BBQスペース', 'タイルデッキ', 'ガーデンファニチャー', '照明', 'サウナ', 'ウッドデッキ', '植栽', '目隠しフェンス'],
+  };
+  var SIMULATOR_PLACEMENTS = ['おまかせ', '左奥', '中央奥', '右奥', '左手前', '中央', '右手前'];
+  var SAMPLE_GARDENS = [
+    {
+      id: 'modern-house',
+      title: '新築住宅（モダン）',
+      description: '新築外構に庭アイテムを足す想定。',
+      image: HERO_IMAGE,
+    },
+    {
+      id: 'simple-backyard',
+      title: 'シンプルな裏庭',
+      description: '人工芝やデッキを考えやすい庭。',
+      image: 'images/lifestyle/categories/category-american-fence.png',
+    },
+    {
+      id: 'outdoor-living',
+      title: 'アウトドアリビング',
+      description: '食事やくつろぎを中心に検討。',
+      image: 'images/lifestyle/hero-evening-garden-pizza.jpg',
+    },
+    {
+      id: 'dog-run',
+      title: 'ドッグラン向けの庭',
+      description: 'フェンスと人工芝の相性を確認。',
+      image: HERO_IMAGE,
+    },
+    {
+      id: 'parking-house',
+      title: '駐車場付き住宅',
+      description: '前庭と駐車場まわりの相談向け。',
+      image: 'images/g20-material/carstop-flute-six.webp',
+    },
+  ];
 
   var state = {
     products: [],
@@ -69,6 +144,15 @@
     showSaved: false,
     showCatalog: false,
     savedIds: [],
+  };
+
+  var simulatorState = {
+    source: 'upload',
+    scene: '裏庭',
+    uploadedName: '',
+    selectedSample: SAMPLE_GARDENS[0].id,
+    selectedItems: [],
+    placements: {},
   };
 
   function text(value) {
@@ -513,6 +597,249 @@
     });
   }
 
+  function simulatorSample() {
+    return SAMPLE_GARDENS.find(function (sample) {
+      return sample.id === simulatorState.selectedSample;
+    }) || SAMPLE_GARDENS[0];
+  }
+
+  function simulatorOrderedItems() {
+    var priority = SIMULATOR_SCENE_PRIORITY[simulatorState.scene] || [];
+    return SIMULATOR_ITEMS.slice().sort(function (a, b) {
+      var aIndex = priority.indexOf(a);
+      var bIndex = priority.indexOf(b);
+      if (aIndex === -1) aIndex = 999;
+      if (bIndex === -1) bIndex = 999;
+      if (aIndex !== bIndex) return aIndex - bIndex;
+      return SIMULATOR_ITEMS.indexOf(a) - SIMULATOR_ITEMS.indexOf(b);
+    });
+  }
+
+  function scenePurpose() {
+    var map = {
+      '裏庭': '家族で楽しめる落ち着いた裏庭',
+      '前庭・駐車場': '玄関まわりと駐車場が使いやすい外構空間',
+      'ドッグラン': '犬が安心して遊べるドッグラン',
+      'アウトドアリビング': '食事やくつろぎを楽しめるアウトドアリビング',
+    };
+    return map[simulatorState.scene] || '庭まわりの外構空間';
+  }
+
+  function photoPromptLabel() {
+    if (simulatorState.source === 'sample') {
+      return '選択した「' + simulatorSample().title + '」のサンプル庭写真';
+    }
+    if (simulatorState.uploadedName) {
+      return 'アップロードされた庭写真';
+    }
+    return 'アップロード予定の庭写真';
+  }
+
+  function buildSimulatorPrompt() {
+    var selected = simulatorState.selectedItems;
+    var itemText = selected.length
+      ? selected.map(function (item) {
+        var placement = simulatorState.placements[item] || 'おまかせ';
+        return placement === 'おまかせ' ? item + 'を自然な位置に' : placement + 'に' + item;
+      }).join('、') + '配置してください。'
+      : '必要な庭アイテムを自然に提案して配置してください。';
+
+    return photoPromptLabel() + 'をもとに、' + simulatorState.scene + 'を' + scenePurpose() + 'にしてください。' +
+      itemText +
+      '既存の建物・窓・外壁・敷地形状はできるだけ維持し、現実的な外構施工として違和感のない完成イメージにしてください。' +
+      '写真全体の明るさ、素材感、植栽の自然さを整え、Garden Livingらしい温かい庭時間が伝わる雰囲気にしてください。';
+  }
+
+  function renderSimulatorSources() {
+    if (simulatorUploadPanel) simulatorUploadPanel.hidden = simulatorState.source !== 'upload';
+    if (simulatorSamplePanel) simulatorSamplePanel.hidden = simulatorState.source !== 'sample';
+    simulatorSourceInputs.forEach(function (input) {
+      var method = input.closest('.simulator-method');
+      input.checked = input.value === simulatorState.source;
+      if (method) method.classList.toggle('is-active', input.checked);
+    });
+  }
+
+  function renderSampleGardens() {
+    if (!sampleGardenGrid) return;
+    sampleGardenGrid.innerHTML = SAMPLE_GARDENS.map(function (sample) {
+      var active = sample.id === simulatorState.selectedSample ? ' is-active' : '';
+      return '<button class="sample-garden-card' + active + '" type="button" data-sample-id="' + escapeHtml(sample.id) + '">' +
+        '<img src="' + escapeHtml(sample.image) + '" alt="' + escapeHtml(sample.title) + '" loading="lazy">' +
+        '<span>' + escapeHtml(sample.title) + '</span>' +
+        '<small>' + escapeHtml(sample.description) + '</small>' +
+      '</button>';
+    }).join('');
+  }
+
+  function renderSimulatorScenes() {
+    if (!simulatorSceneList) return;
+    simulatorSceneList.innerHTML = SIMULATOR_SCENES.map(function (scene) {
+      var active = scene === simulatorState.scene ? ' is-active' : '';
+      return '<button class="scene-choice' + active + '" type="button" data-scene="' + escapeHtml(scene) + '">' + escapeHtml(scene) + '</button>';
+    }).join('');
+  }
+
+  function renderSimulatorItems() {
+    if (!simulatorItemList) return;
+    simulatorItemList.innerHTML = simulatorOrderedItems().map(function (item) {
+      var selected = simulatorState.selectedItems.indexOf(item) !== -1;
+      return '<button class="simulator-item' + (selected ? ' is-selected' : '') + '" type="button" data-item="' + escapeHtml(item) + '" aria-pressed="' + (selected ? 'true' : 'false') + '">' +
+        '<span>' + escapeHtml(item) + '</span>' +
+      '</button>';
+    }).join('');
+  }
+
+  function renderSimulatorPlacements() {
+    if (!simulatorPlacementList) return;
+    if (!simulatorState.selectedItems.length) {
+      simulatorPlacementList.innerHTML = '<p class="empty-message">アイテムを選ぶと、配置指定が表示されます。</p>';
+      return;
+    }
+    simulatorPlacementList.innerHTML = simulatorState.selectedItems.map(function (item) {
+      var current = simulatorState.placements[item] || 'おまかせ';
+      return '<label class="placement-row">' +
+        '<span>' + escapeHtml(item) + '</span>' +
+        '<select data-placement-item="' + escapeHtml(item) + '">' +
+          SIMULATOR_PLACEMENTS.map(function (placement) {
+            return '<option value="' + escapeHtml(placement) + '"' + (placement === current ? ' selected' : '') + '>' + escapeHtml(placement) + '</option>';
+          }).join('') +
+        '</select>' +
+      '</label>';
+    }).join('');
+  }
+
+  function updateSimulatorPrompt() {
+    if (simulatorCount) {
+      simulatorCount.textContent = '選択中：' + simulatorState.selectedItems.length + ' / ' + SIMULATOR_MAX_ITEMS;
+    }
+    if (simulatorPrompt) {
+      simulatorPrompt.value = buildSimulatorPrompt();
+    }
+  }
+
+  function renderSimulator() {
+    renderSimulatorSources();
+    renderSampleGardens();
+    renderSimulatorScenes();
+    renderSimulatorItems();
+    renderSimulatorPlacements();
+    updateSimulatorPrompt();
+  }
+
+  function toggleSimulatorItem(item) {
+    var index = simulatorState.selectedItems.indexOf(item);
+    if (index !== -1) {
+      simulatorState.selectedItems.splice(index, 1);
+      delete simulatorState.placements[item];
+      if (simulatorLimitMessage) simulatorLimitMessage.textContent = '';
+      renderSimulator();
+      return;
+    }
+    if (simulatorState.selectedItems.length >= SIMULATOR_MAX_ITEMS) {
+      if (simulatorLimitMessage) simulatorLimitMessage.textContent = '選択できるのは最大5個までです';
+      return;
+    }
+    simulatorState.selectedItems.push(item);
+    simulatorState.placements[item] = 'おまかせ';
+    if (simulatorLimitMessage) simulatorLimitMessage.textContent = '';
+    renderSimulator();
+  }
+
+  function copySimulatorPrompt() {
+    if (!simulatorPrompt) return;
+    var value = simulatorPrompt.value;
+    var copied = false;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(value).then(function () {
+        if (simulatorResult) simulatorResult.textContent = '指示文をコピーしました。';
+      }).catch(function () {
+        simulatorPrompt.select();
+        document.execCommand('copy');
+        if (simulatorResult) simulatorResult.textContent = '指示文をコピーしました。';
+      });
+      copied = true;
+    }
+    if (!copied) {
+      simulatorPrompt.select();
+      document.execCommand('copy');
+      if (simulatorResult) simulatorResult.textContent = '指示文をコピーしました。';
+    }
+  }
+
+  function initSimulator() {
+    if (!simulatorItemList || !simulatorPrompt) return;
+    renderSimulator();
+
+    simulatorSourceInputs.forEach(function (input) {
+      input.addEventListener('change', function () {
+        simulatorState.source = input.value;
+        if (simulatorResult) simulatorResult.textContent = '';
+        renderSimulator();
+      });
+    });
+
+    if (gardenPhotoInput) {
+      gardenPhotoInput.addEventListener('change', function () {
+        var file = gardenPhotoInput.files && gardenPhotoInput.files[0];
+        if (!file) return;
+        simulatorState.uploadedName = file.name;
+        if (simulatorUploadName) simulatorUploadName.textContent = file.name;
+        if (simulatorUploadPreview) {
+          var img = simulatorUploadPreview.querySelector('img');
+          if (img) img.src = URL.createObjectURL(file);
+          simulatorUploadPreview.hidden = false;
+        }
+        updateSimulatorPrompt();
+      });
+    }
+
+    if (sampleGardenGrid) {
+      sampleGardenGrid.addEventListener('click', function (event) {
+        var button = event.target.closest('.sample-garden-card');
+        if (!button) return;
+        simulatorState.selectedSample = button.dataset.sampleId || SAMPLE_GARDENS[0].id;
+        renderSimulator();
+      });
+    }
+
+    if (simulatorSceneList) {
+      simulatorSceneList.addEventListener('click', function (event) {
+        var button = event.target.closest('.scene-choice');
+        if (!button) return;
+        simulatorState.scene = button.dataset.scene || '裏庭';
+        renderSimulator();
+      });
+    }
+
+    simulatorItemList.addEventListener('click', function (event) {
+      var button = event.target.closest('.simulator-item');
+      if (!button) return;
+      toggleSimulatorItem(button.dataset.item);
+    });
+
+    if (simulatorPlacementList) {
+      simulatorPlacementList.addEventListener('change', function (event) {
+        var select = event.target.closest('select[data-placement-item]');
+        if (!select) return;
+        simulatorState.placements[select.dataset.placementItem] = select.value;
+        updateSimulatorPrompt();
+      });
+    }
+
+    if (simulatorCopy) {
+      simulatorCopy.addEventListener('click', copySimulatorPrompt);
+    }
+
+    if (simulatorGenerate) {
+      simulatorGenerate.addEventListener('click', function () {
+        if (simulatorResult) {
+          simulatorResult.textContent = '現在準備中です。まずは選択内容をもとにスタッフがイメージ確認します。';
+        }
+      });
+    }
+  }
+
   Promise.allSettled([loadJson(PRODUCT_SOURCES), loadJson(G20_SOURCES)])
     .then(function (results) {
       var oldData = results[0].status === 'fulfilled' ? results[0].value : {};
@@ -528,6 +855,7 @@
       renderHero();
       bindSearch();
       bindProductActions();
+      initSimulator();
       renderAll();
       if (loadStatus) {
         loadStatus.textContent = state.products.length + '件の商品を読み込みました。';
