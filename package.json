@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "start": "npm run build && python3 -m http.server 3008 -d dist"
+    "start": "npm run build && node server/dev-server.mjs",
+    "dev": "npm run start"
   }
 }

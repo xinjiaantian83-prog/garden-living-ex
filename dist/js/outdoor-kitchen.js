@@ -99,6 +99,8 @@
     lineUrl: 'https://line.me/R/ti/p/@953wnidc',
     consultTitle: '【Garden Living AIシミュレーター相談】',
     concept: '庭で過ごす時間、アウトドアリビング、ピザ窯、サウナ、ドッグランなど',
+    imageApiEndpoint: window.GARDEN_IMAGE_API_ENDPOINT || '/api/generate-garden-image',
+    imageModel: 'gpt-image-1',
     promptPolicy: '既存の建物・窓・外壁・敷地形状はできるだけ維持し、現実的な外構施工として違和感のない完成イメージにしてください。写真全体の明るさ、素材感、植栽の自然さを整え、Garden Livingらしい温かい庭時間が伝わる雰囲気にしてください。',
     maxItems: 5,
     priceMaster: window.GARDEN_SIMULATOR_PRICE_MASTER || window.GARDEN_LIVING_ITEM_PRICE_MASTER || {},
@@ -870,23 +872,121 @@
       selected_items: simulatorState.selectedItems.slice(),
       placements: Object.assign({}, simulatorState.placements),
       scene: simulatorState.scene,
+      concept: SIMULATOR_CONFIG.concept || '',
+      image_model: SIMULATOR_CONFIG.imageModel || 'gpt-image-1',
     };
+  }
+
+  function dataUrlFromBlob(blob) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function () { resolve(String(reader.result || '')); };
+      reader.onerror = function () { reject(new Error('画像を読み込めませんでした。')); };
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  function imageBlobFromUrl(imageUrl) {
+    return fetch(imageUrl).then(function (response) {
+      if (!response.ok) throw new Error('元画像を読み込めませんでした。');
+      return response.blob();
+    });
+  }
+
+  function resizeImageBlob(blob) {
+    if (!blob.type || blob.type.indexOf('image/') !== 0) return Promise.resolve(blob);
+    var maxSize = 1600;
+    return new Promise(function (resolve) {
+      var objectUrl = URL.createObjectURL(blob);
+      var image = new Image();
+      image.onload = function () {
+        var scale = Math.min(1, maxSize / Math.max(image.width, image.height));
+        var width = Math.max(1, Math.round(image.width * scale));
+        var height = Math.max(1, Math.round(image.height * scale));
+        var canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        var context = canvas.getContext('2d');
+        if (!context) {
+          URL.revokeObjectURL(objectUrl);
+          resolve(blob);
+          return;
+        }
+        context.drawImage(image, 0, 0, width, height);
+        canvas.toBlob(function (resizedBlob) {
+          URL.revokeObjectURL(objectUrl);
+          resolve(resizedBlob || blob);
+        }, 'image/jpeg', 0.88);
+      };
+      image.onerror = function () {
+        URL.revokeObjectURL(objectUrl);
+        resolve(blob);
+      };
+      image.src = objectUrl;
+    });
+  }
+
+  function generationErrorMessage(error) {
+    if (error && error.userMessage) return error.userMessage;
+    if (error && error.message) return error.message;
+    return '生成に失敗しました。時間をおいて再試行してください。';
+  }
+
+  function prepareGardenImagePayload(input) {
+    return imageBlobFromUrl(input.image_url || HERO_IMAGE).then(resizeImageBlob).then(function (blob) {
+      return dataUrlFromBlob(blob).then(function (dataUrl) {
+        return {
+          simulator_id: input.simulator_id,
+          image_source: input.image_source,
+          scene: input.scene,
+          concept: input.concept,
+          prompt: input.prompt,
+          selected_items: input.selected_items,
+          placements: input.placements,
+          image_model: input.image_model,
+          source_image: {
+            data_url: dataUrl,
+            mime_type: blob.type || 'image/png',
+            name: input.image_source === 'sample' ? 'sample-garden.png' : 'garden-photo.png',
+          },
+        };
+      });
+    });
   }
 
   function generateGardenImage(input) {
     simulatorState.lastGenerationInput = input;
+    var endpoint = SIMULATOR_CONFIG.imageApiEndpoint || '/api/generate-garden-image';
 
-    // ここに画像生成APIを接続
-    // TODO: Generation logging
-    // input.image_url / input.prompt / input.selected_items / input.placements / input.scene を送信し、
-    // 返却された画像URLまたはBase64画像を result.image_url として表示する想定です。
-    return new Promise(function (resolve) {
-      window.setTimeout(function () {
-        resolve({
-          image_url: input.image_url || HERO_IMAGE,
-          message: 'API未接続のため、選択した写真を仮の完成イメージとして表示しています。',
-        });
-      }, 1800);
+    return prepareGardenImagePayload(input).then(function (payload) {
+      return fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    }).then(function (response) {
+      return response.json().catch(function () {
+        return {};
+      }).then(function (data) {
+        if (!response.ok || data.error) {
+          var message = data.message || (data.error && data.error.message) || '画像生成APIでエラーが発生しました。';
+          var error = new Error(message);
+          error.userMessage = message;
+          throw error;
+        }
+        if (!data.image_url) {
+          var missingImageError = new Error('生成画像を取得できませんでした。');
+          missingImageError.userMessage = '生成画像を取得できませんでした。時間をおいて再試行してください。';
+          throw missingImageError;
+        }
+        return {
+          image_url: data.image_url,
+          message: data.message || 'AIが完成イメージを生成しました。',
+          model: data.model,
+          provider: data.provider,
+          generation_time_ms: data.generation_time_ms,
+        };
+      });
     });
   }
 
@@ -923,11 +1023,11 @@
           simulatorGeneratedCaption.textContent = result.message || '完成イメージの生成が完了しました。';
         }
         if (simulatorResult) {
-          simulatorResult.textContent = '仮の完成イメージを表示しました。API接続後はここに生成画像が表示されます。';
+          simulatorResult.textContent = result.message || 'AIが完成イメージを生成しました。';
         }
       })
-      .catch(function () {
-        showSimulatorGenerationError('生成に失敗しました。時間をおいて再試行してください。');
+      .catch(function (error) {
+        showSimulatorGenerationError(generationErrorMessage(error));
       })
       .finally(function () {
         setSimulatorGenerating(false);
