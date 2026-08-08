@@ -1442,6 +1442,73 @@ h2 {
   accent-color: var(--accent);
 }
 
+.site-footer {
+  padding: 6px 0 2px;
+  text-align: center;
+}
+
+.site-footer a,
+.legal-card a {
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-page {
+  padding-top: calc(20px + env(safe-area-inset-top));
+}
+
+.legal-card {
+  margin-top: 0;
+}
+
+.legal-title {
+  margin-bottom: 22px;
+  color: var(--text);
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+.legal-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.legal-item {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  padding: 18px 0;
+}
+
+.legal-item dt {
+  color: var(--accent-dark);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.legal-item dd {
+  margin: 0;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.75;
+}
+
+.legal-item small {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.legal-back {
+  margin: 22px 0 0;
+  text-align: center;
+}
+
 @media (min-width: 760px) {
   .app {
     max-width: 1040px;
