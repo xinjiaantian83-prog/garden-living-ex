@@ -1,309 +1,258 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Garden Living by EXた組。車止め・機能門柱・宅配ボックス・ガビオン・ピザ窯など、庭まわりの商品を探せるセレクトショップ。" />
-  <title>Garden Living by EXた組｜暮らしを彩る、庭のセレクトショップ。</title>
-  <link rel="canonical" href="https://gardenliving-ex.net/" />
-  <meta property="og:url" content="https://gardenliving-ex.net/" />
-  <meta property="og:title" content="Garden Living by EXた組｜暮らしを彩る、庭のセレクトショップ。" />
-  <meta property="og:site_name" content="Garden Living" />
-  <meta property="og:type" content="website" />
-  <link rel="stylesheet" href="css/outdoor-kitchen.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>アメリカンフェンス概算見積ツール</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="#top" aria-label="ページ上部へ">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <span>
-        <strong>Garden Living</strong>
-        <small>by EXた組</small>
-      </span>
-    </a>
-    <nav class="nav" aria-label="ページ内メニュー">
-      <a href="#categories">カテゴリ</a>
-      <a href="#catalog">商品一覧</a>
-      <a href="#contact">相談</a>
-    </nav>
-  </header>
-
-  <main id="top">
-    <section class="shop-hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Garden Living</p>
-        <h1>暮らしを彩る、<span class="line-keep">庭のセレクトショップ。</span></h1>
-        <p class="lead">車止め・機能門柱・宅配ボックス・ガビオン・ピザ窯など、庭まわりの商品を取り揃えています。気になる商品は他店価格も比較しながら、納得してお選びください。</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#catalog">商品を探す</a>
-          <a class="btn btn-secondary js-line-track" href="https://line.me/R/ti/p/@953wnidc" target="_blank" rel="noopener noreferrer" data-source="hero">LINEで相談する</a>
-        </div>
+  <main class="app">
+    <header class="hero">
+      <div class="image-frame hero-media" data-fallback="No Image" aria-hidden="true">
+        <img src="images/hero.jpg" srcset="images/hero-900.jpg 900w, images/hero-1600.jpg 1600w, images/hero.jpg 1800w" sizes="100vw" alt="" decoding="async" fetchpriority="high">
       </div>
-      <div class="hero-visual has-images" id="hero-visual" aria-label="庭で使う商品を選ぶGarden Living"></div>
-    </section>
-
-    <section class="section" id="categories">
-      <div class="section-head">
-        <p class="eyebrow">Category</p>
-        <h2>カテゴリから探す</h2>
-        <p>庭まわりの商品を、用途ごとに整理しました。</p>
+      <div class="hero-content">
+        <h1><span>アメリカンフェンス</span><span>全国販売</span></h1>
+        <p>必要部材・設置寸法・価格まで<br>約30秒で自動見積もり</p>
+        <p class="shipping-badge">全国送料無料<small>離島・一部地域除く</small></p>
+        <button id="startEstimateButton" class="hero-button" type="button">見積もりを始める</button>
       </div>
-      <div class="status-message" id="load-status">商品を読み込み中です。</div>
-      <div class="category-grid" id="category-grid"></div>
-    </section>
+    </header>
 
-    <section class="section section-warm" id="scenes">
-      <div class="section-head">
-        <p class="eyebrow">Scene</p>
-        <h2>暮らしのシーンから選ぶ</h2>
-        <p>商品単体ではなく、庭で過ごす時間からカテゴリを選べます。</p>
+    <section class="case-section" aria-labelledby="caseTitle">
+      <div class="section-head compact-head">
+        <h2 id="caseTitle">施工事例</h2>
       </div>
-      <div class="lifestyle-scene-grid">
-        <article class="lifestyle-scene-card">
-          <figure><img src="images/lifestyle/hero-evening-garden-pizza.jpg" alt="庭で食事を楽しむアウトドアキッチンのイメージ" loading="lazy"></figure>
-          <div>
-            <h3>ピザ窯・アウトドアキッチン</h3>
-            <p>庭で家族や友人と食事する時間を、もっと気軽に楽しく。</p>
-            <button type="button" class="scene-category-button" data-category="ピザ窯">関連カテゴリを見る</button>
-          </div>
-        </article>
-        <article class="lifestyle-scene-card">
-          <figure><img src="images/lifestyle/categories/category-gabion.jpg" alt="外構アクセントとして使うガビオンのイメージ" loading="lazy"></figure>
-          <div>
-            <h3>ガビオン・景観アイテム</h3>
-            <p>門柱や外構のアクセントに、石と金属の質感を取り入れる。</p>
-            <button type="button" class="scene-category-button" data-category="ガビオン">関連カテゴリを見る</button>
-          </div>
-        </article>
-        <article class="lifestyle-scene-card">
-          <figure><img src="images/lifestyle/garden-living-hero-final-photo.png" alt="屋根まわりと庭を多目的に使うイメージ" loading="lazy"></figure>
-          <div>
-            <h3>カーポート・屋根まわり</h3>
-            <p>駐車だけでなく、荷物置きや作業スペースとしても使いやすく。</p>
-            <button type="button" class="scene-category-button" data-category="機能門柱">関連カテゴリを見る</button>
-          </div>
-        </article>
-        <article class="lifestyle-scene-card">
-          <figure><img src="images/lifestyle/categories/category-american-fence.png" alt="庭のプライバシーを整えるフェンスのイメージ" loading="lazy"></figure>
-          <div>
-            <h3>フェンス・目隠し</h3>
-            <p>視線を整えながら、庭に抜け感と外観のまとまりをつくる。</p>
-            <button type="button" class="scene-category-button" data-category="アメリカンフェンス">関連カテゴリを見る</button>
-          </div>
-        </article>
-        <article class="lifestyle-scene-card">
-          <figure><img src="images/lifestyle/garden-living-hero-final-photo.png" alt="人工芝の庭で過ごすイメージ" loading="lazy"></figure>
-          <div>
-            <h3>人工芝・グラウンドカバー</h3>
-            <p>子どもや犬が過ごしやすい、手入れしやすい庭の足元へ。</p>
-            <button type="button" class="scene-category-button" data-category="人工芝">関連カテゴリを見る</button>
-          </div>
-        </article>
-        <article class="lifestyle-scene-card">
-          <figure><img src="images/lifestyle/categories/category-water-stand.png" alt="庭で使う立水栓と水まわりのイメージ" loading="lazy"></figure>
-          <div>
-            <h3>水まわり・立水栓</h3>
-            <p>庭作業、ペット、アウトドア後の片付けまで快適に。</p>
-            <button type="button" class="scene-category-button" data-category="立水栓">関連カテゴリを見る</button>
-          </div>
-        </article>
+      <div class="case-scroller" aria-label="施工事例一覧">
+        <button class="case-card" type="button" data-case-title="ドッグラン" data-case-image="images/dogrun.jpg" data-case-srcset="images/dogrun-640.jpg 640w, images/dogrun.jpg 1800w">
+          <span class="image-frame case-image" data-fallback="No Image">
+            <img src="images/dogrun-640.jpg" srcset="images/dogrun-640.jpg 640w, images/dogrun.jpg 1800w" sizes="(max-width: 760px) 72vw, 260px" alt="ドッグランの施工事例" loading="lazy" decoding="async">
+          </span>
+          <strong>ドッグラン</strong>
+        </button>
+        <button class="case-card" type="button" data-case-title="ガレージ" data-case-image="images/garage.jpg" data-case-srcset="images/garage-640.jpg 640w, images/garage.jpg 1800w">
+          <span class="image-frame case-image" data-fallback="No Image">
+            <img src="images/garage-640.jpg" srcset="images/garage-640.jpg 640w, images/garage.jpg 1800w" sizes="(max-width: 760px) 72vw, 260px" alt="ガレージの施工事例" loading="lazy" decoding="async">
+          </span>
+          <strong>ガレージ</strong>
+        </button>
+        <button class="case-card" type="button" data-case-title="庭囲い" data-case-image="images/garden.jpg" data-case-srcset="images/garden-640.jpg 640w, images/garden.jpg 1800w">
+          <span class="image-frame case-image" data-fallback="No Image">
+            <img src="images/garden-640.jpg" srcset="images/garden-640.jpg 640w, images/garden.jpg 1800w" sizes="(max-width: 760px) 72vw, 260px" alt="庭囲いの施工事例" loading="lazy" decoding="async">
+          </span>
+          <strong>庭囲い</strong>
+        </button>
+        <button class="case-card" type="button" data-case-title="店舗" data-case-image="images/shop.jpg" data-case-srcset="images/shop-640.jpg 640w, images/shop.jpg 1800w">
+          <span class="image-frame case-image" data-fallback="No Image">
+            <img src="images/shop-640.jpg" srcset="images/shop-640.jpg 640w, images/shop.jpg 1800w" sizes="(max-width: 760px) 72vw, 260px" alt="店舗の施工事例" loading="lazy" decoding="async">
+          </span>
+          <strong>店舗</strong>
+        </button>
       </div>
     </section>
 
-    <section class="section simulator-section" id="ai-simulator">
+    <section id="estimateInput" class="card input-card" aria-labelledby="inputTitle">
       <div class="section-head">
-        <p class="eyebrow">AI Garden <span class="beta-pill">Beta</span></p>
-        <h2>AIガーデンシミュレーター β版</h2>
-        <p>お庭の写真をもとに、ピザ窯・タイルデッキ・人工芝などを配置した完成イメージを作成できます。</p>
+        <h2 id="inputTitle">かんたん見積もり</h2>
       </div>
-      <div class="simulator-panel" aria-label="AIガーデンシミュレーター">
-        <div class="simulator-intro">
-          <span class="simulator-status-badge">β版・準備中</span>
-          <h3>写真とアイテムを選んで、完成イメージ用の指示文を作る。</h3>
-          <p>今はAI画像生成APIには未接続です。選んだ内容はプロンプトとしてコピーでき、LINE相談時のイメージ共有にも使えます。</p>
-          <p class="simulator-usage-note">本機能は一般のお客様向けの簡易シミュレーションです。同業者・営業目的での無断利用はご遠慮ください。</p>
-        </div>
 
-        <div class="simulator-step">
-          <div class="simulator-step-head">
-            <span>1</span>
-            <h3>使う写真を選ぶ</h3>
-          </div>
-          <div class="simulator-methods" role="radiogroup" aria-label="シミュレーション方法">
-            <label class="simulator-method is-active">
-              <input type="radio" name="simulator-source" value="upload" checked>
-              <strong>自宅の写真を使う</strong>
-              <small>推奨。実際の庭写真から考えます。</small>
-            </label>
-            <label class="simulator-method">
-              <input type="radio" name="simulator-source" value="sample">
-              <strong>サンプルの庭を使う</strong>
-              <small>写真がなくても試せます。</small>
-            </label>
-          </div>
+      <fieldset class="shape-picker">
+        <legend>設置形状を選択</legend>
+        <button class="shape-button" type="button" data-shape="line">
+          <span class="shape-icon shape-line" aria-hidden="true"></span>
+          <strong>直線</strong>
+        </button>
+        <button class="shape-button" type="button" data-shape="l">
+          <span class="shape-icon shape-l" aria-hidden="true"></span>
+          <strong>L字</strong>
+        </button>
+        <button class="shape-button" type="button" data-shape="u">
+          <span class="shape-icon shape-u" aria-hidden="true"></span>
+          <strong>コの字</strong>
+        </button>
+        <button class="shape-button" type="button" data-shape="box">
+          <span class="shape-icon shape-box" aria-hidden="true"></span>
+          <strong>四角</strong>
+        </button>
+      </fieldset>
 
-          <div class="simulator-source-panel" id="simulator-upload-panel">
-            <label class="upload-box" for="garden-photo-input">
-              <input id="garden-photo-input" type="file" accept="image/*">
-              <span>庭写真をアップロード</span>
-              <small>1枚だけ選択できます。スマホの写真でもOKです。</small>
-            </label>
-            <figure class="simulator-preview" id="simulator-upload-preview" hidden>
-              <img alt="アップロードした庭写真のプレビュー">
-              <figcaption id="simulator-upload-name"></figcaption>
-            </figure>
-          </div>
+      <div id="segmentNav" class="segment-nav" aria-label="入力中の辺"></div>
+      <div id="segmentApply" class="segment-apply" aria-live="polite"></div>
+      <div id="segmentInputs" class="segment-inputs" aria-label="各辺の入力"></div>
 
-          <div class="simulator-source-panel" id="simulator-sample-panel" hidden>
-            <div class="sample-garden-grid" id="sample-garden-grid"></div>
-          </div>
-        </div>
+      <button id="resetButton" class="ghost-button full-button" type="button">リセット</button>
+    </section>
 
-        <div class="simulator-step">
-          <div class="simulator-step-head">
-            <span>2</span>
-            <h3>シーンを選ぶ</h3>
-          </div>
-          <div class="scene-choice-grid" id="simulator-scene-list"></div>
-        </div>
+    <section class="card drawing-card" aria-labelledby="drawingTitle">
+      <div class="section-head">
+        <h2 id="drawingTitle">図面</h2>
+      </div>
+      <div id="drawingCanvas" class="drawing-canvas" aria-label="フェンス配置図"></div>
+      <div id="oppositeDimensionNotice" class="opposite-dimension-notice" aria-live="polite"></div>
+      <div class="drawing-legend" aria-label="図面凡例">
+        <span><i class="legend-post"></i>柱</span>
+        <span><i class="legend-panel900"></i>900</span>
+        <span><i class="legend-panel1500"></i>1500</span>
+        <span><i class="legend-gate"></i>門扉</span>
+      </div>
+    </section>
 
-        <div class="simulator-step">
-          <div class="simulator-step-head">
-            <span>3</span>
-            <h3>追加したいアイテムを選ぶ</h3>
-          </div>
-          <div class="selection-counter" id="simulator-count">選択中：0 / 5</div>
-          <p class="simulator-message" id="simulator-limit-message" aria-live="polite"></p>
-          <div class="simulator-item-grid" id="simulator-item-list"></div>
-        </div>
+    <section class="card" aria-labelledby="dimensionsTitle">
+      <div class="section-head">
+        <h2 id="dimensionsTitle">選択中の辺の構成</h2>
+      </div>
+      <div id="selectedSegmentDetail" class="selected-segment-detail"></div>
+    </section>
 
-        <div class="simulator-step">
-          <div class="simulator-step-head">
-            <span>4</span>
-            <h3>写真の上で配置エリアを確認する</h3>
-          </div>
-          <figure class="placement-photo-map">
-            <img id="placement-reference-image" src="images/lifestyle/garden-living-hero-final-photo.png" alt="配置指定用の庭写真">
-            <div class="placement-map-grid" aria-label="配置エリア">
-              <span>A</span><span>B</span><span>C</span>
-              <span>D</span><span>E</span><span>F</span>
-              <span>G</span><span>H</span><span>I</span>
-            </div>
-            <figcaption>A=左奥、E=中央、I=右手前のように、写真上の大まかな位置を指定できます。</figcaption>
-          </figure>
-          <div class="placement-list" id="simulator-placement-list">
-            <p class="empty-message">アイテムを選ぶと、配置指定が表示されます。</p>
-          </div>
-        </div>
+    <section class="card parts-card" aria-label="部材一覧">
+      <details id="partsDetails">
+        <summary id="partsSummary">部材一覧を見る</summary>
+        <div id="partsList" class="parts-list" aria-label="使用部材一覧"></div>
+      </details>
+    </section>
 
-        <div class="simulator-price-card" id="simulator-price-card">
-          <div class="simulator-price-head">
-            <div>
-              <p class="eyebrow">Reference Price</p>
-              <h3>選択した商品</h3>
-            </div>
-            <span>税込参考</span>
-          </div>
-          <div class="selected-price-list" id="simulator-selected-price-list">
-            <p class="empty-message">商品を選ぶと、参考価格が表示されます。</p>
-          </div>
-          <div class="simulator-total">
-            <span>商品代合計（税込参考）</span>
-            <strong id="simulator-total-price">¥0</strong>
-          </div>
-          <p class="simulator-price-note">※商品代の参考価格です。施工費・基礎工事・運搬費等は含まれておりません。現場状況により価格は変動します。</p>
-          <div class="simulator-consult-box">
-            <div>
-              <h3>この内容で相談する</h3>
-              <p>相談内容をコピーして、LINEで貼り付けて送ってください。</p>
-            </div>
-            <textarea id="simulator-consult-text" readonly></textarea>
-            <div class="simulator-actions">
-              <button class="btn btn-secondary" type="button" id="simulator-copy-consult">相談内容をコピー</button>
-              <a class="btn btn-primary js-line-track" id="simulator-line-consult" href="https://line.me/R/ti/p/@953wnidc" target="_blank" rel="noopener noreferrer" data-source="ai_simulator">LINEで相談する</a>
-            </div>
-            <p class="simulator-result" id="simulator-consult-result" aria-live="polite"></p>
-          </div>
-        </div>
+    <section class="summary-grid" aria-label="価格">
+      <article class="total-card">
+        <span>材料一式（税込）</span>
+        <strong id="customerTotalTaxIn">¥0</strong>
+      </article>
+    </section>
 
-        <div class="simulator-prompt-card">
+    <section class="card order-flow-card" aria-labelledby="orderFlowTitle">
+      <div class="section-head order-flow-head">
+        <h2 id="orderFlowTitle">ご注文の流れ</h2>
+        <p>内容・配送を確認後、お支払いをお願いしております。</p>
+      </div>
+      <ol class="order-flow-list">
+        <li>
+          <span>01</span>
           <div>
-            <p class="eyebrow">Prompt</p>
-            <h3>AI生成用の指示文</h3>
+            <strong>自動見積もり</strong>
+            <p>必要部材・設置寸法・材料価格を確認</p>
           </div>
-          <textarea id="simulator-prompt" readonly></textarea>
-          <div class="simulator-actions">
-            <button class="btn btn-secondary" type="button" id="simulator-copy">指示文をコピー</button>
-            <button class="btn btn-primary" type="button" id="simulator-generate">完成イメージを作成する</button>
+        </li>
+        <li>
+          <span>02</span>
+          <div>
+            <strong>LINE・メールで確認</strong>
+            <p>見積内容を送信して注文相談</p>
           </div>
-          <p class="simulator-result" id="simulator-result" aria-live="polite"></p>
-        </div>
+        </li>
+        <li>
+          <span>03</span>
+          <div>
+            <strong>内容・配送確認</strong>
+            <p>商品内容・配送可否・納期を当店で確認</p>
+          </div>
+        </li>
+        <li>
+          <span>04</span>
+          <div>
+            <strong>お支払い</strong>
+            <p>内容・金額確認後に決済</p>
+          </div>
+        </li>
+        <li>
+          <span>05</span>
+          <div>
+            <strong>配送のご案内</strong>
+            <p>入金確認後、メーカーに配送日時を確認し、ご連絡いたします</p>
+          </div>
+        </li>
+      </ol>
+    </section>
 
-        <div class="simulator-generation-card" id="simulator-generation-card">
-          <div class="simulator-generation-head">
-            <div>
-              <p class="eyebrow">Generated Image</p>
-              <h3>生成された完成イメージ</h3>
-            </div>
-            <span>API接続準備中</span>
-          </div>
-          <figure class="simulator-generated-preview">
-            <div class="simulator-generated-image-wrap" id="simulator-generated-image-wrap">
-              <img id="simulator-generated-image" src="images/lifestyle/garden-living-hero-final-photo.png" alt="AIガーデンシミュレーターの生成結果プレビュー" draggable="false">
-              <span class="generated-watermark" aria-hidden="true">Garden Living by EXた組</span>
-            </div>
-            <figcaption id="simulator-generated-caption">まだAPI未接続のため、仮画像を表示しています。</figcaption>
-          </figure>
-          <div class="simulator-loading" id="simulator-loading" hidden>
-            <span class="loading-dot" aria-hidden="true"></span>
-            <p>AIが完成イメージを作成中です…</p>
-          </div>
-          <div class="simulator-error-box" id="simulator-error-box" hidden>
-            <p id="simulator-error-message">生成に失敗しました。</p>
-            <button class="btn btn-secondary" type="button" id="simulator-retry">再試行する</button>
-          </div>
-        </div>
+    <section class="card action-card" aria-labelledby="shippingTitle">
+      <div class="shipping-card-content">
+        <p class="section-kicker">Delivery</p>
+        <h2 id="shippingTitle">全国送料無料</h2>
+        <p>※離島・一部地域を除く</p>
+        <button id="shippingButton" class="ghost-button full-button" type="button">配送について確認する</button>
+        <p id="shippingStatus" class="copy-status" role="status" aria-live="polite"></p>
       </div>
     </section>
 
-    <section class="section section-warm" id="catalog">
+    <section class="card reply-card inquiry-card" aria-labelledby="replyTitle">
       <div class="section-head">
-        <p class="eyebrow">Products</p>
-        <h2>商品を探す</h2>
-        <p>カテゴリを選ぶか、検索してから商品一覧を表示します。</p>
+        <h2 id="replyTitle">お問い合わせ</h2>
       </div>
-      <div class="shop-search">
-        <input id="product-search" type="search" placeholder="車止め、宅配ボックス、ピザ窯、品番など" autocomplete="off" />
-        <div class="search-meta">
-          <p id="result-count">商品を読み込み中です。</p>
-          <div class="search-actions">
-            <button id="saved-filter" type="button">保存した商品 <span id="saved-count">0</span></button>
-            <button id="clear-filter" type="button">すべての商品を見る</button>
-          </div>
-        </div>
-      </div>
-      <div class="catalog-grid" id="catalog-grid"></div>
+      <p class="inquiry-note">見積内容は自動で引き継がれます。</p>
+      <a id="lineInquiryButton" class="primary-button full-button inquiry-button" href="#" target="_blank" rel="noopener">この見積内容でLINE相談する</a>
+      <a id="emailInquiryButton" class="ghost-button full-button inquiry-button inquiry-button-secondary" href="#">メールで問い合わせる</a>
+      <p id="inquiryStatus" class="copy-status" role="status" aria-live="polite"></p>
     </section>
 
-    <section class="section contact-section" id="contact">
+    <section class="card share-card" aria-labelledby="shareTitle">
       <div class="section-head">
-        <p class="eyebrow">Contact</p>
-        <h2>気になる商品を、LINEで相談する。</h2>
-        <p>受注発注が基本です。購入前にサイズ、色、施工方法、他店価格との比較まで一緒に確認できます。</p>
+        <h2 id="shareTitle">URL共有</h2>
       </div>
-      <div class="contact-actions">
-        <a class="btn btn-line js-line-track" href="https://line.me/R/ti/p/@953wnidc" target="_blank" rel="noopener noreferrer" data-source="contact_section">LINEで相談する</a>
-        <a class="btn btn-phone" href="tel:09028235513">電話相談</a>
-        <a class="btn btn-mail" href="mailto:xinjiaantian83@gmail.com?subject=Garden%20Living%E3%81%AE%E7%9B%B8%E8%AB%87">メール相談</a>
+      <input id="shareUrl" class="share-url" type="text" readonly aria-label="共有URL">
+      <button id="shareButton" class="ghost-button full-button" type="button">共有URLをコピー</button>
+      <p id="shareStatus" class="copy-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card notice-card" aria-labelledby="noticeTitle">
+      <div class="section-head">
+        <p class="section-kicker">Before Order</p>
+        <h2 id="noticeTitle">施工前の確認事項</h2>
       </div>
+      <div id="noticeList" class="notice-list"></div>
+      <ul class="check-list">
+        <li>埋設物確認</li>
+        <li>門扉開閉スペース確認</li>
+        <li>配送時立ち会い</li>
+        <li>受領時署名</li>
+        <li>配送希望日は注文時相談</li>
+      </ul>
+      <p class="notice">表示価格はアメリカンフェンス材料のみの概算価格です。人工芝、基礎工事、フェンス設置費、その他施工費は含まれていません。</p>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p><strong>Garden Living</strong> <span>by EXた組</span></p>
-  </footer>
+  <div id="shippingModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="shippingModalTitle" hidden>
+    <div class="modal-panel">
+      <button id="closeShippingModal" class="modal-close" type="button" aria-label="閉じる">×</button>
+      <p class="section-kicker">Delivery</p>
+      <h2 id="shippingModalTitle">送料・配送について</h2>
+      <ul class="check-list">
+        <li>全国送料無料（離島・一部地域を除く）</li>
+        <li>荷受け必須</li>
+        <li>受領時に署名が必要です</li>
+        <li>配送会社により配送方法が異なる場合があります</li>
+        <li>発注からお届けまで通常1〜2週間程度が目安です</li>
+        <li>配送日は商品・配送条件の確認後にご案内します。</li>
+      </ul>
+      <label class="confirm-row">
+        <input id="shippingConfirmed" type="checkbox">
+        <span>内容を確認しました</span>
+      </label>
+    </div>
+  </div>
 
-  <script src="js/garden-price-master.js"></script>
-  <script src="js/outdoor-kitchen.js"></script>
+  <div id="linePasteModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="linePasteTitle" hidden>
+    <div class="modal-panel line-paste-panel">
+      <button id="closeLinePasteModal" class="modal-close" type="button" aria-label="閉じる">×</button>
+      <h2 id="linePasteTitle">見積内容をコピーしました</h2>
+      <p id="linePasteMessage" class="line-paste-message">LINEのトーク画面で、入力欄を長押しして「ペースト」してください。</p>
+      <div class="modal-actions">
+        <a id="openLineButton" class="primary-button full-button" href="https://lin.ee/sQNwZUv" target="_blank" rel="noopener">LINEを開く</a>
+        <button id="cancelLinePasteModal" class="ghost-button full-button" type="button">キャンセル</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="caseModal" class="modal-backdrop image-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="caseModalTitle" hidden>
+    <div class="modal-panel image-modal-panel">
+      <button id="closeCaseModal" class="modal-close" type="button" aria-label="閉じる">×</button>
+      <h2 id="caseModalTitle">施工事例</h2>
+      <div class="image-frame modal-image-frame" data-fallback="No Image">
+        <img id="caseModalImage" src="images/dogrun.jpg" sizes="(max-width: 760px) 92vw, 860px" alt="" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+
+  <script src="fence-engine.js"></script>
+  <script src="url-state.js"></script>
+  <script src="script-inquiry.js"></script>
 </body>
 </html>
