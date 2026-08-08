@@ -1,0 +1,140 @@
+[
+  {
+    "key": "v03-water-stand",
+    "item": "立水栓",
+    "mode": "single",
+    "status": 200,
+    "elapsed_ms": 23001,
+    "generation_time_ms": 22444,
+    "reference_products_used": [
+      {
+        "product_id": "WATER-STAND-SCENE-REFERENCE",
+        "product_name": "立水栓 ガーデンパン施工イメージ",
+        "image_url": "images/g20-material/water-stand/girare-w-all-black.jpg",
+        "image_role": "main"
+      }
+    ],
+    "output": "generated/v03-water-stand-single.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  },
+  {
+    "key": "v03-water-stand",
+    "item": "立水栓",
+    "mode": "multi",
+    "status": 200,
+    "elapsed_ms": 23318,
+    "generation_time_ms": 22596,
+    "reference_products_used": [
+      {
+        "product_id": "WATER-STAND-SCENE-REFERENCE",
+        "product_name": "立水栓 ガーデンパン施工イメージ",
+        "image_url": "images/g20-material/water-stand/girare-w-all-black.jpg",
+        "image_role": "main"
+      },
+      {
+        "product_id": "WATER-STAND-SCENE-REFERENCE",
+        "product_name": "立水栓 ガーデンパン施工イメージ",
+        "image_url": "images/g20-material/water-stand-reference/water-stand-garden-scene-reference.jpg",
+        "image_role": "ai_reference_1"
+      }
+    ],
+    "output": "generated/v03-water-stand-multi.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  },
+  {
+    "key": "v03-pizza-oven",
+    "item": "ピザ窯",
+    "mode": "single",
+    "status": 200,
+    "elapsed_ms": 24428,
+    "generation_time_ms": 23936,
+    "reference_products_used": [
+      {
+        "product_id": "EG3-AB-PK-REFERENCE",
+        "product_name": "アンティークブリックス ピザ窯 EG3-AB-PK",
+        "image_url": "images/g20-material/pizza-oven/antique-bricks-pizza-oven-eg3-ab-pk.jpg",
+        "image_role": "main"
+      }
+    ],
+    "output": "generated/v03-pizza-oven-single.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  },
+  {
+    "key": "v03-pizza-oven",
+    "item": "ピザ窯",
+    "mode": "multi",
+    "status": 200,
+    "elapsed_ms": 25809,
+    "generation_time_ms": 25117,
+    "reference_products_used": [
+      {
+        "product_id": "EG3-AB-PK-REFERENCE",
+        "product_name": "アンティークブリックス ピザ窯 EG3-AB-PK",
+        "image_url": "images/g20-material/pizza-oven/antique-bricks-pizza-oven-eg3-ab-pk.jpg",
+        "image_role": "main"
+      },
+      {
+        "product_id": "EG3-AB-PK-REFERENCE",
+        "product_name": "アンティークブリックス ピザ窯 EG3-AB-PK",
+        "image_url": "images/g20-material/pizza-oven/antique-bricks-pizza-oven-eg3-ab-pk-door-detail.jpg",
+        "image_role": "ai_reference_1"
+      },
+      {
+        "product_id": "EG3-AB-PK-REFERENCE",
+        "product_name": "アンティークブリックス ピザ窯 EG3-AB-PK",
+        "image_url": "images/g20-material/pizza-oven/antique-bricks-pizza-oven-eg3-ab-pk-wood-storage-detail.jpg",
+        "image_role": "ai_reference_2"
+      }
+    ],
+    "output": "generated/v03-pizza-oven-multi.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  },
+  {
+    "key": "v03-gabion",
+    "item": "ガビオン",
+    "mode": "single",
+    "status": 200,
+    "elapsed_ms": 20316,
+    "generation_time_ms": 19250,
+    "reference_products_used": [
+      {
+        "product_id": "GABION-WALL-SCENE-REFERENCE",
+        "product_name": "ガビオン ストーンウォール施工イメージ",
+        "image_url": "images/g20-material/gabion-stonewall-sueoki.jpg",
+        "image_role": "main"
+      }
+    ],
+    "output": "generated/v03-gabion-single.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  },
+  {
+    "key": "v03-gabion",
+    "item": "ガビオン",
+    "mode": "multi",
+    "status": 200,
+    "elapsed_ms": 24581,
+    "generation_time_ms": 23707,
+    "reference_products_used": [
+      {
+        "product_id": "GABION-WALL-SCENE-REFERENCE",
+        "product_name": "ガビオン ストーンウォール施工イメージ",
+        "image_url": "images/g20-material/gabion-stonewall-sueoki.jpg",
+        "image_role": "main"
+      },
+      {
+        "product_id": "GABION-WALL-SCENE-REFERENCE",
+        "product_name": "ガビオン ストーンウォール施工イメージ",
+        "image_url": "images/g20-material/gabion-reference/gabion-wall-scene-reference.jpg",
+        "image_role": "ai_reference_1"
+      }
+    ],
+    "output": "generated/v03-gabion-multi.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  }
+]

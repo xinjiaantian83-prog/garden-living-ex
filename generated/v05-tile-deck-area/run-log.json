@@ -1,0 +1,141 @@
+{
+  "version": "0.5-area",
+  "target": "tile-deck",
+  "purpose": "タイルデッキ area instruction minimal validation.",
+  "source_image": "/Users/yasudashinya/Downloads/IMG_4858.JPG",
+  "area": [
+    {
+      "x": 0.12,
+      "y": 0.6
+    },
+    {
+      "x": 0.88,
+      "y": 0.58
+    },
+    {
+      "x": 0.91,
+      "y": 0.88
+    },
+    {
+      "x": 0.08,
+      "y": 0.91
+    }
+  ],
+  "instruction_image": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-tile-deck-area/tile-deck-area-instruction.jpg",
+  "reference_image": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-tile-deck-area/tile-deck-reference.png",
+  "run_count": 5,
+  "started_at": "2026-07-12T08:40:46.214Z",
+  "runs": [
+    {
+      "index": 1,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-tile-deck-area/tile-deck-area-01.png",
+      "elapsed_ms": 24783,
+      "generation_time_ms": 24331,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "GL-REFERENCE-TILE-DECK-AREA-INSTRUCTION",
+          "product_name": "タイルデッキ 指定範囲画像",
+          "image_url": "generated/v05-tile-deck-area/tile-deck-area-instruction.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "GL-REFERENCE-TILE-DECK",
+          "product_name": "タイルデッキ",
+          "image_url": "generated/v05-tile-deck-area/tile-deck-reference.png",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-tile-deck-area/tile-deck-area-02.png",
+      "elapsed_ms": 23393,
+      "generation_time_ms": 22565,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "GL-REFERENCE-TILE-DECK-AREA-INSTRUCTION",
+          "product_name": "タイルデッキ 指定範囲画像",
+          "image_url": "generated/v05-tile-deck-area/tile-deck-area-instruction.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "GL-REFERENCE-TILE-DECK",
+          "product_name": "タイルデッキ",
+          "image_url": "generated/v05-tile-deck-area/tile-deck-reference.png",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-tile-deck-area/tile-deck-area-03.png",
+      "elapsed_ms": 24504,
+      "generation_time_ms": 24152,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "GL-REFERENCE-TILE-DECK-AREA-INSTRUCTION",
+          "product_name": "タイルデッキ 指定範囲画像",
+          "image_url": "generated/v05-tile-deck-area/tile-deck-area-instruction.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "GL-REFERENCE-TILE-DECK",
+          "product_name": "タイルデッキ",
+          "image_url": "generated/v05-tile-deck-area/tile-deck-reference.png",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-tile-deck-area/tile-deck-area-04.png",
+      "elapsed_ms": 24485,
+      "generation_time_ms": 23272,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "GL-REFERENCE-TILE-DECK-AREA-INSTRUCTION",
+          "product_name": "タイルデッキ 指定範囲画像",
+          "image_url": "generated/v05-tile-deck-area/tile-deck-area-instruction.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "GL-REFERENCE-TILE-DECK",
+          "product_name": "タイルデッキ",
+          "image_url": "generated/v05-tile-deck-area/tile-deck-reference.png",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-tile-deck-area/tile-deck-area-05.png",
+      "elapsed_ms": 20357,
+      "generation_time_ms": 19550,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "GL-REFERENCE-TILE-DECK-AREA-INSTRUCTION",
+          "product_name": "タイルデッキ 指定範囲画像",
+          "image_url": "generated/v05-tile-deck-area/tile-deck-area-instruction.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "GL-REFERENCE-TILE-DECK",
+          "product_name": "タイルデッキ",
+          "image_url": "generated/v05-tile-deck-area/tile-deck-reference.png",
+          "image_role": "main"
+        }
+      ]
+    }
+  ],
+  "finished_at": "2026-07-12T08:42:43.971Z"
+}

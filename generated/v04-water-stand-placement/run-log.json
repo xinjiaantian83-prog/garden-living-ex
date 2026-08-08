@@ -1,0 +1,591 @@
+{
+  "version": "0.4",
+  "purpose": "Water stand placement tendency analysis. No placement rules added.",
+  "source_image": "/Users/yasudashinya/Downloads/IMG_4858.JPG",
+  "product": {
+    "product_id": "WATER-STAND-SCENE-REFERENCE",
+    "product_name": "立水栓 ガーデンパン施工イメージ",
+    "category": "立水栓",
+    "main_image": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+    "ai_reference_images": [
+      "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+      "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg"
+    ],
+    "size": "庭用立水栓とガーデンパン",
+    "color": "ダークグレー角柱、ブラック水栓、ダークグレー角型パン",
+    "ai_features": [
+      "細身の角柱型水栓柱",
+      "柱上部に黒い主蛇口",
+      "柱下部に黒い補助蛇口",
+      "低く厚みのある四角形のガーデンパン",
+      "ガーデンパンは深さがあり内側もダークグレー",
+      "落ち着いたダークグレー系の庭水まわり"
+    ],
+    "ai_prompt": "参照画像の立水栓とガーデンパンの形を優先してください。細身の角柱、上部の黒い主蛇口、下部の黒い補助蛇口、低く厚みのある角型ガーデンパンを商品特徴として再現してください。丸い水鉢、陶器風の鉢、白い受け皿、装飾的な水栓柱にはしないでください。"
+  },
+  "run_count": 20,
+  "started_at": "2026-07-12T06:49:56.390Z",
+  "runs": [
+    {
+      "index": 1,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-01.png",
+      "elapsed_ms": 26354,
+      "generation_time_ms": 25642,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-02.png",
+      "elapsed_ms": 38659,
+      "generation_time_ms": 37793,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-03.png",
+      "elapsed_ms": 26850,
+      "generation_time_ms": 26260,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-04.png",
+      "elapsed_ms": 26863,
+      "generation_time_ms": 25712,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-05.png",
+      "elapsed_ms": 22424,
+      "generation_time_ms": 21508,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-06.png",
+      "elapsed_ms": 23054,
+      "generation_time_ms": 22612,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-07.png",
+      "elapsed_ms": 23138,
+      "generation_time_ms": 22407,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-08.png",
+      "elapsed_ms": 23077,
+      "generation_time_ms": 22067,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-09.png",
+      "elapsed_ms": 25607,
+      "generation_time_ms": 25081,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-10.png",
+      "elapsed_ms": 21891,
+      "generation_time_ms": 20948,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-11.png",
+      "elapsed_ms": 22658,
+      "generation_time_ms": 21843,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-12.png",
+      "elapsed_ms": 22596,
+      "generation_time_ms": 21483,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-13.png",
+      "elapsed_ms": 21687,
+      "generation_time_ms": 21018,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-14.png",
+      "elapsed_ms": 23326,
+      "generation_time_ms": 22861,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-15.png",
+      "elapsed_ms": 31506,
+      "generation_time_ms": 30463,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-16.png",
+      "elapsed_ms": 22311,
+      "generation_time_ms": 21625,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 17,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-17.png",
+      "elapsed_ms": 20280,
+      "generation_time_ms": 19558,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-18.png",
+      "elapsed_ms": 23597,
+      "generation_time_ms": 22854,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 19,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-19.png",
+      "elapsed_ms": 23422,
+      "generation_time_ms": 22701,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "index": 20,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-water-stand-placement/water-stand-placement-20.png",
+      "elapsed_ms": 22553,
+      "generation_time_ms": 21807,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "WATER-STAND-SCENE-REFERENCE",
+          "product_name": "立水栓 ガーデンパン施工イメージ",
+          "image_url": "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    }
+  ],
+  "finished_at": "2026-07-12T06:58:08.358Z"
+}

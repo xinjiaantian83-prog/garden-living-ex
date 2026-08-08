@@ -13,6 +13,7 @@
   var savedCount = document.getElementById('saved-count');
   var resultCount = document.getElementById('result-count');
   var heroVisual = document.getElementById('hero-visual');
+  var simulatorJumpLinks = document.querySelectorAll('.js-simulator-jump');
   var simulatorSourceInputs = document.querySelectorAll('input[name="simulator-source"]');
   var simulatorUploadPanel = document.getElementById('simulator-upload-panel');
   var simulatorSamplePanel = document.getElementById('simulator-sample-panel');
@@ -43,10 +44,31 @@
   var simulatorErrorBox = document.getElementById('simulator-error-box');
   var simulatorErrorMessage = document.getElementById('simulator-error-message');
   var simulatorRetry = document.getElementById('simulator-retry');
+  var legacySimulatorSection = document.getElementById('ai-simulator');
+  var legacySimulatorEnabled = !!(legacySimulatorSection && !legacySimulatorSection.hidden);
   var sampleGardenGrid = document.getElementById('sample-garden-grid');
+  var carportEnabled = document.getElementById('carport-enabled');
+  var carportProductName = document.getElementById('carport-product-name');
+  var carportProductSummary = document.getElementById('carport-product-summary');
+  var carportOptionGrid = document.getElementById('carport-option-grid');
+  var carportSize = document.getElementById('carport-size');
+  var carportHeight = document.getElementById('carport-height');
+  var carportBodyColor = document.getElementById('carport-body-color');
+  var carportRoof = document.getElementById('carport-roof');
+  var carportDrainage = document.getElementById('carport-drainage');
+  var carportPricePreview = document.getElementById('carport-price-preview');
+  var carportDisplayPrice = document.getElementById('carport-display-price');
+  var carportPriceNote = document.getElementById('carport-price-note');
 
   var PRODUCT_SOURCES = [];
   var G20_SOURCES = ['json/g20-material-candidates.json'];
+  var EXTERIOR_SOURCES = {
+    products: ['json/exterior-products.json'],
+    aiSpecs: ['json/ai-product-specs.json'],
+    options: ['json/product-option-master.json'],
+    prices: ['json/product-price-matrix.json'],
+  };
+  var NESCA_TEST_VARIANT_ID = 'NESCA-F-WIDE-2CAR-54-50-H22-SG-STANDARD-NO-LIGHT';
   var TARGET_CATEGORIES = [
     '車止め',
     'サイクルスタンド',
@@ -93,17 +115,97 @@
   var SITE_ORIGIN = 'https://gardenliving-ex.net';
   var GARDEN_SIMULATOR_CONFIG = {
     id: 'garden-living',
-    title: 'AIガーデンシミュレーター β版',
+    title: 'デザインシミュレーション',
     description: 'お庭の写真をもとに、ピザ窯・タイルデッキ・人工芝などを配置した完成イメージを作成できます。',
     watermark: 'Garden Living by EXた組',
     lineUrl: 'https://line.me/R/ti/p/@953wnidc',
-    consultTitle: '【Garden Living AIシミュレーター相談】',
+    consultTitle: '【Garden Living デザインシミュレーション相談】',
     concept: '庭で過ごす時間、アウトドアリビング、ピザ窯、サウナ、ドッグランなど',
     imageApiEndpoint: window.GARDEN_IMAGE_API_ENDPOINT || '/api/generate-garden-image',
     imageModel: 'gpt-image-1',
-    promptPolicy: '既存の建物・窓・外壁・敷地形状はできるだけ維持し、現実的な外構施工として違和感のない完成イメージにしてください。写真全体の明るさ、素材感、植栽の自然さを整え、Garden Livingらしい温かい庭時間が伝わる雰囲気にしてください。',
+    promptPolicy: '既存の建物・窓・外壁・敷地形状はできるだけ維持し、現実的な外構施工として違和感のない完成イメージにしてください。選択していない商品・素材・植栽・床仕上げは追加せず、写真全体の明るさと素材感だけを必要最小限で整えてください。',
     maxItems: 5,
     priceMaster: window.GARDEN_SIMULATOR_PRICE_MASTER || window.GARDEN_LIVING_ITEM_PRICE_MASTER || {},
+    referenceProducts: {
+      'アメリカンフェンス': {
+        product_id: 'OOC-AMERICAN-FENCE-REFERENCE',
+        product_name: 'Only One American fence',
+        category: 'アメリカンフェンス',
+        image_url: 'images/g20-material/american-fence/onlyone-american-fence-reference.jpg',
+        size: '900×900系フェンスを組み合わせる想定',
+        color: 'シルバー',
+        features: [
+          'シルバーの丸パイプフレーム',
+          'チェーンリンク金網',
+          '角が丸いパネル形状',
+          '縦横に連結できる支柱構成',
+          'ドッグランや庭の仕切りに合う抜け感',
+        ],
+      },
+      'ピザ窯': {
+        product_id: 'EG3-AB-PK-REFERENCE',
+        product_name: 'アンティークブリックス ピザ窯 EG3-AB-PK',
+        category: 'ピザ窯',
+        main_image: 'images/g20-material/pizza-oven/antique-bricks-pizza-oven-eg3-ab-pk.jpg',
+        ai_reference_images: [
+          'images/g20-material/pizza-oven/antique-bricks-pizza-oven-eg3-ab-pk-door-detail.jpg',
+          'images/g20-material/pizza-oven/antique-bricks-pizza-oven-eg3-ab-pk-wood-storage-detail.jpg',
+        ],
+        size: '家庭用屋外ピザ窯',
+        color: 'ブラウン系耐火レンガ、濃茶の鉄扉',
+        ai_features: [
+          '耐火レンガを積んだアーチ型の窯本体',
+          '前面に濃茶の大きな鉄扉',
+          '扉上部に小さな丸窓',
+          '下部に薪を収納できる開口',
+          '重厚感のあるアンティークブリックス仕上げ',
+        ],
+        ai_prompt: '参照画像のピザ窯本体を優先してください。丸いドーム型ではなく、耐火レンガのアーチ、濃茶の鉄扉、小さな丸窓、下部の薪収納を商品特徴として再現してください。',
+      },
+      '立水栓': {
+        product_id: 'WATER-STAND-SCENE-REFERENCE',
+        product_name: '立水栓 ガーデンパン施工イメージ',
+        category: '立水栓',
+        main_image: 'images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg',
+        ai_reference_images: [
+          'images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg',
+          'images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg',
+        ],
+        size: '庭用立水栓とガーデンパン',
+        color: 'ダークグレー角柱、ブラック水栓、ダークグレー角型パン',
+        ai_features: [
+          '細身の角柱型水栓柱',
+          '柱上部に黒い主蛇口',
+          '柱下部に黒い補助蛇口',
+          '低く厚みのある四角形のガーデンパン',
+          'ガーデンパンは深さがあり内側もダークグレー',
+          '植栽やガビオンと馴染む施工イメージ',
+          '落ち着いたダークグレー系の庭水まわり',
+        ],
+        ai_prompt: '参照画像の立水栓とガーデンパンの形を優先してください。細身の角柱、上部の黒い主蛇口、下部の黒い補助蛇口、低く厚みのある角型ガーデンパンを商品特徴として再現してください。丸い水鉢、陶器風の鉢、白い受け皿、装飾的な水栓柱にはしないでください。',
+      },
+      'ガビオン': {
+        product_id: 'GABION-WALL-SCENE-REFERENCE',
+        product_name: 'ガビオン ストーンウォール施工イメージ',
+        category: 'ガビオン',
+        main_image: 'images/g20-material/gabion-reference/gabion-product-angled-1200x300x900.jpg',
+        ai_reference_images: [
+          'images/g20-material/gabion-reference/gabion-mesh-stone-detail.jpg',
+          'images/g20-material/gabion-reference/gabion-real-scene-depth.jpg',
+        ],
+        size: '1200×900×300mm系の箱型ガビオン',
+        color: 'グレー系自然石、スチールメッシュ',
+        ai_features: [
+          '直方体のワイヤーメッシュボックス',
+          '正方形グリッドの亜鉛メッキ風スチール金網',
+          '金網の内側にグレー系の割栗石がぎっしり詰まっている',
+          '厚みのある箱型フレームで上面と側面の金網も見える',
+          '普通の石積み塀ではなく金網越しに石が見える構造',
+          '庭の景観アクセントや低いストーンウォールとして使う',
+        ],
+        ai_prompt: '参照画像の箱型ワイヤーメッシュ構造を最優先してください。石だけの壁、ブロック塀、コンクリート塀、乱形石貼りにはしないでください。必ず外側に正方形グリッドの金属メッシュが見え、その内側にグレー系の割栗石が詰まったガビオンとして再現してください。上面・側面にも金網の厚みが分かるようにしてください。',
+      },
+    },
     scenes: ['裏庭', '前庭・駐車場', 'ドッグラン', 'アウトドアリビング'],
     scenePurposes: {
       '裏庭': '家族で楽しめる落ち着いた裏庭',
@@ -200,6 +302,10 @@
     showSaved: false,
     showCatalog: false,
     savedIds: [],
+    exteriorProducts: [],
+    exteriorSpecs: [],
+    exteriorOptionGroups: [],
+    exteriorPriceMatrices: [],
   };
 
   var simulatorState = {
@@ -211,6 +317,20 @@
     selectedItems: [],
     placements: {},
     lastGenerationInput: null,
+    lastGeneratedImageUrl: '',
+    selectedCarport: {
+      enabled: false,
+      product_id: 'LIXIL-CARPORT-NESCA-F-WIDE',
+      variant_id: NESCA_TEST_VARIANT_ID,
+      options: {
+        size: '54-50',
+        height: 'H22',
+        body_color: 'SG',
+        roof_material: 'STANDARD',
+        lighting: 'NO-LIGHT',
+        drainage_direction: 'FRONT_LOW',
+      },
+    },
   };
 
   function text(value) {
@@ -298,6 +418,107 @@
     return typeof price === 'number' && isFinite(price) ? price : null;
   }
 
+  function findExteriorProduct(productId) {
+    return state.exteriorProducts.find(function (product) {
+      return product.product_id === productId;
+    }) || null;
+  }
+
+  function findExteriorSpec(aiSpecId) {
+    return state.exteriorSpecs.find(function (spec) {
+      return spec.ai_spec_id === aiSpecId;
+    }) || null;
+  }
+
+  function findOptionGroup(groupId) {
+    return state.exteriorOptionGroups.find(function (group) {
+      return group.option_group_id === groupId;
+    }) || null;
+  }
+
+  function findOption(groupId, code) {
+    var group = findOptionGroup(groupId);
+    var options = group && Array.isArray(group.options) ? group.options : [];
+    return options.find(function (option) {
+      return option.code === code;
+    }) || null;
+  }
+
+  function findPriceMatrix(matrixId) {
+    return state.exteriorPriceMatrices.find(function (matrix) {
+      return matrix.price_matrix_id === matrixId;
+    }) || null;
+  }
+
+  function findCarportVariant() {
+    var product = findExteriorProduct(simulatorState.selectedCarport.product_id);
+    if (!product) return null;
+    var matrix = findPriceMatrix(product.price_matrix_id);
+    var variants = matrix && Array.isArray(matrix.variants) ? matrix.variants : [];
+    var selected = simulatorState.selectedCarport.options || {};
+    var matched = variants.find(function (variant) {
+      var codes = variant.option_codes || {};
+      return codes.size === selected.size &&
+        codes.height === selected.height &&
+        codes.body_color === selected.body_color &&
+        codes.roof_material === selected.roof_material &&
+        codes.lighting === selected.lighting;
+    });
+    if (matched) return matched;
+    return variants.find(function (variant) {
+      return variant.variant_id === simulatorState.selectedCarport.variant_id;
+    }) || null;
+  }
+
+  function activeVariantPriceBlock(variant) {
+    if (!variant) return null;
+    var override = variant.override_price || {};
+    var standard = variant.standard_price || {};
+    return override.enabled ? override : standard;
+  }
+
+  function computedBasicTotal(priceBlock) {
+    if (!priceBlock) return null;
+    var productPrice = priceBlock.product_price_in_tax;
+    var installFee = priceBlock.standard_installation_fee_in_tax;
+    if (typeof productPrice !== 'number' || typeof installFee !== 'number') return null;
+    return productPrice + installFee;
+  }
+
+  function carportDisplayAmount() {
+    return computedBasicTotal(activeVariantPriceBlock(findCarportVariant()));
+  }
+
+  function carportLabel(groupId, code, fallback) {
+    var option = findOption(groupId, code);
+    return (option && option.customer_label) || fallback || code || '未選択';
+  }
+
+  function selectedCarportDetails() {
+    if (!simulatorState.selectedCarport.enabled) return null;
+    var product = findExteriorProduct(simulatorState.selectedCarport.product_id);
+    var variant = findCarportVariant();
+    var spec = product ? findExteriorSpec(product.ai_spec_id) : null;
+    var options = simulatorState.selectedCarport.options || {};
+    return {
+      product: product,
+      variant: variant,
+      spec: spec,
+      product_id: product && product.product_id,
+      variant_id: variant && variant.variant_id,
+      ai_spec_id: product && product.ai_spec_id,
+      product_name: product ? product.public_name : 'LIXIL ネスカF ワイド',
+      size: carportLabel('CARPORT_SIZE_NESCA_F_WIDE', options.size, '2台用 標準サイズ'),
+      height: carportLabel('CARPORT_HEIGHT_BASIC', options.height, '標準高さ'),
+      bodyColor: carportLabel('CARPORT_BODY_COLOR_BASIC', options.body_color, 'シャイングレー'),
+      roof: carportLabel('CARPORT_POLYCA_ROOF_BASIC', options.roof_material, '標準ポリカ'),
+      drainage: carportLabel('CARPORT_DRAINAGE_DIRECTION', options.drainage_direction, '前側水下'),
+      price: carportDisplayAmount(),
+      priceLabel: '参考価格（税込・標準施工費込）',
+      selected_options: Object.assign({}, options),
+    };
+  }
+
   function loadJson(sources) {
     return sources.reduce(function (promise, source) {
       return promise.catch(function () {
@@ -307,6 +528,13 @@
         });
       });
     }, Promise.reject());
+  }
+
+  function loadOptionalJson(sources, fallback) {
+    return loadJson(sources).catch(function (error) {
+      console.warn('[Garden Living] optional json load failed:', sources, error);
+      return fallback || {};
+    });
   }
 
   function oldProductIsPublished(product) {
@@ -730,6 +958,20 @@
     return '自宅写真';
   }
 
+  function carportPromptText() {
+    var details = selectedCarportDetails();
+    if (!details) return '';
+    return details.product_name + '（' +
+      details.size + '、' +
+      details.height + '、' +
+      details.bodyColor + '、' +
+      details.roof + '、' +
+      details.drainage +
+      '）を、駐車場範囲内へ施工済みの完成イメージとして自然に配置してください。' +
+      ' カーポート以外の外構要素は追加しないでください。人工芝、植栽、タイル、土間コンクリートの打ち替え、フェンス、照明、門柱など、選択していない商品や素材は新しく足さないでください。' +
+      ' 既存の床面、擁壁、側溝、階段、周囲の建物、植栽は、カーポート施工に直接干渉しない限りそのまま維持してください。';
+  }
+
   function buildSimulatorPrompt() {
     var selected = simulatorState.selectedItems;
     var itemText = selected.length
@@ -737,6 +979,10 @@
         return areaPromptText(item, simulatorState.placements[item]);
       }).join('、') + '配置してください。'
       : '必要な庭アイテムを自然に提案して配置してください。';
+    var carportText = carportPromptText();
+    if (carportText) {
+      itemText += ' ' + carportText;
+    }
 
     return photoPromptLabel() + 'をもとに、' + simulatorState.scene + 'を' + scenePurpose() + 'にしてください。' +
       itemText +
@@ -788,6 +1034,47 @@
     }).join('');
   }
 
+  function optionHtml(groupId, selectedCode) {
+    var group = findOptionGroup(groupId);
+    var options = group && Array.isArray(group.options) ? group.options : [];
+    return options.filter(function (option) {
+      return option.enabled !== false;
+    }).map(function (option) {
+      return '<option value="' + escapeHtml(option.code) + '"' + (option.code === selectedCode ? ' selected' : '') + '>' +
+        escapeHtml(option.customer_label || option.code) +
+      '</option>';
+    }).join('');
+  }
+
+  function renderCarportBlock() {
+    if (!carportEnabled) return;
+    var product = findExteriorProduct(simulatorState.selectedCarport.product_id);
+    var variant = findCarportVariant();
+    var details = selectedCarportDetails();
+    var options = simulatorState.selectedCarport.options;
+
+    if (carportProductName) carportProductName.textContent = product ? product.public_name : 'LIXIL ネスカF ワイド';
+    if (carportProductSummary) carportProductSummary.textContent = product ? product.summary : '2台用カーポートの完成イメージを作成します。';
+    carportEnabled.checked = simulatorState.selectedCarport.enabled;
+    if (carportOptionGrid) carportOptionGrid.hidden = !simulatorState.selectedCarport.enabled;
+    if (carportPricePreview) carportPricePreview.hidden = !simulatorState.selectedCarport.enabled;
+
+    if (carportSize) carportSize.innerHTML = optionHtml('CARPORT_SIZE_NESCA_F_WIDE', options.size);
+    if (carportHeight) carportHeight.innerHTML = optionHtml('CARPORT_HEIGHT_BASIC', options.height);
+    if (carportBodyColor) carportBodyColor.innerHTML = optionHtml('CARPORT_BODY_COLOR_BASIC', options.body_color);
+    if (carportRoof) carportRoof.innerHTML = optionHtml('CARPORT_POLYCA_ROOF_BASIC', options.roof_material);
+    if (carportDrainage) carportDrainage.innerHTML = optionHtml('CARPORT_DRAINAGE_DIRECTION', options.drainage_direction);
+
+    if (carportDisplayPrice) {
+      carportDisplayPrice.textContent = details ? formatSimulatorYen(details.price) : '価格未設定';
+    }
+    if (carportPriceNote) {
+      carportPriceNote.textContent = variant && variant.price_status === 'temporary'
+        ? '仮価格です。特殊施工・現場条件により別途。'
+        : '特殊施工・現場条件により別途。';
+    }
+  }
+
   function renderSimulatorPlacements() {
     if (!simulatorPlacementList) return;
     if (!simulatorState.selectedItems.length) {
@@ -815,29 +1102,40 @@
 
   function renderSimulatorPriceSummary() {
     if (!simulatorSelectedPriceList || !simulatorTotalPrice) return;
-    if (!simulatorState.selectedItems.length) {
+    var carport = selectedCarportDetails();
+    if (!simulatorState.selectedItems.length && !carport) {
       simulatorSelectedPriceList.innerHTML = '<p class="empty-message">商品を選ぶと、参考価格が表示されます。</p>';
       simulatorTotalPrice.textContent = '¥0';
       return;
     }
 
     var total = 0;
-    simulatorSelectedPriceList.innerHTML = simulatorState.selectedItems.map(function (item) {
+    var rows = simulatorState.selectedItems.map(function (item) {
       var price = simulatorItemPrice(item);
       if (price !== null) total += price;
       return '<div class="selected-price-row">' +
         '<span>' + escapeHtml(item) + '</span>' +
         '<strong>' + escapeHtml(formatSimulatorYen(price)) + '</strong>' +
       '</div>';
-    }).join('');
+    });
+    if (carport) {
+      total += carport.price || 0;
+      rows.push('<div class="selected-price-row selected-price-row-carport">' +
+        '<span>' + escapeHtml(carport.product_name) + '<small>' + escapeHtml(carport.size + ' / ' + carport.height + ' / ' + carport.bodyColor + ' / ' + carport.roof) + '</small></span>' +
+        '<strong>' + escapeHtml(formatSimulatorYen(carport.price)) + '</strong>' +
+      '</div>');
+    }
+    simulatorSelectedPriceList.innerHTML = rows.join('');
     simulatorTotalPrice.textContent = formatSimulatorYen(total);
   }
 
   function simulatorTotalAmount() {
-    return simulatorState.selectedItems.reduce(function (sum, item) {
+    var itemTotal = simulatorState.selectedItems.reduce(function (sum, item) {
       var price = simulatorItemPrice(item);
       return sum + (price !== null ? price : 0);
     }, 0);
+    var carport = selectedCarportDetails();
+    return itemTotal + (carport && carport.price ? carport.price : 0);
   }
 
   function buildSimulatorConsultText() {
@@ -847,14 +1145,27 @@
         return '・' + item + '　配置：' + placement + '　' + formatSimulatorYen(simulatorItemPrice(item));
       }).join('\n')
       : '・未選択';
+    var carport = selectedCarportDetails();
+    var carportLines = carport
+      ? '\n\n施工商品：\n' +
+        '・商品名：' + carport.product_name + '\n' +
+        '・サイズ：' + carport.size + '\n' +
+        '・柱高さ：' + carport.height + '\n' +
+        '・本体色：' + carport.bodyColor + '\n' +
+        '・屋根材：' + carport.roof + '\n' +
+        '・水下方向：' + carport.drainage + '\n' +
+        '・参考価格：' + formatSimulatorYen(carport.price) + '（税込・標準施工費込）\n' +
+        '・生成画像：' + (simulatorState.lastGeneratedImageUrl ? '参考イメージあり（画面上の生成画像をご確認ください）' : '未生成') + '\n' +
+        '※生成画像は完成イメージです。実際の施工可否・正式価格は現地条件を確認してから確定します。'
+      : '';
 
-    return (SIMULATOR_CONFIG.consultTitle || '【AIガーデンシミュレーター相談】') + '\n\n' +
+    return (SIMULATOR_CONFIG.consultTitle || '【Garden Living デザインシミュレーション相談】') + '\n\n' +
       'シーン：' + simulatorState.scene + '\n' +
       '使用写真：' + consultPhotoLabel() + '\n\n' +
-      '選択商品：\n' + selectedLines + '\n\n' +
-      '商品代合計（税込参考）：' + formatSimulatorYen(simulatorTotalAmount()) + '\n\n' +
-      '※施工費・基礎工事・運搬費等は含まれていません。\n\n' +
-      'AI生成用指示文：\n' + buildSimulatorPrompt() + '\n\n' +
+      '選択商品：\n' + selectedLines + carportLines + '\n\n' +
+      '参考価格合計（税込）：' + formatSimulatorYen(simulatorTotalAmount()) + '\n\n' +
+      '※Garden Living商品は商品代の参考価格です。施工商品は標準施工費込みの参考価格です。特殊施工・現場条件により価格は変動します。\n\n' +
+      '完成イメージ用指示文：\n' + buildSimulatorPrompt() + '\n\n' +
       'この内容で相談したいです。';
   }
 
@@ -864,17 +1175,41 @@
   }
 
   function simulatorGenerationInput() {
+    var carport = selectedCarportDetails();
+    var selectedItems = simulatorState.selectedItems.slice();
+    if (carport) selectedItems.push(carport.product_name);
     return {
       image_url: simulatorSourceImage(),
       image_source: simulatorState.source,
       simulator_id: SIMULATOR_CONFIG.id || 'garden-simulator',
       prompt: buildSimulatorPrompt(),
-      selected_items: simulatorState.selectedItems.slice(),
+      selected_items: selectedItems,
+      reference_products: simulatorReferenceProducts(selectedItems),
       placements: Object.assign({}, simulatorState.placements),
       scene: simulatorState.scene,
       concept: SIMULATOR_CONFIG.concept || '',
       image_model: SIMULATOR_CONFIG.imageModel || 'gpt-image-1',
+      product_id: carport && carport.product_id,
+      variant_id: carport && carport.variant_id,
+      ai_spec_id: carport && carport.ai_spec_id,
+      selected_options: carport && carport.selected_options,
+      exterior_product: carport ? {
+        product_name: carport.product_name,
+        size: carport.size,
+        height: carport.height,
+        body_color: carport.bodyColor,
+        roof_material: carport.roof,
+        drainage_direction: carport.drainage,
+        reference_price_in_tax: carport.price,
+      } : null,
     };
+  }
+
+  function simulatorReferenceProducts(selectedItems) {
+    var referenceMap = SIMULATOR_CONFIG.referenceProducts || {};
+    return selectedItems.map(function (item) {
+      return referenceMap[item];
+    }).filter(Boolean);
   }
 
   function dataUrlFromBlob(blob) {
@@ -944,6 +1279,11 @@
           selected_items: input.selected_items,
           placements: input.placements,
           image_model: input.image_model,
+          product_id: input.product_id,
+          variant_id: input.variant_id,
+          ai_spec_id: input.ai_spec_id,
+          selected_options: input.selected_options,
+          exterior_product: input.exterior_product,
           source_image: {
             data_url: dataUrl,
             mime_type: blob.type || 'image/png',
@@ -959,6 +1299,13 @@
     var endpoint = SIMULATOR_CONFIG.imageApiEndpoint || '/api/generate-garden-image';
 
     return prepareGardenImagePayload(input).then(function (payload) {
+      console.info('[Garden Living Simulator] generation payload:', {
+        product_id: payload.product_id,
+        variant_id: payload.variant_id,
+        ai_spec_id: payload.ai_spec_id,
+        selected_options: payload.selected_options,
+        selected_items: payload.selected_items,
+      });
       return fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -981,7 +1328,7 @@
         }
         return {
           image_url: data.image_url,
-          message: data.message || 'AIが完成イメージを生成しました。',
+        message: data.message || '完成イメージを生成しました。',
           model: data.model,
           provider: data.provider,
           generation_time_ms: data.generation_time_ms,
@@ -995,7 +1342,7 @@
     if (simulatorRetry) simulatorRetry.disabled = isGenerating;
     if (simulatorLoading) simulatorLoading.hidden = !isGenerating;
     if (isGenerating && simulatorResult) {
-      simulatorResult.textContent = 'AIが完成イメージを作成中です…';
+      simulatorResult.textContent = '完成イメージを作成中です…';
     }
   }
 
@@ -1016,6 +1363,7 @@
 
     generateGardenImage(generationInput)
       .then(function (result) {
+        simulatorState.lastGeneratedImageUrl = result.image_url || '';
         if (simulatorGeneratedImage) {
           simulatorGeneratedImage.src = result.image_url || HERO_IMAGE;
         }
@@ -1023,8 +1371,9 @@
           simulatorGeneratedCaption.textContent = result.message || '完成イメージの生成が完了しました。';
         }
         if (simulatorResult) {
-          simulatorResult.textContent = result.message || 'AIが完成イメージを生成しました。';
+          simulatorResult.textContent = result.message || '完成イメージを生成しました。';
         }
+        updateSimulatorPrompt();
       })
       .catch(function (error) {
         showSimulatorGenerationError(generationErrorMessage(error));
@@ -1052,6 +1401,7 @@
     renderSampleGardens();
     renderSimulatorScenes();
     renderSimulatorItems();
+    renderCarportBlock();
     renderSimulatorPlacements();
     renderSimulatorPriceSummary();
     updateSimulatorPrompt();
@@ -1121,7 +1471,16 @@
   }
 
   function initSimulator() {
-    if (!simulatorItemList || !simulatorPrompt) return;
+    simulatorJumpLinks.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        var target = document.getElementById('template01-showroom');
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    if (!legacySimulatorEnabled || !simulatorItemList || !simulatorPrompt) return;
     if (simulatorGeneratedWatermark) {
       simulatorGeneratedWatermark.textContent = SIMULATOR_CONFIG.watermark || 'Garden Living by EXた組';
     }
@@ -1172,6 +1531,34 @@
         renderSimulator();
       });
     }
+
+    if (carportEnabled) {
+      carportEnabled.addEventListener('change', function () {
+        simulatorState.selectedCarport.enabled = carportEnabled.checked;
+        if (simulatorState.selectedCarport.enabled) {
+          simulatorState.scene = '前庭・駐車場';
+        }
+        renderSimulator();
+      });
+    }
+
+    [
+      [carportSize, 'size'],
+      [carportHeight, 'height'],
+      [carportBodyColor, 'body_color'],
+      [carportRoof, 'roof_material'],
+      [carportDrainage, 'drainage_direction'],
+    ].forEach(function (pair) {
+      var input = pair[0];
+      var key = pair[1];
+      if (!input) return;
+      input.addEventListener('change', function () {
+        simulatorState.selectedCarport.options[key] = input.value;
+        var variant = findCarportVariant();
+        if (variant) simulatorState.selectedCarport.variant_id = variant.variant_id;
+        renderSimulator();
+      });
+    });
 
     simulatorItemList.addEventListener('click', function (event) {
       var button = event.target.closest('.simulator-item');
@@ -1234,10 +1621,349 @@
     }
   }
 
-  Promise.allSettled([loadJson(PRODUCT_SOURCES), loadJson(G20_SOURCES)])
+  function initTemplate01Showroom() {
+    var root = document.getElementById('template01-showroom');
+    if (!root) return;
+
+    var preview = document.getElementById('template01-preview-image');
+    var caption = document.getElementById('template01-preview-caption');
+    var imageNote = document.getElementById('template01-image-note');
+    var afterThumb = document.getElementById('template01-after-thumb');
+    var turfInput = document.getElementById('template01-turf');
+    var tileEnabled = document.getElementById('template01-tile-enabled');
+    var tileColor = document.getElementById('template01-tile-color');
+    var tileSize = document.getElementById('template01-tile-size');
+    var tileStep = document.getElementById('template01-tile-step');
+    var fenceSelect = document.getElementById('template01-fence');
+    var furnitureInput = document.getElementById('template01-furniture');
+    var pizzaInput = document.getElementById('template01-pizza');
+    var totalPrice = document.getElementById('template01-total-price');
+    var selectedList = document.getElementById('template01-selected-list');
+    var consultText = document.getElementById('template01-consult-text');
+    var copyConsult = document.getElementById('template01-copy-consult');
+    var copyResult = document.getElementById('template01-copy-result');
+    var lineConsult = document.getElementById('template01-line-consult');
+    var presetButtons = Array.prototype.slice.call(root.querySelectorAll('[data-template01-preset]'));
+    var controlCards = {
+      turf: document.getElementById('template01-card-turf'),
+      tile: document.getElementById('template01-card-tile'),
+      fence: document.getElementById('template01-card-fence'),
+      furniture: document.getElementById('template01-card-furniture'),
+      pizza: document.getElementById('template01-card-pizza'),
+    };
+
+    var IMAGE_BASE = 'images/templates/template01/';
+    var SHOWROOM_BASE = IMAGE_BASE + 'showroom/';
+    var TEMPLATE01_IMAGES = {
+      before: IMAGE_BASE + 'template01-before.jpg',
+      turf: IMAGE_BASE + 'template01-turf-after.jpg',
+      soilPizza: SHOWROOM_BASE + 'soil-pizza.jpg',
+      soilFence: SHOWROOM_BASE + 'soil-fence.jpg',
+      turfFence: SHOWROOM_BASE + 'turf-fence.jpg',
+      turfDogrunFence: SHOWROOM_BASE + 'turf-dogrun-fence.jpg',
+      turfFencePizza: SHOWROOM_BASE + 'turf-fence-pizza.jpg',
+      turfTileFurniture: SHOWROOM_BASE + 'turf-tile-furniture.jpg',
+      turfTileFurniturePizza: SHOWROOM_BASE + 'turf-tile-furniture-pizza.jpg',
+      fullCalm: SHOWROOM_BASE + 'full-calm.jpg',
+    };
+
+    var TEMPLATE01_PRICE = {
+      turf: 180000,
+      furniture: 120000,
+      pizza: 230000,
+      fence: {
+        straight: 220000,
+        dogrun: 360000,
+      },
+      tile: {
+        natural: {
+          standard: { one: 320000, two: 390000 },
+          wide: { one: 460000, two: 540000 },
+        },
+        greige: {
+          standard: { one: 340000, two: 410000 },
+          wide: { one: 480000, two: 560000 },
+        },
+      },
+    };
+
+    var stateTemplate = {
+      turf: false,
+      tile: {
+        enabled: false,
+        color: 'natural',
+        size: 'standard',
+        step: 'one',
+      },
+      fence: 'none',
+      furniture: false,
+      pizza: false,
+    };
+
+    function yen(value) {
+      return '￥' + Number(value || 0).toLocaleString('ja-JP');
+    }
+
+    function tileLabel() {
+      var color = stateTemplate.tile.color === 'greige' ? 'グレージュ' : 'ナチュラルベージュ';
+      var size = stateTemplate.tile.size === 'wide' ? '広めサイズ' : '標準サイズ';
+      var step = stateTemplate.tile.step === 'two' ? '本体＋ステップ' : '1段';
+      return color + ' / ' + size + ' / ' + step;
+    }
+
+    function tilePrice() {
+      if (!stateTemplate.tile.enabled) return 0;
+      return TEMPLATE01_PRICE.tile[stateTemplate.tile.color][stateTemplate.tile.size][stateTemplate.tile.step] || 0;
+    }
+
+    function selectedItems() {
+      var items = [];
+      if (stateTemplate.turf) {
+        items.push({ key: 'turf', label: '人工芝', detail: '固定After素材', price: TEMPLATE01_PRICE.turf });
+      }
+      if (stateTemplate.tile.enabled) {
+        items.push({ key: 'tile', label: 'タイルデッキ', detail: tileLabel(), price: tilePrice() });
+      }
+      if (stateTemplate.fence !== 'none') {
+        items.push({
+          key: 'fence',
+          label: 'アメリカンフェンス',
+          detail: stateTemplate.fence === 'dogrun' ? 'ドッグラン向け囲い＋ゲート' : '直線フェンス',
+          price: TEMPLATE01_PRICE.fence[stateTemplate.fence] || 0,
+        });
+      }
+      if (stateTemplate.furniture) {
+        items.push({ key: 'furniture', label: 'ガーデンファニチャー', detail: 'ダイニングテーブル＋チェア', price: TEMPLATE01_PRICE.furniture });
+      }
+      if (stateTemplate.pizza) {
+        items.push({ key: 'pizza', label: 'ピザ窯', detail: 'レンガ造り・アーチ型・薪収納付き', price: TEMPLATE01_PRICE.pizza });
+      }
+      return items;
+    }
+
+    function chooseImage() {
+      var turf = stateTemplate.turf;
+      var tile = stateTemplate.tile.enabled;
+      var fence = stateTemplate.fence !== 'none';
+      var dogrun = stateTemplate.fence === 'dogrun';
+      var furniture = stateTemplate.furniture;
+      var pizza = stateTemplate.pizza;
+
+      if (!turf && !tile && !fence && !furniture && !pizza) {
+        return { src: TEMPLATE01_IMAGES.before, label: 'Before（土の庭）', exact: true, note: '' };
+      }
+      if (turf && tile && furniture && fence && pizza) {
+        return { src: TEMPLATE01_IMAGES.fullCalm, label: '人工芝＋タイルデッキ＋フェンス＋家具＋ピザ窯', exact: true, note: '' };
+      }
+      if (turf && tile && furniture && pizza && !fence) {
+        return { src: TEMPLATE01_IMAGES.turfTileFurniturePizza, label: '人工芝＋タイルデッキ＋家具＋ピザ窯', exact: true, note: '' };
+      }
+      if (turf && fence && pizza && !tile && !furniture) {
+        return { src: TEMPLATE01_IMAGES.turfFencePizza, label: '人工芝＋アメリカンフェンス＋ピザ窯', exact: true, note: '' };
+      }
+      if (turf && dogrun && !tile && !furniture && !pizza) {
+        return { src: TEMPLATE01_IMAGES.turfDogrunFence, label: '人工芝＋ドッグラン向け囲い', exact: true, note: '' };
+      }
+      if (turf && fence && !tile && !furniture && !pizza) {
+        return { src: TEMPLATE01_IMAGES.turfFence, label: '人工芝＋アメリカンフェンス', exact: true, note: '' };
+      }
+      if (turf && tile && furniture && !fence && !pizza) {
+        return { src: TEMPLATE01_IMAGES.turfTileFurniture, label: '人工芝＋タイルデッキ＋家具', exact: true, note: '' };
+      }
+      if (!turf && !tile && fence && !furniture && !pizza) {
+        return { src: TEMPLATE01_IMAGES.soilFence, label: '土＋アメリカンフェンス', exact: true, note: '' };
+      }
+      if (!turf && !tile && !fence && !furniture && pizza) {
+        return { src: TEMPLATE01_IMAGES.soilPizza, label: '土＋ピザ窯', exact: true, note: '' };
+      }
+      if (turf && !tile && !fence && !furniture && !pizza) {
+        return { src: TEMPLATE01_IMAGES.turf, label: '人工芝', exact: true, note: '' };
+      }
+      return {
+        src: TEMPLATE01_IMAGES.before,
+        label: '個別イメージ未制作',
+        exact: false,
+        note: 'この組み合わせの個別完成イメージは未制作です。選択内容は相談文に反映されます。',
+      };
+    }
+
+    function total() {
+      return selectedItems().reduce(function (sum, item) {
+        return sum + item.price;
+      }, 0);
+    }
+
+    function buildConsult() {
+      var items = selectedItems();
+      var lines = [
+        '【Garden Living 展示場1号 相談】',
+        '',
+        'テンプレート：Template01 標準的な建売住宅の裏庭',
+        '表示画像：' + chooseImage().label,
+        '',
+        '選択商品：',
+      ];
+
+      if (!items.length) {
+        lines.push('・未選択（外構前の土の庭）');
+      } else {
+        items.forEach(function (item) {
+          lines.push('・' + item.label + ' / ' + item.detail + ' / ' + yen(item.price));
+        });
+      }
+
+      lines = lines.concat([
+        '',
+        '商品代合計（税込参考）：' + yen(total()),
+        '',
+        chooseImage().exact ? '' : '※この組み合わせの個別完成イメージは未制作です。相談時に内容確認します。',
+        '',
+        '※設置費・基礎工事・運搬費等は含まれておりません。',
+        '※正式なご提案・お見積りは現地確認後となります。',
+        '',
+        'この内容で相談したいです。',
+      ]);
+      return lines.join('\n');
+    }
+
+    function syncInputs() {
+      if (turfInput) turfInput.checked = stateTemplate.turf;
+      if (tileEnabled) tileEnabled.checked = stateTemplate.tile.enabled;
+      if (tileColor) tileColor.value = stateTemplate.tile.color;
+      if (tileSize) tileSize.value = stateTemplate.tile.size;
+      if (tileStep) tileStep.value = stateTemplate.tile.step;
+      if (fenceSelect) fenceSelect.value = stateTemplate.fence;
+      if (furnitureInput) furnitureInput.checked = stateTemplate.furniture;
+      if (pizzaInput) pizzaInput.checked = stateTemplate.pizza;
+      if (tileColor) tileColor.disabled = !stateTemplate.tile.enabled;
+      if (tileSize) tileSize.disabled = !stateTemplate.tile.enabled;
+      if (tileStep) tileStep.disabled = !stateTemplate.tile.enabled;
+      var tileOptions = document.getElementById('template01-tile-options');
+      if (tileOptions) tileOptions.classList.toggle('is-disabled', !stateTemplate.tile.enabled);
+      if (controlCards.turf) controlCards.turf.classList.toggle('is-selected', stateTemplate.turf);
+      if (controlCards.tile) controlCards.tile.classList.toggle('is-selected', stateTemplate.tile.enabled);
+      if (controlCards.fence) controlCards.fence.classList.toggle('is-selected', stateTemplate.fence !== 'none');
+      if (controlCards.furniture) controlCards.furniture.classList.toggle('is-selected', stateTemplate.furniture);
+      if (controlCards.pizza) controlCards.pizza.classList.toggle('is-selected', stateTemplate.pizza);
+    }
+
+    function updatePresetActive(activePreset) {
+      presetButtons.forEach(function (button) {
+        button.classList.toggle('is-active', button.dataset.template01Preset === activePreset);
+      });
+    }
+
+    function renderTemplate01(activePreset) {
+      var started = performance && performance.now ? performance.now() : Date.now();
+      var image = chooseImage();
+      var items = selectedItems();
+      var totalValue = total();
+      syncInputs();
+
+      if (preview) {
+        preview.src = image.src;
+        preview.alt = 'Template01 ' + image.label;
+      }
+      if (afterThumb) afterThumb.src = image.src;
+      if (caption) caption.textContent = image.label;
+      if (imageNote) {
+        imageNote.textContent = image.note || '';
+        imageNote.classList.toggle('is-visible', !image.exact && !!image.note);
+      }
+      if (totalPrice) totalPrice.textContent = yen(totalValue);
+      if (selectedList) {
+        selectedList.innerHTML = items.length
+          ? items.map(function (item) {
+            return '<li><span>' + item.label + '<small> ' + item.detail + '</small></span><strong>' + yen(item.price) + '</strong></li>';
+          }).join('')
+          : '<li><span>商品未選択</span><strong>' + yen(0) + '</strong></li>';
+      }
+      if (consultText) consultText.value = buildConsult();
+      updatePresetActive(activePreset || '');
+      if (copyResult) copyResult.textContent = '';
+      window.__template01LastSwitchMs = Math.round((performance && performance.now ? performance.now() : Date.now()) - started);
+    }
+
+    function setPreset(name) {
+      stateTemplate.turf = false;
+      stateTemplate.tile.enabled = false;
+      stateTemplate.tile.color = 'natural';
+      stateTemplate.tile.size = 'standard';
+      stateTemplate.tile.step = 'one';
+      stateTemplate.fence = 'none';
+      stateTemplate.furniture = false;
+      stateTemplate.pizza = false;
+
+      if (name === 'family') {
+        stateTemplate.turf = true;
+        stateTemplate.tile.enabled = true;
+        stateTemplate.tile.size = 'wide';
+        stateTemplate.tile.step = 'two';
+        stateTemplate.furniture = true;
+      }
+      if (name === 'dogrun') {
+        stateTemplate.turf = true;
+        stateTemplate.fence = 'dogrun';
+      }
+      if (name === 'pizza') {
+        stateTemplate.pizza = true;
+      }
+      renderTemplate01(name);
+    }
+
+    function bindInput(input, handler) {
+      if (!input) return;
+      input.addEventListener('change', function () {
+        handler();
+        renderTemplate01('');
+      });
+    }
+
+    bindInput(turfInput, function () { stateTemplate.turf = !!turfInput.checked; });
+    bindInput(tileEnabled, function () { stateTemplate.tile.enabled = !!tileEnabled.checked; });
+    bindInput(tileColor, function () { stateTemplate.tile.color = tileColor.value || 'natural'; });
+    bindInput(tileSize, function () { stateTemplate.tile.size = tileSize.value || 'standard'; });
+    bindInput(tileStep, function () { stateTemplate.tile.step = tileStep.value || 'one'; });
+    bindInput(fenceSelect, function () { stateTemplate.fence = fenceSelect.value || 'none'; });
+    bindInput(furnitureInput, function () { stateTemplate.furniture = !!furnitureInput.checked; });
+    bindInput(pizzaInput, function () { stateTemplate.pizza = !!pizzaInput.checked; });
+
+    presetButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        setPreset(button.dataset.template01Preset || 'reset');
+      });
+    });
+
+    if (copyConsult) {
+      copyConsult.addEventListener('click', function () {
+        copyTextToClipboard(buildConsult(), function () {
+          if (copyResult) copyResult.textContent = '相談内容をコピーしました';
+        });
+      });
+    }
+
+    if (lineConsult) {
+      lineConsult.href = LINE_URL || lineConsult.href || '#contact';
+    }
+
+    renderTemplate01('reset');
+  }
+
+  Promise.allSettled([
+    loadJson(PRODUCT_SOURCES),
+    loadJson(G20_SOURCES),
+    loadOptionalJson(EXTERIOR_SOURCES.products, { products: [] }),
+    loadOptionalJson(EXTERIOR_SOURCES.aiSpecs, { specs: [] }),
+    loadOptionalJson(EXTERIOR_SOURCES.options, { option_groups: [] }),
+    loadOptionalJson(EXTERIOR_SOURCES.prices, { price_matrices: [] }),
+  ])
     .then(function (results) {
       var oldData = results[0].status === 'fulfilled' ? results[0].value : {};
       var g20Data = results[1].status === 'fulfilled' ? results[1].value : {};
+      var exteriorData = results[2].status === 'fulfilled' ? results[2].value : {};
+      var aiSpecData = results[3].status === 'fulfilled' ? results[3].value : {};
+      var optionData = results[4].status === 'fulfilled' ? results[4].value : {};
+      var priceData = results[5].status === 'fulfilled' ? results[5].value : {};
       var oldProducts = (Array.isArray(oldData.products) ? oldData.products : [])
         .filter(oldProductIsPublished)
         .map(convertOldProduct);
@@ -1245,11 +1971,16 @@
         .filter(publishedG20)
         .map(convertG20Product);
       state.savedIds = readSavedIds();
+      state.exteriorProducts = Array.isArray(exteriorData.products) ? exteriorData.products : [];
+      state.exteriorSpecs = Array.isArray(aiSpecData.specs) ? aiSpecData.specs : [];
+      state.exteriorOptionGroups = Array.isArray(optionData.option_groups) ? optionData.option_groups : [];
+      state.exteriorPriceMatrices = Array.isArray(priceData.price_matrices) ? priceData.price_matrices : [];
       state.products = dedupe(oldProducts.concat(g20Products));
       renderHero();
       bindSearch();
       bindProductActions();
       initSimulator();
+      initTemplate01Showroom();
       renderAll();
       if (loadStatus) {
         loadStatus.textContent = state.products.length + '件の商品を読み込みました。';

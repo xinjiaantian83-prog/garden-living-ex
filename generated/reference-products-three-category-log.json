@@ -1,0 +1,92 @@
+[
+  {
+    "key": "water-stand",
+    "item": "立水栓",
+    "mode": "text",
+    "status": 200,
+    "elapsed_ms": 25649,
+    "generation_time_ms": 24412,
+    "reference_products_used": [],
+    "output": "generated/water-stand-text.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  },
+  {
+    "key": "water-stand",
+    "item": "立水栓",
+    "mode": "reference",
+    "status": 200,
+    "elapsed_ms": 30052,
+    "generation_time_ms": 29546,
+    "reference_products_used": [
+      {
+        "product_id": "OOC-000096",
+        "product_name": "ジラーレW(補助蛇口付)オールブラック",
+        "image_url": "images/g20-material/water-stand/girare-w-all-black.jpg"
+      }
+    ],
+    "output": "generated/water-stand-reference.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  },
+  {
+    "key": "pizza-oven",
+    "item": "ピザ窯",
+    "mode": "text",
+    "status": 200,
+    "elapsed_ms": 22517,
+    "generation_time_ms": 21516,
+    "reference_products_used": [],
+    "output": "generated/pizza-oven-text.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  },
+  {
+    "key": "pizza-oven",
+    "item": "ピザ窯",
+    "mode": "reference",
+    "status": 200,
+    "elapsed_ms": 24725,
+    "generation_time_ms": 24046,
+    "reference_products_used": [
+      {
+        "product_id": "PIZZA-OVEN-REFERENCE",
+        "product_name": "屋外用ドーム型ピザ窯",
+        "image_url": "images/lifestyle/hero-evening-garden-pizza.jpg"
+      }
+    ],
+    "output": "generated/pizza-oven-reference.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  },
+  {
+    "key": "gabion",
+    "item": "ガビオン",
+    "mode": "text",
+    "status": 200,
+    "elapsed_ms": 22039,
+    "generation_time_ms": 21262,
+    "reference_products_used": [],
+    "output": "generated/gabion-text.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  },
+  {
+    "key": "gabion",
+    "item": "ガビオン",
+    "mode": "reference",
+    "status": 200,
+    "elapsed_ms": 24329,
+    "generation_time_ms": 23999,
+    "reference_products_used": [
+      {
+        "product_id": "OOC-000007",
+        "product_name": "ガビオン ストーンウォールユニット据置仕様 H450×W1200×D300",
+        "image_url": "images/g20-material/gabion-stonewall-sueoki.jpg"
+      }
+    ],
+    "output": "generated/gabion-reference.png",
+    "message": "AIが完成イメージを生成しました。",
+    "error": null
+  }
+]

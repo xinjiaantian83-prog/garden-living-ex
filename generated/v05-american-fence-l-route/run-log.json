@@ -1,0 +1,149 @@
+{
+  "version": "0.5-l-route",
+  "purpose": "American fence L-route instruction minimal validation. Three points, two line segments.",
+  "source_image": "/Users/yasudashinya/Downloads/IMG_4858.JPG",
+  "route": {
+    "start": {
+      "x": 0.1,
+      "y": 0.58
+    },
+    "corner": {
+      "x": 0.86,
+      "y": 0.56
+    },
+    "end": {
+      "x": 0.86,
+      "y": 0.78
+    }
+  },
+  "route_instruction_image": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-american-fence-l-route/l-route-instruction.jpg",
+  "product": {
+    "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+    "product_name": "Only One American fence",
+    "category": "アメリカンフェンス",
+    "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+    "size": "900×900系フェンスを組み合わせる想定",
+    "color": "シルバー",
+    "features": [
+      "シルバーの丸パイプフレーム",
+      "チェーンリンク金網",
+      "角が丸いパネル形状",
+      "縦横に連結できる支柱構成"
+    ]
+  },
+  "run_count": 5,
+  "started_at": "2026-07-12T08:21:56.860Z",
+  "runs": [
+    {
+      "index": 1,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-american-fence-l-route/american-fence-l-route-01.png",
+      "elapsed_ms": 24053,
+      "generation_time_ms": 23174,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "L-ROUTE-INSTRUCTION-IMAGE",
+          "product_name": "フェンスL字設置ルート指示画像",
+          "image_url": "generated/v05-american-fence-l-route/l-route-instruction.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-american-fence-l-route/american-fence-l-route-02.png",
+      "elapsed_ms": 23051,
+      "generation_time_ms": 22177,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "L-ROUTE-INSTRUCTION-IMAGE",
+          "product_name": "フェンスL字設置ルート指示画像",
+          "image_url": "generated/v05-american-fence-l-route/l-route-instruction.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-american-fence-l-route/american-fence-l-route-03.png",
+      "elapsed_ms": 23850,
+      "generation_time_ms": 23044,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "L-ROUTE-INSTRUCTION-IMAGE",
+          "product_name": "フェンスL字設置ルート指示画像",
+          "image_url": "generated/v05-american-fence-l-route/l-route-instruction.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-american-fence-l-route/american-fence-l-route-04.png",
+      "elapsed_ms": 24758,
+      "generation_time_ms": 24485,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "L-ROUTE-INSTRUCTION-IMAGE",
+          "product_name": "フェンスL字設置ルート指示画像",
+          "image_url": "generated/v05-american-fence-l-route/l-route-instruction.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v05-american-fence-l-route/american-fence-l-route-05.png",
+      "elapsed_ms": 31597,
+      "generation_time_ms": 31263,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "L-ROUTE-INSTRUCTION-IMAGE",
+          "product_name": "フェンスL字設置ルート指示画像",
+          "image_url": "generated/v05-american-fence-l-route/l-route-instruction.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    }
+  ],
+  "finished_at": "2026-07-12T08:24:04.437Z"
+}

@@ -1,0 +1,517 @@
+{
+  "version": "0.4-stage2",
+  "purpose": "American fence placement tendency with construction example references. No placement rules added.",
+  "source_image": "/Users/yasudashinya/Downloads/IMG_4858.JPG",
+  "product": {
+    "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+    "product_name": "Only One American fence",
+    "category": "アメリカンフェンス",
+    "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+    "size": "900×900系フェンスを組み合わせる想定",
+    "color": "シルバー",
+    "features": [
+      "シルバーの丸パイプフレーム",
+      "チェーンリンク金網",
+      "角が丸いパネル形状",
+      "縦横に連結できる支柱構成",
+      "ドッグランや庭の仕切りに合う抜け感"
+    ]
+  },
+  "placement_examples": [
+    {
+      "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-EDGE-GATE",
+      "product_name": "施工事例: 建物際とゲート付き配置",
+      "category": "アメリカンフェンス施工事例",
+      "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-edge-gate.webp"
+    },
+    {
+      "product_id": "AMERICAN-FENCE-PLACEMENT-DOG-GATE",
+      "product_name": "施工事例: ドッグランの出入口",
+      "category": "アメリカンフェンス施工事例",
+      "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg"
+    },
+    {
+      "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-LINE",
+      "product_name": "施工事例: 建物際の直線配置",
+      "category": "アメリカンフェンス施工事例",
+      "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-line.jpg"
+    },
+    {
+      "product_id": "AMERICAN-FENCE-PLACEMENT-U-SHAPE-DIAGRAM",
+      "product_name": "施工事例: コの字配置と片開き扉",
+      "category": "アメリカンフェンス施工事例",
+      "image_url": "images/g20-material/american-fence-placement-reference/american-fence-u-shape-diagram.jpg"
+    },
+    {
+      "product_id": "AMERICAN-FENCE-PLACEMENT-DOGRUN-ENCLOSURE",
+      "product_name": "施工事例: ドッグランを囲う配置",
+      "category": "アメリカンフェンス施工事例",
+      "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg"
+    }
+  ],
+  "run_count": 10,
+  "started_at": "2026-07-12T07:32:55.554Z",
+  "runs": [
+    {
+      "index": 1,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement-stage2/american-fence-stage2-01.png",
+      "elapsed_ms": 25386,
+      "generation_time_ms": 24203,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-EDGE-GATE",
+          "product_name": "施工事例: 建物際とゲート付き配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-edge-gate.webp",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOG-GATE",
+          "product_name": "施工事例: ドッグランの出入口",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-LINE",
+          "product_name": "施工事例: 建物際の直線配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-line.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-U-SHAPE-DIAGRAM",
+          "product_name": "施工事例: コの字配置と片開き扉",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-u-shape-diagram.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOGRUN-ENCLOSURE",
+          "product_name": "施工事例: ドッグランを囲う配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement-stage2/american-fence-stage2-02.png",
+      "elapsed_ms": 30116,
+      "generation_time_ms": 28692,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-EDGE-GATE",
+          "product_name": "施工事例: 建物際とゲート付き配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-edge-gate.webp",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOG-GATE",
+          "product_name": "施工事例: ドッグランの出入口",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-LINE",
+          "product_name": "施工事例: 建物際の直線配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-line.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-U-SHAPE-DIAGRAM",
+          "product_name": "施工事例: コの字配置と片開き扉",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-u-shape-diagram.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOGRUN-ENCLOSURE",
+          "product_name": "施工事例: ドッグランを囲う配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement-stage2/american-fence-stage2-03.png",
+      "elapsed_ms": 24304,
+      "generation_time_ms": 23509,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-EDGE-GATE",
+          "product_name": "施工事例: 建物際とゲート付き配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-edge-gate.webp",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOG-GATE",
+          "product_name": "施工事例: ドッグランの出入口",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-LINE",
+          "product_name": "施工事例: 建物際の直線配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-line.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-U-SHAPE-DIAGRAM",
+          "product_name": "施工事例: コの字配置と片開き扉",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-u-shape-diagram.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOGRUN-ENCLOSURE",
+          "product_name": "施工事例: ドッグランを囲う配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement-stage2/american-fence-stage2-04.png",
+      "elapsed_ms": 24499,
+      "generation_time_ms": 23341,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-EDGE-GATE",
+          "product_name": "施工事例: 建物際とゲート付き配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-edge-gate.webp",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOG-GATE",
+          "product_name": "施工事例: ドッグランの出入口",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-LINE",
+          "product_name": "施工事例: 建物際の直線配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-line.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-U-SHAPE-DIAGRAM",
+          "product_name": "施工事例: コの字配置と片開き扉",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-u-shape-diagram.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOGRUN-ENCLOSURE",
+          "product_name": "施工事例: ドッグランを囲う配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement-stage2/american-fence-stage2-05.png",
+      "elapsed_ms": 21902,
+      "generation_time_ms": 20884,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-EDGE-GATE",
+          "product_name": "施工事例: 建物際とゲート付き配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-edge-gate.webp",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOG-GATE",
+          "product_name": "施工事例: ドッグランの出入口",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-LINE",
+          "product_name": "施工事例: 建物際の直線配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-line.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-U-SHAPE-DIAGRAM",
+          "product_name": "施工事例: コの字配置と片開き扉",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-u-shape-diagram.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOGRUN-ENCLOSURE",
+          "product_name": "施工事例: ドッグランを囲う配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement-stage2/american-fence-stage2-06.png",
+      "elapsed_ms": 25856,
+      "generation_time_ms": 24985,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-EDGE-GATE",
+          "product_name": "施工事例: 建物際とゲート付き配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-edge-gate.webp",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOG-GATE",
+          "product_name": "施工事例: ドッグランの出入口",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-LINE",
+          "product_name": "施工事例: 建物際の直線配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-line.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-U-SHAPE-DIAGRAM",
+          "product_name": "施工事例: コの字配置と片開き扉",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-u-shape-diagram.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOGRUN-ENCLOSURE",
+          "product_name": "施工事例: ドッグランを囲う配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement-stage2/american-fence-stage2-07.png",
+      "elapsed_ms": 27148,
+      "generation_time_ms": 26259,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-EDGE-GATE",
+          "product_name": "施工事例: 建物際とゲート付き配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-edge-gate.webp",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOG-GATE",
+          "product_name": "施工事例: ドッグランの出入口",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-LINE",
+          "product_name": "施工事例: 建物際の直線配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-line.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-U-SHAPE-DIAGRAM",
+          "product_name": "施工事例: コの字配置と片開き扉",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-u-shape-diagram.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOGRUN-ENCLOSURE",
+          "product_name": "施工事例: ドッグランを囲う配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement-stage2/american-fence-stage2-08.png",
+      "elapsed_ms": 23336,
+      "generation_time_ms": 22107,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-EDGE-GATE",
+          "product_name": "施工事例: 建物際とゲート付き配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-edge-gate.webp",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOG-GATE",
+          "product_name": "施工事例: ドッグランの出入口",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-LINE",
+          "product_name": "施工事例: 建物際の直線配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-line.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-U-SHAPE-DIAGRAM",
+          "product_name": "施工事例: コの字配置と片開き扉",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-u-shape-diagram.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOGRUN-ENCLOSURE",
+          "product_name": "施工事例: ドッグランを囲う配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement-stage2/american-fence-stage2-09.png",
+      "elapsed_ms": 22909,
+      "generation_time_ms": 22221,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-EDGE-GATE",
+          "product_name": "施工事例: 建物際とゲート付き配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-edge-gate.webp",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOG-GATE",
+          "product_name": "施工事例: ドッグランの出入口",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-LINE",
+          "product_name": "施工事例: 建物際の直線配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-line.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-U-SHAPE-DIAGRAM",
+          "product_name": "施工事例: コの字配置と片開き扉",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-u-shape-diagram.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOGRUN-ENCLOSURE",
+          "product_name": "施工事例: ドッグランを囲う配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement-stage2/american-fence-stage2-10.png",
+      "elapsed_ms": 23766,
+      "generation_time_ms": 22989,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-EDGE-GATE",
+          "product_name": "施工事例: 建物際とゲート付き配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-edge-gate.webp",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOG-GATE",
+          "product_name": "施工事例: ドッグランの出入口",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-BUILDING-LINE",
+          "product_name": "施工事例: 建物際の直線配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-building-line.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-U-SHAPE-DIAGRAM",
+          "product_name": "施工事例: コの字配置と片開き扉",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-u-shape-diagram.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "AMERICAN-FENCE-PLACEMENT-DOGRUN-ENCLOSURE",
+          "product_name": "施工事例: ドッグランを囲う配置",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg",
+          "image_role": "main"
+        }
+      ]
+    }
+  ],
+  "finished_at": "2026-07-12T07:37:04.836Z"
+}

@@ -1,0 +1,14 @@
+{
+  "output": "generated/v03-water-stand-improved-multi.png",
+  "ms": 25602,
+  "refs": [
+    "images/g20-material/water-stand-reference/water-stand-full-column-pan.jpg",
+    "images/g20-material/water-stand-reference/water-stand-two-faucet-detail.jpg",
+    "images/g20-material/water-stand-reference/water-stand-square-pan-detail.jpg"
+  ],
+  "model": "gpt-image-1",
+  "size": "1024x1024",
+  "quality": "medium",
+  "created_at": "2026-07-12T06:10:52.211Z",
+  "prompt": "Version0.3 商品画像参照方式の立水栓再現テスト。評価対象は配置ではなく商品一致率のみ。庭写真を元に、参照商品の立水栓とガーデンパンを庭へ自然に加えた完成イメージを作る。参照画像の形状、色、素材、ディテールを最優先する。細身のダークグレー角柱型水栓柱、柱上部の黒い主蛇口、柱下部の黒い補助蛇口、低く厚みのある四角形のダークグレーガーデンパン、パンの深さと内側の暗い色を再現する。丸い水鉢、陶器風の鉢、白い受け皿、装飾的な水栓柱、蛇口が1つだけの水栓にはしない。既存建物と庭写真の大枠は維持する。"
+}

@@ -1,0 +1,373 @@
+{
+  "schema_version": "0.1.0",
+  "last_updated_at": "2026-07-11",
+  "description": "サイズ・柱高・色・屋根材・オプション別価格DB。表示価格や粗利などの算出値は保存せず、必要時に計算する。",
+  "calculation_policy": {
+    "standard_price": "標準価格。自動計算または標準入力値として保持する。",
+    "override_price": "管理者専用の手入力上書き価格。入力がある場合のみ標準価格より優先する。",
+    "customer_display_price": "保存しない。override_priceが有効ならoverride、未入力ならstandard_priceから画面表示時に計算する。",
+    "basic_total_formula": "商品代 + 標準施工費",
+    "gross_profit_formula": "表示価格または基本合計 - 仕入原価。保存せず必要時に計算する。",
+    "special_work": "特殊施工は金額を固定せず、原則として別途見積り。"
+  },
+  "price_display_rules": [
+    {
+      "business_type": "garden_living_goods",
+      "main_label": "商品代参考（税込）",
+      "sub_note": "設置費・組立費別途",
+      "customer_main_price_source": "product_price_in_tax",
+      "show_installation_fee": false,
+      "show_basic_total": false,
+      "show_special_work_note": false
+    },
+    {
+      "business_type": "ex_takumi_construction",
+      "main_label": "参考価格（税込・標準施工費込）",
+      "sub_note": "特殊施工・現場条件により別途",
+      "customer_main_price_source": "basic_total_in_tax",
+      "show_installation_fee": false,
+      "show_basic_total": true,
+      "show_special_work_note": true
+    }
+  ],
+  "price_matrices": [
+    {
+      "price_matrix_id": "PRICE-LIXIL-CARPORT-NESCA-F-WIDE",
+      "product_id": "LIXIL-CARPORT-NESCA-F-WIDE",
+      "business_type": "ex_takumi_construction",
+      "currency": "JPY",
+      "tax_included": true,
+      "special_work_policy": "柱移動・梁延長・切詰め・変形地・土間補修・電気工事等は別途見積り。",
+      "variants": [
+        {
+          "variant_id": "NESCA-F-WIDE-2CAR-54-50-H22-SG-STANDARD-NO-LIGHT",
+          "product_id": "LIXIL-CARPORT-NESCA-F-WIDE",
+          "label": "ネスカF ワイド 2台用 54-50型 標準高さ シャイングレー 標準ポリカ",
+          "option_codes": {
+            "car_count": 2,
+            "size": "54-50",
+            "height": "H22",
+            "body_color": "SG",
+            "roof_material": "STANDARD",
+            "lighting": "NO-LIGHT"
+          },
+          "standard_price": {
+            "product_price_in_tax": 420000,
+            "standard_installation_fee_in_tax": 165000,
+            "special_work_in_tax": null,
+            "special_work_label": "別途見積り",
+            "calculation_method": "temporary_manual",
+            "calculation_note": "Version 0.1仮価格"
+          },
+          "override_price": {
+            "enabled": false,
+            "product_price_in_tax": null,
+            "standard_installation_fee_in_tax": null,
+            "special_work_in_tax": null,
+            "override_reason": null,
+            "updated_at": null,
+            "updated_by": null
+          },
+          "cost_management": {
+            "maker_list_price_ex_tax": null,
+            "maker_list_price_in_tax": null,
+            "purchase_rate": null,
+            "purchase_price_ex_tax": null,
+            "purchase_price_in_tax": null
+          },
+          "price_status": "temporary",
+          "price_checked_at": null,
+          "price_source_url": null,
+          "internal_note": "仮価格。正式価格確定前。"
+        },
+        {
+          "variant_id": "NESCA-F-WIDE-2CAR-54-50-H22-SG-HEAT-NO-LIGHT",
+          "product_id": "LIXIL-CARPORT-NESCA-F-WIDE",
+          "label": "ネスカF ワイド 2台用 54-50型 標準高さ シャイングレー 熱線吸収ポリカ",
+          "option_codes": {
+            "car_count": 2,
+            "size": "54-50",
+            "height": "H22",
+            "body_color": "SG",
+            "roof_material": "HEAT",
+            "lighting": "NO-LIGHT"
+          },
+          "standard_price": {
+            "product_price_in_tax": 445000,
+            "standard_installation_fee_in_tax": 165000,
+            "special_work_in_tax": null,
+            "special_work_label": "別途見積り",
+            "calculation_method": "temporary_manual",
+            "calculation_note": "Version 0.1仮価格"
+          },
+          "override_price": {
+            "enabled": false,
+            "product_price_in_tax": null,
+            "standard_installation_fee_in_tax": null,
+            "special_work_in_tax": null,
+            "override_reason": null,
+            "updated_at": null,
+            "updated_by": null
+          },
+          "cost_management": {
+            "maker_list_price_ex_tax": null,
+            "maker_list_price_in_tax": null,
+            "purchase_rate": null,
+            "purchase_price_ex_tax": null,
+            "purchase_price_in_tax": null
+          },
+          "price_status": "temporary",
+          "price_checked_at": null,
+          "price_source_url": null,
+          "internal_note": "仮価格。正式価格確定前。"
+        },
+        {
+          "variant_id": "NESCA-F-WIDE-2CAR-54-50-H22-BK-STANDARD-NO-LIGHT",
+          "product_id": "LIXIL-CARPORT-NESCA-F-WIDE",
+          "label": "ネスカF ワイド 2台用 54-50型 標準高さ ブラック 標準ポリカ",
+          "option_codes": {
+            "car_count": 2,
+            "size": "54-50",
+            "height": "H22",
+            "body_color": "BK",
+            "roof_material": "STANDARD",
+            "lighting": "NO-LIGHT"
+          },
+          "standard_price": {
+            "product_price_in_tax": 435000,
+            "standard_installation_fee_in_tax": 165000,
+            "special_work_in_tax": null,
+            "special_work_label": "別途見積り",
+            "calculation_method": "temporary_manual",
+            "calculation_note": "Version 0.1仮価格"
+          },
+          "override_price": {
+            "enabled": false,
+            "product_price_in_tax": null,
+            "standard_installation_fee_in_tax": null,
+            "special_work_in_tax": null,
+            "override_reason": null,
+            "updated_at": null,
+            "updated_by": null
+          },
+          "cost_management": {
+            "maker_list_price_ex_tax": null,
+            "maker_list_price_in_tax": null,
+            "purchase_rate": null,
+            "purchase_price_ex_tax": null,
+            "purchase_price_in_tax": null
+          },
+          "price_status": "temporary",
+          "price_checked_at": null,
+          "price_source_url": null,
+          "internal_note": "仮価格。正式価格確定前。"
+        },
+        {
+          "variant_id": "NESCA-F-WIDE-2CAR-54-50-H22-BK-HEAT-NO-LIGHT",
+          "product_id": "LIXIL-CARPORT-NESCA-F-WIDE",
+          "label": "ネスカF ワイド 2台用 54-50型 標準高さ ブラック 熱線吸収ポリカ",
+          "option_codes": {
+            "car_count": 2,
+            "size": "54-50",
+            "height": "H22",
+            "body_color": "BK",
+            "roof_material": "HEAT",
+            "lighting": "NO-LIGHT"
+          },
+          "standard_price": {
+            "product_price_in_tax": 460000,
+            "standard_installation_fee_in_tax": 165000,
+            "special_work_in_tax": null,
+            "special_work_label": "別途見積り",
+            "calculation_method": "temporary_manual",
+            "calculation_note": "Version 0.1仮価格"
+          },
+          "override_price": {
+            "enabled": false,
+            "product_price_in_tax": null,
+            "standard_installation_fee_in_tax": null,
+            "special_work_in_tax": null,
+            "override_reason": null,
+            "updated_at": null,
+            "updated_by": null
+          },
+          "cost_management": {
+            "maker_list_price_ex_tax": null,
+            "maker_list_price_in_tax": null,
+            "purchase_rate": null,
+            "purchase_price_ex_tax": null,
+            "purchase_price_in_tax": null
+          },
+          "price_status": "temporary",
+          "price_checked_at": null,
+          "price_source_url": null,
+          "internal_note": "仮価格。正式価格確定前。"
+        },
+        {
+          "variant_id": "NESCA-F-WIDE-2CAR-54-50-H25-SG-STANDARD-NO-LIGHT",
+          "product_id": "LIXIL-CARPORT-NESCA-F-WIDE",
+          "label": "ネスカF ワイド 2台用 54-50型 ロング高さ シャイングレー 標準ポリカ",
+          "option_codes": {
+            "car_count": 2,
+            "size": "54-50",
+            "height": "H25",
+            "body_color": "SG",
+            "roof_material": "STANDARD",
+            "lighting": "NO-LIGHT"
+          },
+          "standard_price": {
+            "product_price_in_tax": 455000,
+            "standard_installation_fee_in_tax": 175000,
+            "special_work_in_tax": null,
+            "special_work_label": "別途見積り",
+            "calculation_method": "temporary_manual",
+            "calculation_note": "Version 0.1仮価格"
+          },
+          "override_price": {
+            "enabled": false,
+            "product_price_in_tax": null,
+            "standard_installation_fee_in_tax": null,
+            "special_work_in_tax": null,
+            "override_reason": null,
+            "updated_at": null,
+            "updated_by": null
+          },
+          "cost_management": {
+            "maker_list_price_ex_tax": null,
+            "maker_list_price_in_tax": null,
+            "purchase_rate": null,
+            "purchase_price_ex_tax": null,
+            "purchase_price_in_tax": null
+          },
+          "price_status": "temporary",
+          "price_checked_at": null,
+          "price_source_url": null,
+          "internal_note": "仮価格。正式価格確定前。"
+        },
+        {
+          "variant_id": "NESCA-F-WIDE-2CAR-54-50-H25-SG-HEAT-NO-LIGHT",
+          "product_id": "LIXIL-CARPORT-NESCA-F-WIDE",
+          "label": "ネスカF ワイド 2台用 54-50型 ロング高さ シャイングレー 熱線吸収ポリカ",
+          "option_codes": {
+            "car_count": 2,
+            "size": "54-50",
+            "height": "H25",
+            "body_color": "SG",
+            "roof_material": "HEAT",
+            "lighting": "NO-LIGHT"
+          },
+          "standard_price": {
+            "product_price_in_tax": 480000,
+            "standard_installation_fee_in_tax": 175000,
+            "special_work_in_tax": null,
+            "special_work_label": "別途見積り",
+            "calculation_method": "temporary_manual",
+            "calculation_note": "Version 0.1仮価格"
+          },
+          "override_price": {
+            "enabled": false,
+            "product_price_in_tax": null,
+            "standard_installation_fee_in_tax": null,
+            "special_work_in_tax": null,
+            "override_reason": null,
+            "updated_at": null,
+            "updated_by": null
+          },
+          "cost_management": {
+            "maker_list_price_ex_tax": null,
+            "maker_list_price_in_tax": null,
+            "purchase_rate": null,
+            "purchase_price_ex_tax": null,
+            "purchase_price_in_tax": null
+          },
+          "price_status": "temporary",
+          "price_checked_at": null,
+          "price_source_url": null,
+          "internal_note": "仮価格。正式価格確定前。"
+        },
+        {
+          "variant_id": "NESCA-F-WIDE-2CAR-54-50-H25-BK-STANDARD-NO-LIGHT",
+          "product_id": "LIXIL-CARPORT-NESCA-F-WIDE",
+          "label": "ネスカF ワイド 2台用 54-50型 ロング高さ ブラック 標準ポリカ",
+          "option_codes": {
+            "car_count": 2,
+            "size": "54-50",
+            "height": "H25",
+            "body_color": "BK",
+            "roof_material": "STANDARD",
+            "lighting": "NO-LIGHT"
+          },
+          "standard_price": {
+            "product_price_in_tax": 470000,
+            "standard_installation_fee_in_tax": 175000,
+            "special_work_in_tax": null,
+            "special_work_label": "別途見積り",
+            "calculation_method": "temporary_manual",
+            "calculation_note": "Version 0.1仮価格"
+          },
+          "override_price": {
+            "enabled": false,
+            "product_price_in_tax": null,
+            "standard_installation_fee_in_tax": null,
+            "special_work_in_tax": null,
+            "override_reason": null,
+            "updated_at": null,
+            "updated_by": null
+          },
+          "cost_management": {
+            "maker_list_price_ex_tax": null,
+            "maker_list_price_in_tax": null,
+            "purchase_rate": null,
+            "purchase_price_ex_tax": null,
+            "purchase_price_in_tax": null
+          },
+          "price_status": "temporary",
+          "price_checked_at": null,
+          "price_source_url": null,
+          "internal_note": "仮価格。正式価格確定前。"
+        },
+        {
+          "variant_id": "NESCA-F-WIDE-2CAR-54-50-H25-BK-HEAT-NO-LIGHT",
+          "product_id": "LIXIL-CARPORT-NESCA-F-WIDE",
+          "label": "ネスカF ワイド 2台用 54-50型 ロング高さ ブラック 熱線吸収ポリカ",
+          "option_codes": {
+            "car_count": 2,
+            "size": "54-50",
+            "height": "H25",
+            "body_color": "BK",
+            "roof_material": "HEAT",
+            "lighting": "NO-LIGHT"
+          },
+          "standard_price": {
+            "product_price_in_tax": 495000,
+            "standard_installation_fee_in_tax": 175000,
+            "special_work_in_tax": null,
+            "special_work_label": "別途見積り",
+            "calculation_method": "temporary_manual",
+            "calculation_note": "Version 0.1仮価格"
+          },
+          "override_price": {
+            "enabled": false,
+            "product_price_in_tax": null,
+            "standard_installation_fee_in_tax": null,
+            "special_work_in_tax": null,
+            "override_reason": null,
+            "updated_at": null,
+            "updated_by": null
+          },
+          "cost_management": {
+            "maker_list_price_ex_tax": null,
+            "maker_list_price_in_tax": null,
+            "purchase_rate": null,
+            "purchase_price_ex_tax": null,
+            "purchase_price_in_tax": null
+          },
+          "price_status": "temporary",
+          "price_checked_at": null,
+          "price_source_url": null,
+          "internal_note": "仮価格。正式価格確定前。"
+        }
+      ]
+    }
+  ]
+}

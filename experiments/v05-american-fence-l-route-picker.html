@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>V0.5 American Fence L Route Picker</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
+      background: #f7f4ee;
+      color: #171717;
+    }
+
+    main {
+      width: min(960px, calc(100% - 32px));
+      margin: 32px auto;
+    }
+
+    .stage {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #ddd8cf;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 18px 45px rgba(20, 18, 15, 0.08);
+      touch-action: manipulation;
+    }
+
+    .stage img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .route-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .point {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      transform: translate(-50%, -50%);
+      border: 3px solid #fff;
+      border-radius: 999px;
+      background: #b54834;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+      pointer-events: none;
+    }
+
+    .panel {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 16px;
+      border: 1px solid #ddd8cf;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    button {
+      width: fit-content;
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 18px;
+      background: #171717;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    code {
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>V0.5 American Fence L Route Picker</h1>
+    <p>写真上で始点、折れ点、終点の順にタップします。座標は画像サイズに対する0〜1の正規化座標で表示されます。</p>
+    <div class="stage" id="stage">
+      <img src="../generated/v05-american-fence-l-route/source.jpg" alt="検証用庭写真">
+      <svg class="route-svg" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
+        <polyline id="line" points="" fill="none" stroke="#b54834" stroke-width="0.008" stroke-linecap="round" stroke-linejoin="round" opacity="0.92"></polyline>
+      </svg>
+    </div>
+    <div class="panel">
+      <strong id="status">始点をタップしてください</strong>
+      <code id="coords">[]</code>
+      <button type="button" id="reset">リセット</button>
+    </div>
+  </main>
+  <script>
+    const stage = document.querySelector('#stage');
+    const line = document.querySelector('#line');
+    const status = document.querySelector('#status');
+    const coords = document.querySelector('#coords');
+    const reset = document.querySelector('#reset');
+    const labels = ['始点', '折れ点', '終点'];
+    const points = [];
+
+    function render() {
+      stage.querySelectorAll('.point').forEach((point) => point.remove());
+      points.forEach((point) => {
+        const dot = document.createElement('span');
+        dot.className = 'point';
+        dot.style.left = `${point.x * 100}%`;
+        dot.style.top = `${point.y * 100}%`;
+        stage.appendChild(dot);
+      });
+
+      line.setAttribute('points', points.map((point) => `${point.x},${point.y}`).join(' '));
+      line.style.display = points.length >= 2 ? 'block' : 'none';
+      status.textContent = points.length < 3 ? `${labels[points.length]}をタップしてください` : 'L字ルート指定完了';
+      coords.textContent = JSON.stringify(points, null, 2);
+    }
+
+    stage.addEventListener('click', (event) => {
+      if (points.length >= 3) return;
+      const rect = stage.getBoundingClientRect();
+      points.push({
+        x: Number(((event.clientX - rect.left) / rect.width).toFixed(4)),
+        y: Number(((event.clientY - rect.top) / rect.height).toFixed(4)),
+      });
+      render();
+    });
+
+    reset.addEventListener('click', () => {
+      points.splice(0, points.length);
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

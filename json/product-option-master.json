@@ -1,0 +1,160 @@
+{
+  "schema_version": "0.1.0",
+  "last_updated_at": "2026-07-11",
+  "description": "商品選択UIと価格variant生成で使う選択肢マスタ。客用ラベルと内部コードを分けて保持する。",
+  "option_groups": [
+    {
+      "option_group_id": "CARPORT_SIZE_NESCA_F_WIDE",
+      "label": "サイズ",
+      "display_type": "cards",
+      "selection_type": "single",
+      "options": [
+        {
+          "code": "54-50",
+          "customer_label": "2台用 標準サイズ",
+          "internal_label": "54-50型",
+          "car_count": 2,
+          "width_mm": null,
+          "depth_mm": null,
+          "enabled": true,
+          "sort_order": 10,
+          "note": "Version 0.1の仮売れ筋サイズ。正式寸法は後続確認。"
+        }
+      ]
+    },
+    {
+      "option_group_id": "CARPORT_HEIGHT_BASIC",
+      "label": "柱高さ",
+      "display_type": "segmented",
+      "selection_type": "single",
+      "options": [
+        {
+          "code": "H22",
+          "customer_label": "標準高さ",
+          "internal_label": "H22",
+          "description": "標準的な柱高さです。",
+          "enabled": true,
+          "sort_order": 10
+        },
+        {
+          "code": "H25",
+          "customer_label": "ロング高さ",
+          "internal_label": "H25",
+          "description": "車高が高い車や余裕を持たせたい場合の高さです。",
+          "enabled": true,
+          "sort_order": 20
+        }
+      ]
+    },
+    {
+      "option_group_id": "CARPORT_BODY_COLOR_BASIC",
+      "label": "本体色",
+      "display_type": "swatch",
+      "selection_type": "single",
+      "options": [
+        {
+          "code": "SG",
+          "customer_label": "シャイングレー",
+          "internal_label": "シャイングレー",
+          "color_hex": "#A7A7A0",
+          "enabled": true,
+          "sort_order": 10
+        },
+        {
+          "code": "BK",
+          "customer_label": "ブラック",
+          "internal_label": "ブラック",
+          "color_hex": "#111111",
+          "enabled": true,
+          "sort_order": 20
+        }
+      ]
+    },
+    {
+      "option_group_id": "CARPORT_POLYCA_ROOF_BASIC",
+      "label": "屋根材",
+      "display_type": "cards",
+      "selection_type": "single",
+      "options": [
+        {
+          "code": "STANDARD",
+          "customer_label": "標準ポリカ",
+          "internal_label": "標準ポリカーボネート",
+          "description": "標準的なポリカーボネート屋根材です。",
+          "enabled": true,
+          "sort_order": 10
+        },
+        {
+          "code": "HEAT",
+          "customer_label": "熱線吸収ポリカ",
+          "internal_label": "熱線吸収ポリカーボネート",
+          "description": "日差しや暑さが気になる方向けの屋根材です。",
+          "enabled": true,
+          "sort_order": 20
+        }
+      ]
+    },
+    {
+      "option_group_id": "CARPORT_DRAINAGE_DIRECTION",
+      "label": "水下方向",
+      "display_type": "segmented",
+      "selection_type": "single",
+      "price_affects": false,
+      "ai_affects": true,
+      "options": [
+        {
+          "code": "FRONT_LOW",
+          "customer_label": "前側水下",
+          "internal_label": "道路側・手前側を水下",
+          "enabled": true,
+          "sort_order": 10
+        },
+        {
+          "code": "REAR_LOW",
+          "customer_label": "後ろ側水下",
+          "internal_label": "建物側・奥側を水下",
+          "enabled": true,
+          "sort_order": 20
+        }
+      ]
+    },
+    {
+      "option_group_id": "CARPORT_SC_LIGHTING",
+      "label": "照明オプション",
+      "display_type": "cards",
+      "selection_type": "single",
+      "options": [
+        {
+          "code": "NO-LIGHT",
+          "customer_label": "照明なし",
+          "internal_label": "照明なし",
+          "enabled": true,
+          "sort_order": 10
+        },
+        {
+          "code": "DOWNLIGHT",
+          "customer_label": "ダウンライト",
+          "internal_label": "ダウンライト",
+          "enabled": true,
+          "sort_order": 20
+        },
+        {
+          "code": "LINE-LIGHT",
+          "customer_label": "シームレスラインライト",
+          "internal_label": "シームレスラインライト",
+          "enabled": true,
+          "sort_order": 30
+        }
+      ],
+      "forbidden_combinations": [
+        {
+          "codes": [
+            "DOWNLIGHT",
+            "LINE-LIGHT"
+          ],
+          "message": "ダウンライトとシームレスラインライトは同時に選択できません。"
+        }
+      ]
+    }
+  ]
+}

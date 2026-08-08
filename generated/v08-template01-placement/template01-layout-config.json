@@ -1,0 +1,341 @@
+{
+  "template_id": "template01",
+  "version": "1.0.0",
+  "before_image": "images/templates/template01/template01-before.jpg",
+  "image_size": {
+    "width": 829,
+    "height": 568
+  },
+  "layer_model": {
+    "background_layers": [
+      "soil",
+      "turf",
+      "gravel",
+      "decomposed_granite",
+      "concrete"
+    ],
+    "product_layers": [
+      "tile_deck",
+      "american_fence",
+      "garden_furniture",
+      "pizza_oven",
+      "gabion",
+      "water_stand",
+      "sauna"
+    ],
+    "render_order": [
+      "background",
+      "structure",
+      "equipment_furniture"
+    ]
+  },
+  "products": {
+    "turf": {
+      "label": "人工芝",
+      "color": [
+        61,
+        139,
+        65,
+        150
+      ],
+      "layer_kind": "background",
+      "render_group": "background",
+      "z": 5,
+      "patterns": {
+        "A": {
+          "label": "ひろく敷く",
+          "type": "area",
+          "polygon": [
+            [
+              0.06,
+              0.56
+            ],
+            [
+              0.48,
+              0.5
+            ],
+            [
+              0.95,
+              0.68
+            ],
+            [
+              0.96,
+              0.95
+            ],
+            [
+              0.03,
+              0.95
+            ],
+            [
+              0.01,
+              0.73
+            ]
+          ]
+        },
+        "B": {
+          "label": "控えめに敷く",
+          "type": "area",
+          "polygon": [
+            [
+              0.16,
+              0.59
+            ],
+            [
+              0.53,
+              0.53
+            ],
+            [
+              0.87,
+              0.68
+            ],
+            [
+              0.83,
+              0.88
+            ],
+            [
+              0.15,
+              0.88
+            ],
+            [
+              0.08,
+              0.73
+            ]
+          ]
+        }
+      }
+    },
+    "tile_deck": {
+      "label": "タイルデッキ",
+      "color": [
+        214,
+        190,
+        150,
+        175
+      ],
+      "layer_kind": "product",
+      "render_group": "structure",
+      "z": 20,
+      "patterns": {
+        "A": {
+          "label": "小さめ",
+          "type": "area",
+          "polygon": [
+            [
+              0.47,
+              0.55
+            ],
+            [
+              0.96,
+              0.67
+            ],
+            [
+              0.95,
+              0.78
+            ],
+            [
+              0.42,
+              0.69
+            ]
+          ]
+        },
+        "B": {
+          "label": "広め",
+          "type": "area",
+          "polygon": [
+            [
+              0.33,
+              0.52
+            ],
+            [
+              0.98,
+              0.66
+            ],
+            [
+              0.98,
+              0.85
+            ],
+            [
+              0.24,
+              0.74
+            ]
+          ]
+        }
+      }
+    },
+    "american_fence": {
+      "label": "アメリカンフェンス",
+      "color": [
+        205,
+        214,
+        210,
+        230
+      ],
+      "layer_kind": "product",
+      "render_group": "structure",
+      "z": 50,
+      "patterns": {
+        "A": {
+          "label": "奥の一辺",
+          "type": "route",
+          "route": [
+            [
+              0.17,
+              0.48
+            ],
+            [
+              0.53,
+              0.48
+            ]
+          ]
+        },
+        "B": {
+          "label": "左境界+奥のL字",
+          "type": "route",
+          "route": [
+            [
+              0.03,
+              0.68
+            ],
+            [
+              0.18,
+              0.48
+            ],
+            [
+              0.54,
+              0.48
+            ]
+          ]
+        }
+      }
+    },
+    "garden_furniture": {
+      "label": "ガーデンファニチャー",
+      "color": [
+        128,
+        87,
+        54,
+        210
+      ],
+      "layer_kind": "product",
+      "render_group": "equipment_furniture",
+      "z": 70,
+      "patterns": {
+        "A": {
+          "label": "ダイニング",
+          "type": "object",
+          "rect": {
+            "x": 0.68,
+            "y": 0.7,
+            "width": 0.18,
+            "height": 0.12
+          },
+          "rotation": -4
+        },
+        "B": {
+          "label": "休憩席",
+          "type": "object",
+          "rect": {
+            "x": 0.42,
+            "y": 0.7,
+            "width": 0.2,
+            "height": 0.11
+          },
+          "rotation": -2
+        }
+      }
+    },
+    "pizza_oven": {
+      "label": "ピザ窯",
+      "color": [
+        166,
+        93,
+        49,
+        220
+      ],
+      "layer_kind": "product",
+      "render_group": "equipment_furniture",
+      "z": 60,
+      "patterns": {
+        "A": {
+          "label": "デッキ脇",
+          "type": "object",
+          "rect": {
+            "x": 0.52,
+            "y": 0.56,
+            "width": 0.1,
+            "height": 0.14
+          },
+          "rotation": 0
+        },
+        "B": {
+          "label": "庭の端",
+          "type": "object",
+          "rect": {
+            "x": 0.78,
+            "y": 0.57,
+            "width": 0.11,
+            "height": 0.15
+          },
+          "rotation": -3
+        }
+      }
+    }
+  },
+  "recommended_sets": [
+    {
+      "id": "playable-garden",
+      "label": "まずは遊べる庭",
+      "state": {
+        "turf": "A",
+        "tile_deck": "none",
+        "american_fence": "A",
+        "garden_furniture": "none",
+        "pizza_oven": "none"
+      }
+    },
+    {
+      "id": "family-garden",
+      "label": "家族で過ごす庭",
+      "state": {
+        "turf": "A",
+        "tile_deck": "A",
+        "american_fence": "none",
+        "garden_furniture": "A",
+        "pizza_oven": "none"
+      }
+    },
+    {
+      "id": "dogrun-garden",
+      "label": "ドッグランの庭",
+      "state": {
+        "turf": "A",
+        "tile_deck": "none",
+        "american_fence": "B",
+        "garden_furniture": "none",
+        "pizza_oven": "none"
+      }
+    },
+    {
+      "id": "pizza-weekend",
+      "label": "休日の食事を楽しむ庭",
+      "state": {
+        "turf": "none",
+        "tile_deck": "A",
+        "american_fence": "none",
+        "garden_furniture": "A",
+        "pizza_oven": "B"
+      }
+    },
+    {
+      "id": "complete-calm",
+      "label": "全部入り控えめ",
+      "state": {
+        "turf": "B",
+        "tile_deck": "A",
+        "american_fence": "A",
+        "garden_furniture": "A",
+        "pizza_oven": "B"
+      }
+    }
+  ]
+}

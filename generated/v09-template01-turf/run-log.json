@@ -1,0 +1,24 @@
+{
+  "source": "/Users/yasudashinya/Documents/New project/garden-living-ex/images/templates/template01/template01-before.jpg",
+  "final_output": "/Users/yasudashinya/Documents/New project/garden-living-ex/images/templates/template01/template01-turf-after.jpg",
+  "selected_generation": {
+    "index": 1,
+    "outputPath": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v09-template01-turf/generation-01.jpg",
+    "elapsedMs": 64930,
+    "providerTimeMs": 64091
+  },
+  "results": [
+    {
+      "index": 1,
+      "outputPath": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v09-template01-turf/generation-01.jpg",
+      "elapsedMs": 64930,
+      "providerTimeMs": 64091
+    },
+    {
+      "index": 2,
+      "outputPath": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v09-template01-turf/generation-02.jpg",
+      "elapsedMs": 39727,
+      "providerTimeMs": 38677
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.1.0",
+  "last_updated_at": "2026-07-11",
+  "description": "Garden Living / EXた組で扱う外構施工商品の商品マスタ。価格・AI仕様・選択肢は別ファイルで管理する。",
+  "design_policy": {
+    "purpose": "お客様が自宅で落ち着いて商品を比較し、完成イメージと価格感を見ながら納得して相談できる状態を作る。",
+    "customer_first": true,
+    "not_sales_pressure": true,
+    "special_work_policy": "柱移動・梁延長・切詰め・変形地・特殊施工は別途見積りとする。"
+  },
+  "products": [
+    {
+      "product_id": "LIXIL-CARPORT-NESCA-F-WIDE",
+      "maker": "LIXIL",
+      "brand": "LIXIL",
+      "category": "カーポート",
+      "business_type": "ex_takumi_construction",
+      "series": "ネスカF",
+      "product_name": "ネスカF ワイド",
+      "public_name": "LIXIL ネスカF ワイド",
+      "short_name": "ネスカF ワイド",
+      "summary": "フラット屋根のベーシックな2台用カーポート。",
+      "description": "すっきりしたフラット屋根で、住宅外観に合わせやすい2台用カーポートです。標準的な駐車場に導入しやすく、はじめてカーポートを検討する方にも比較しやすい商品です。",
+      "customer_positioning": "価格と使いやすさのバランスを重視した標準提案商品",
+      "main_image": null,
+      "gallery_images": [],
+      "enabled_public": true,
+      "enabled_simulator": true,
+      "standard_only": true,
+      "ai_spec_id": "AI-LIXIL-CARPORT-NESCA-F-WIDE",
+      "price_matrix_id": "PRICE-LIXIL-CARPORT-NESCA-F-WIDE",
+      "option_group_ids": [
+        "CARPORT_SIZE_NESCA_F_WIDE",
+        "CARPORT_HEIGHT_BASIC",
+        "CARPORT_BODY_COLOR_BASIC",
+        "CARPORT_POLYCA_ROOF_BASIC",
+        "CARPORT_DRAINAGE_DIRECTION"
+      ],
+      "customer_notice": "表示価格は標準施工条件での参考価格です。特殊施工・現場条件により別途お見積りとなります。",
+      "internal_note": "Version 0.1では2台用ワイドの売れ筋構成のみ対応。正式サイズ・正式価格は後続確認。"
+    }
+  ]
+}

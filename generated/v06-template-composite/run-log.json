@@ -1,0 +1,202 @@
+{
+  "source": "generated/v05-tile-deck-area/source.jpg",
+  "combo_count": 15,
+  "average_render_ms": 16.81,
+  "outputs": [
+    {
+      "id": "01-basic-lawn-deck",
+      "name": "芝とタイルの基本庭",
+      "state": {
+        "fence": "none",
+        "tile": "A",
+        "turf": "A",
+        "pizza": "none",
+        "furniture": "A"
+      },
+      "render_ms": 19.61,
+      "output": "generated/v06-template-composite/01-basic-lawn-deck.jpg"
+    },
+    {
+      "id": "02-dogrun-fence",
+      "name": "ドッグラン寄り",
+      "state": {
+        "fence": "B",
+        "tile": "none",
+        "turf": "A",
+        "pizza": "none",
+        "furniture": "none"
+      },
+      "render_ms": 16.95,
+      "output": "generated/v06-template-composite/02-dogrun-fence.jpg"
+    },
+    {
+      "id": "03-pizza-meal",
+      "name": "ピザ窯と食事",
+      "state": {
+        "fence": "A",
+        "tile": "A",
+        "turf": "none",
+        "pizza": "B",
+        "furniture": "A"
+      },
+      "render_ms": 22.04,
+      "output": "generated/v06-template-composite/03-pizza-meal.jpg"
+    },
+    {
+      "id": "04-clean-lawn",
+      "name": "すっきり芝庭",
+      "state": {
+        "fence": "none",
+        "tile": "B",
+        "turf": "B",
+        "pizza": "none",
+        "furniture": "B"
+      },
+      "render_ms": 19.19,
+      "output": "generated/v06-template-composite/04-clean-lawn.jpg"
+    },
+    {
+      "id": "05-fence-lawn-pizza",
+      "name": "囲い庭とピザ窯",
+      "state": {
+        "fence": "B",
+        "tile": "none",
+        "turf": "A",
+        "pizza": "A",
+        "furniture": "none"
+      },
+      "render_ms": 15.73,
+      "output": "generated/v06-template-composite/05-fence-lawn-pizza.jpg"
+    },
+    {
+      "id": "06-tile-dining",
+      "name": "タイル上のダイニング",
+      "state": {
+        "fence": "none",
+        "tile": "B",
+        "turf": "none",
+        "pizza": "none",
+        "furniture": "A"
+      },
+      "render_ms": 15.21,
+      "output": "generated/v06-template-composite/06-tile-dining.jpg"
+    },
+    {
+      "id": "07-front-fence-furniture",
+      "name": "前面フェンスと休憩席",
+      "state": {
+        "fence": "A",
+        "tile": "none",
+        "turf": "B",
+        "pizza": "none",
+        "furniture": "B"
+      },
+      "render_ms": 15.56,
+      "output": "generated/v06-template-composite/07-front-fence-furniture.jpg"
+    },
+    {
+      "id": "08-pizza-focused",
+      "name": "ピザ窯主役",
+      "state": {
+        "fence": "none",
+        "tile": "A",
+        "turf": "none",
+        "pizza": "A",
+        "furniture": "B"
+      },
+      "render_ms": 21.55,
+      "output": "generated/v06-template-composite/08-pizza-focused.jpg"
+    },
+    {
+      "id": "09-family-garden",
+      "name": "家族で使う庭",
+      "state": {
+        "fence": "B",
+        "tile": "A",
+        "turf": "B",
+        "pizza": "none",
+        "furniture": "A"
+      },
+      "render_ms": 18.26,
+      "output": "generated/v06-template-composite/09-family-garden.jpg"
+    },
+    {
+      "id": "10-minimal-deck",
+      "name": "最小タイルデッキ",
+      "state": {
+        "fence": "none",
+        "tile": "A",
+        "turf": "none",
+        "pizza": "none",
+        "furniture": "none"
+      },
+      "render_ms": 8.42,
+      "output": "generated/v06-template-composite/10-minimal-deck.jpg"
+    },
+    {
+      "id": "11-lawn-only",
+      "name": "人工芝のみ",
+      "state": {
+        "fence": "none",
+        "tile": "none",
+        "turf": "A",
+        "pizza": "none",
+        "furniture": "none"
+      },
+      "render_ms": 8.65,
+      "output": "generated/v06-template-composite/11-lawn-only.jpg"
+    },
+    {
+      "id": "12-fence-only",
+      "name": "フェンスのみ",
+      "state": {
+        "fence": "B",
+        "tile": "none",
+        "turf": "none",
+        "pizza": "none",
+        "furniture": "none"
+      },
+      "render_ms": 5.44,
+      "output": "generated/v06-template-composite/12-fence-only.jpg"
+    },
+    {
+      "id": "13-pizza-no-deck",
+      "name": "芝庭のピザ窯",
+      "state": {
+        "fence": "none",
+        "tile": "none",
+        "turf": "B",
+        "pizza": "B",
+        "furniture": "A"
+      },
+      "render_ms": 21.13,
+      "output": "generated/v06-template-composite/13-pizza-no-deck.jpg"
+    },
+    {
+      "id": "14-full-but-calm",
+      "name": "全部入り控えめ",
+      "state": {
+        "fence": "A",
+        "tile": "A",
+        "turf": "B",
+        "pizza": "B",
+        "furniture": "A"
+      },
+      "render_ms": 23.44,
+      "output": "generated/v06-template-composite/14-full-but-calm.jpg"
+    },
+    {
+      "id": "15-outdoor-room",
+      "name": "アウトドアルーム風",
+      "state": {
+        "fence": "B",
+        "tile": "B",
+        "turf": "none",
+        "pizza": "A",
+        "furniture": "A"
+      },
+      "render_ms": 21.03,
+      "output": "generated/v06-template-composite/15-outdoor-room.jpg"
+    }
+  ]
+}

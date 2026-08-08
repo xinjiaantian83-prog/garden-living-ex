@@ -1,0 +1,71 @@
+{
+  "generated_at": "2026-07-13T09:42:46.570Z",
+  "before_image": "/Users/yasudashinya/Documents/New project/garden-living-ex/images/templates/template01/template01-before.jpg",
+  "turf_image": "/Users/yasudashinya/Documents/New project/garden-living-ex/images/templates/template01/template01-turf-after.jpg",
+  "outputs": {
+    "soilPizza": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v11-template01-layer-proof/composition-01-soil-pizza.jpg",
+    "turfFence": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v11-template01-layer-proof/composition-02-turf-fence.jpg",
+    "turfTileFurniture": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v11-template01-layer-proof/composition-03-turf-tile-furniture.jpg"
+  },
+  "results": [
+    {
+      "key": "soilPizza",
+      "output_path": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v11-template01-layer-proof/composition-01-soil-pizza.jpg",
+      "elapsed_ms": 31172,
+      "provider_time_ms": 30246,
+      "references_used": [
+        {
+          "product_id": "OOC-PIZZA-EG3-AB-PK",
+          "product_name": "アンティークブリックス ピザ窯",
+          "image_url": "images/g20-material/pizza-oven/antique-bricks-pizza-oven-eg3-ab-pk.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "OOC-PIZZA-EG3-AB-PK",
+          "product_name": "アンティークブリックス ピザ窯",
+          "image_url": "images/g20-material/pizza-oven/antique-bricks-pizza-oven-eg3-ab-pk-door-detail.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "OOC-PIZZA-EG3-AB-PK",
+          "product_name": "アンティークブリックス ピザ窯",
+          "image_url": "images/g20-material/pizza-oven/antique-bricks-pizza-oven-eg3-ab-pk-wood-storage-detail.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "key": "turfFence",
+      "output_path": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v11-template01-layer-proof/composition-02-turf-fence.jpg",
+      "elapsed_ms": 40598,
+      "provider_time_ms": 39513,
+      "references_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        },
+        {
+          "product_id": "OOC-AMERICAN-FENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dogrun-enclosure.jpg",
+          "image_role": "ai_reference_1"
+        },
+        {
+          "product_id": "OOC-AMERICAN-FENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence-placement-reference/american-fence-dog-gate.jpg",
+          "image_role": "ai_reference_2"
+        }
+      ]
+    },
+    {
+      "key": "turfTileFurniture",
+      "output_path": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v11-template01-layer-proof/composition-03-turf-tile-furniture.jpg",
+      "elapsed_ms": 32193,
+      "provider_time_ms": 31332,
+      "references_used": []
+    }
+  ]
+}

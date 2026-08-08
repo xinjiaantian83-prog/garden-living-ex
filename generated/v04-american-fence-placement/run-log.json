@@ -1,0 +1,185 @@
+{
+  "version": "0.4",
+  "purpose": "American fence placement tendency analysis. No placement rules added.",
+  "source_image": "/Users/yasudashinya/Downloads/IMG_4858.JPG",
+  "product": {
+    "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+    "product_name": "Only One American fence",
+    "category": "アメリカンフェンス",
+    "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+    "size": "900×900系フェンスを組み合わせる想定",
+    "color": "シルバー",
+    "features": [
+      "シルバーの丸パイプフレーム",
+      "チェーンリンク金網",
+      "角が丸いパネル形状",
+      "縦横に連結できる支柱構成",
+      "ドッグランや庭の仕切りに合う抜け感"
+    ]
+  },
+  "run_count": 10,
+  "started_at": "2026-07-12T07:12:59.110Z",
+  "runs": [
+    {
+      "index": 1,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement/american-fence-placement-01.png",
+      "elapsed_ms": 22325,
+      "generation_time_ms": 21596,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement/american-fence-placement-02.png",
+      "elapsed_ms": 19765,
+      "generation_time_ms": 19051,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement/american-fence-placement-03.png",
+      "elapsed_ms": 21873,
+      "generation_time_ms": 20997,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement/american-fence-placement-04.png",
+      "elapsed_ms": 20343,
+      "generation_time_ms": 19470,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement/american-fence-placement-05.png",
+      "elapsed_ms": 21806,
+      "generation_time_ms": 20624,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement/american-fence-placement-06.png",
+      "elapsed_ms": 21600,
+      "generation_time_ms": 20402,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement/american-fence-placement-07.png",
+      "elapsed_ms": 23377,
+      "generation_time_ms": 22626,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement/american-fence-placement-08.png",
+      "elapsed_ms": 20860,
+      "generation_time_ms": 20019,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement/american-fence-placement-09.png",
+      "elapsed_ms": 23668,
+      "generation_time_ms": 22985,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "status": 200,
+      "output": "/Users/yasudashinya/Documents/New project/garden-living-ex/generated/v04-american-fence-placement/american-fence-placement-10.png",
+      "elapsed_ms": 19864,
+      "generation_time_ms": 19309,
+      "model": "gpt-image-1",
+      "reference_products_used": [
+        {
+          "product_id": "OOC-AMERICAN-FENCE-REFERENCE",
+          "product_name": "Only One American fence",
+          "image_url": "images/g20-material/american-fence/onlyone-american-fence-reference.jpg",
+          "image_role": "main"
+        }
+      ]
+    }
+  ],
+  "finished_at": "2026-07-12T07:16:34.649Z"
+}
