@@ -34,6 +34,7 @@ const elements = {
   selectedSegmentDetail: $("selectedSegmentDetail"),
   customerTotalTaxIn: $("customerTotalTaxIn"),
   startEstimateButton: $("startEstimateButton"),
+  productEstimateButton: $("productEstimateButton"),
   shippingButton: $("shippingButton"),
   shippingStatus: $("shippingStatus"),
   shippingModal: $("shippingModal"),
@@ -1412,6 +1413,11 @@ function setupInputs() {
   elements.startEstimateButton.addEventListener("click", () => {
     document.getElementById("estimateInput").scrollIntoView({ behavior: "smooth", block: "start" });
   });
+  if (elements.productEstimateButton) {
+    elements.productEstimateButton.addEventListener("click", () => {
+      document.getElementById("estimateInput").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 
   document.querySelectorAll("[data-shape]").forEach((button) => {
     button.addEventListener("click", () => updateShape(button.dataset.shape));
