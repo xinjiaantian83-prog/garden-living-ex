@@ -2,7 +2,7 @@
   "use strict";
 
   // GA4の実際の測定IDへ差し替える場所（例: G-ABC123DE45）
-  var GA4_MEASUREMENT_ID = "G-XXXXXXXXXX";
+  var GA4_MEASUREMENT_ID = "G-30TMHDBZP7";
   var isConfigured = /^G-[A-Z0-9]+$/i.test(GA4_MEASUREMENT_ID) && GA4_MEASUREMENT_ID !== "G-XXXXXXXXXX";
 
   window.dataLayer = window.dataLayer || [];
