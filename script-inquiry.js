@@ -21,6 +21,37 @@ const TAX_RATE = 0.1;
 const CUSTOMER_RATE = 0.8;
 const LINE_URL = "https://lin.ee/sQNwZUv";
 const CONTACT_EMAIL = "xinjiaantian83@gmail.com";
+let estimateTrackingStarted = false;
+let lastTrackedEstimateSignature = "";
+
+function trackAnalyticsEvent(eventName, parameters = {}) {
+  if (window.glAnalytics && typeof window.glAnalytics.track === "function") {
+    window.glAnalytics.track(eventName, parameters);
+  }
+}
+
+function trackEstimateResult(layout, price) {
+  if (!estimateTrackingStarted) return;
+  const signature = JSON.stringify({
+    shape: state.shape,
+    total: price.customerTotalTaxIn,
+    segments: layout.segments.map((segment) => ({
+      id: segment.id,
+      actualMm: segment.actualMm,
+      panels: segment.panels,
+      gates: segment.gates
+    }))
+  });
+  if (signature === lastTrackedEstimateSignature) return;
+  lastTrackedEstimateSignature = signature;
+  trackAnalyticsEvent("estimate_result_view", {
+    product_name: "アメリカンフェンス",
+    estimate_shape: state.shape,
+    estimate_total: price.customerTotalTaxIn,
+    currency: "JPY"
+  });
+}
+
 const urlState = window.AmericanFenceUrlState;
 const fenceEngine = window.AmericanFenceEngine;
 const $ = (id) => document.getElementById(id);
@@ -1407,14 +1438,25 @@ function render() {
   saveState();
   elements.shareUrl.value = window.location.href;
   renderInquiry(price);
+  trackEstimateResult(layout, price);
 }
 
 function setupInputs() {
   elements.startEstimateButton.addEventListener("click", () => {
+    estimateTrackingStarted = true;
+    trackAnalyticsEvent("estimate_start", {
+      product_name: "アメリカンフェンス",
+      start_location: "hero"
+    });
     document.getElementById("estimateInput").scrollIntoView({ behavior: "smooth", block: "start" });
   });
   if (elements.productEstimateButton) {
     elements.productEstimateButton.addEventListener("click", () => {
+      estimateTrackingStarted = true;
+      trackAnalyticsEvent("estimate_start", {
+        product_name: "アメリカンフェンス",
+        start_location: "product_section"
+      });
       document.getElementById("estimateInput").scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }
@@ -1538,6 +1580,11 @@ async function copyShareUrl() {
 function handleInquiryClick(event) {
   const reason = event.currentTarget.dataset.disabledReason;
   if (!reason) {
+    const isLineInquiry = event.currentTarget === elements.lineInquiryButton;
+    trackAnalyticsEvent(isLineInquiry ? "line_inquiry_click" : "other_inquiry_click", {
+      product_name: "アメリカンフェンス",
+      inquiry_method: isLineInquiry ? "line" : "email"
+    });
     const shouldCopy = event.currentTarget.dataset.copyOnClick === "true";
     const message = event.currentTarget.dataset.inquiryMessage || "";
     if (shouldCopy) {
@@ -1565,6 +1612,10 @@ function handleInquiryClick(event) {
 
 setupInputs();
 setupImages();
+trackAnalyticsEvent("american_fence_product_view", {
+  product_name: "アメリカンフェンス",
+  page_type: "product_estimate"
+});
 elements.lineInquiryButton.addEventListener("click", handleInquiryClick);
 elements.emailInquiryButton.addEventListener("click", handleInquiryClick);
 elements.shareButton.addEventListener("click", copyShareUrl);
