@@ -845,8 +845,7 @@ h2 {
 .stepper input:focus,
 .inquiry-button:focus,
 .field-row input:focus,
-.field-row select:focus,
-.share-url:focus {
+.field-row select:focus {
   border-color: var(--accent);
   outline: 3px solid rgba(22, 122, 74, 0.16);
 }
@@ -1009,6 +1008,37 @@ h2 {
 }
 
 .shipping-inline .copy-status:empty {
+  display: none;
+}
+
+.share-inline {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  font-size: 12px;
+}
+
+.share-inline button {
+  min-height: 40px;
+  border: 0;
+  background: transparent;
+  color: var(--accent-dark);
+  padding: 0 8px;
+  font-size: 12px;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.share-inline .copy-status {
+  min-height: 0;
+  margin: 0 0 0 6px;
+  font-size: 12px;
+}
+
+.share-inline .copy-status:empty {
   display: none;
 }
 
@@ -1423,19 +1453,6 @@ h2 {
   font-size: 15px;
   font-weight: 900;
   line-height: 1.4;
-}
-
-.share-url {
-  width: 100%;
-  min-height: 48px;
-  border: 2px solid var(--line);
-  border-radius: 18px;
-  background: #ffffff;
-  color: var(--text);
-  padding: 10px 12px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 13px;
-  line-height: 1.35;
 }
 
 .check-list {
