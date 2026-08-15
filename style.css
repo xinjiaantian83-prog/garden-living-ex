@@ -1566,7 +1566,42 @@ h2 {
   accent-color: var(--accent);
 }
 
+.operator-section {
+  margin-top: 22px;
+  padding: 18px 4px 14px;
+  border-top: 1px solid var(--line);
+}
+
+.operator-section h2 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.operator-section p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.operator-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  margin-top: 6px;
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 16px;
   padding: 6px 0 2px;
   text-align: center;
 }
