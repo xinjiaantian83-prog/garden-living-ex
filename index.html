@@ -68,94 +68,58 @@
         <span>縦張り / 横張り</span>
       </div>
 
+      <button id="productEstimateButton" class="primary-button full-button" type="button">この商品で見積もりする</button>
+
       <div class="product-gallery" aria-label="商品写真">
-        <div class="product-group">
-          <h3>施工イメージ</h3>
-          <div class="product-scroller">
-            <button class="case-card product-card" type="button" data-case-title="ドッグラン使用例" data-case-image="images/product/american-fence-dogrun.webp" data-case-srcset="images/product/american-fence-dogrun.webp 1078w">
-              <span class="image-frame case-image" data-fallback="No Image">
-                <img src="images/product/american-fence-dogrun.webp" srcset="images/product/american-fence-dogrun.webp 1078w" sizes="(max-width: 760px) 72vw, 260px" alt="オンリーワンクラブ アメリカンフェンスのドッグラン使用例" loading="lazy" decoding="async">
-              </span>
-              <strong>ドッグラン使用例</strong>
-            </button>
-            <button class="case-card product-card" type="button" data-case-title="住宅の庭囲い" data-case-image="images/product/american-fence-residence.webp" data-case-srcset="images/product/american-fence-residence.webp 1200w">
-              <span class="image-frame case-image" data-fallback="No Image">
-                <img src="images/product/american-fence-residence.webp" srcset="images/product/american-fence-residence.webp 1200w" sizes="(max-width: 760px) 72vw, 260px" alt="オンリーワンクラブ アメリカンフェンスの住宅施工写真" loading="lazy" decoding="async">
-              </span>
-              <strong>住宅の庭囲い</strong>
-            </button>
-            <button class="case-card product-card" type="button" data-case-title="門扉としての使用例" data-case-image="images/product/american-fence-gate-detail.webp" data-case-srcset="images/product/american-fence-gate-detail.webp 1188w">
-              <span class="image-frame case-image" data-fallback="No Image">
-                <img src="images/product/american-fence-gate-detail.webp" srcset="images/product/american-fence-gate-detail.webp 1188w" sizes="(max-width: 760px) 72vw, 260px" alt="アメリカンフェンスを門扉として使った例" loading="lazy" decoding="async">
-              </span>
-              <strong>門扉使用例</strong>
-            </button>
-          </div>
+        <div class="product-featured-grid">
+          <button class="case-card product-card" type="button" data-case-title="ドッグラン使用例" data-case-image="images/product/american-fence-dogrun.webp" data-case-srcset="images/product/american-fence-dogrun.webp 1078w">
+            <span class="image-frame case-image" data-fallback="No Image"><img src="images/product/american-fence-dogrun.webp" srcset="images/product/american-fence-dogrun.webp 1078w" sizes="(max-width: 760px) 44vw, 220px" alt="オンリーワンクラブ アメリカンフェンスのドッグラン使用例" loading="lazy" decoding="async"></span>
+            <strong>施工イメージ</strong>
+          </button>
+          <button class="case-card product-card" type="button" data-case-title="900×900mm パネル" data-case-image="images/product/panel-900x900.webp" data-case-srcset="images/product/panel-900x900.webp 814w">
+            <span class="image-frame case-image" data-fallback="No Image"><img src="images/product/panel-900x900.webp" srcset="images/product/panel-900x900.webp 814w" sizes="(max-width: 760px) 44vw, 220px" alt="900×900mmのアメリカンフェンスパネル" loading="lazy" decoding="async"></span>
+            <strong>パネル</strong>
+          </button>
+          <button class="case-card product-card" type="button" data-case-title="ポール・ジョイント・部材詳細" data-case-image="images/product/parts-overview.png" data-case-srcset="images/product/parts-overview.png 1707w">
+            <span class="image-frame case-image" data-fallback="No Image"><img src="images/product/parts-overview.png" srcset="images/product/parts-overview.png 1707w" sizes="(max-width: 760px) 44vw, 220px" alt="アメリカンフェンスのポール、ジョイント、ヒンジ、ドアラッチの部材詳細" loading="lazy" decoding="async"></span>
+            <strong>ポール・接続部材</strong>
+          </button>
+          <button class="case-card product-card" type="button" data-case-title="門扉としての使用例" data-case-image="images/product/american-fence-gate-detail.webp" data-case-srcset="images/product/american-fence-gate-detail.webp 1188w">
+            <span class="image-frame case-image" data-fallback="No Image"><img src="images/product/american-fence-gate-detail.webp" srcset="images/product/american-fence-gate-detail.webp 1188w" sizes="(max-width: 760px) 44vw, 220px" alt="アメリカンフェンスを門扉として使った例" loading="lazy" decoding="async"></span>
+            <strong>門扉関連</strong>
+          </button>
         </div>
 
-        <div class="product-group">
-          <h3>パネル</h3>
-          <div class="product-scroller">
-            <button class="case-card product-card" type="button" data-case-title="900×900mm パネル" data-case-image="images/product/panel-900x900.webp" data-case-srcset="images/product/panel-900x900.webp 814w">
-              <span class="image-frame case-image" data-fallback="No Image">
-                <img src="images/product/panel-900x900.webp" srcset="images/product/panel-900x900.webp 814w" sizes="(max-width: 760px) 72vw, 260px" alt="900×900mmのアメリカンフェンスパネル" loading="lazy" decoding="async">
-              </span>
-              <strong>900×900mm</strong>
+        <details class="product-more">
+          <summary>商品・部材写真をもっと見る</summary>
+          <div class="product-more-grid">
+            <button class="case-card product-card" type="button" data-case-title="住宅の庭囲い" data-case-image="images/product/american-fence-residence.webp" data-case-srcset="images/product/american-fence-residence.webp 1200w">
+              <span class="image-frame case-image" data-fallback="No Image"><img src="images/product/american-fence-residence.webp" srcset="images/product/american-fence-residence.webp 1200w" sizes="(max-width: 760px) 44vw, 220px" alt="オンリーワンクラブ アメリカンフェンスの住宅施工写真" loading="lazy" decoding="async"></span>
+              <strong>住宅の庭囲い</strong>
             </button>
             <button class="case-card product-card" type="button" data-case-title="1500×900mm 縦張り" data-case-image="images/product/panel-1500x900-vertical.webp" data-case-srcset="images/product/panel-1500x900-vertical.webp 814w">
-              <span class="image-frame case-image" data-fallback="No Image">
-                <img src="images/product/panel-1500x900-vertical.webp" srcset="images/product/panel-1500x900-vertical.webp 814w" sizes="(max-width: 760px) 72vw, 260px" alt="1500×900mmの縦張りアメリカンフェンスパネル" loading="lazy" decoding="async">
-              </span>
+              <span class="image-frame case-image" data-fallback="No Image"><img src="images/product/panel-1500x900-vertical.webp" srcset="images/product/panel-1500x900-vertical.webp 814w" sizes="(max-width: 760px) 44vw, 220px" alt="1500×900mmの縦張りアメリカンフェンスパネル" loading="lazy" decoding="async"></span>
               <strong>1500×900mm 縦張り</strong>
             </button>
             <button class="case-card product-card" type="button" data-case-title="1500×900mm 横張り" data-case-image="images/product/panel-1500x900-horizontal.webp" data-case-srcset="images/product/panel-1500x900-horizontal.webp 814w">
-              <span class="image-frame case-image" data-fallback="No Image">
-                <img src="images/product/panel-1500x900-horizontal.webp" srcset="images/product/panel-1500x900-horizontal.webp 814w" sizes="(max-width: 760px) 72vw, 260px" alt="1500×900mmの横張りアメリカンフェンスパネル" loading="lazy" decoding="async">
-              </span>
+              <span class="image-frame case-image" data-fallback="No Image"><img src="images/product/panel-1500x900-horizontal.webp" srcset="images/product/panel-1500x900-horizontal.webp 814w" sizes="(max-width: 760px) 44vw, 220px" alt="1500×900mmの横張りアメリカンフェンスパネル" loading="lazy" decoding="async"></span>
               <strong>1500×900mm 横張り</strong>
             </button>
-          </div>
-        </div>
-
-        <div class="product-group">
-          <h3>ポール・接続部材</h3>
-          <div class="product-scroller">
-            <button class="case-card product-card" type="button" data-case-title="ポール・ジョイント・部材詳細" data-case-image="images/product/parts-overview.png" data-case-srcset="images/product/parts-overview.png 1707w">
-              <span class="image-frame case-image" data-fallback="No Image">
-                <img src="images/product/parts-overview.png" srcset="images/product/parts-overview.png 1707w" sizes="(max-width: 760px) 72vw, 260px" alt="アメリカンフェンスのポール、ジョイント、ヒンジ、ドアラッチの部材詳細" loading="lazy" decoding="async">
-              </span>
-              <strong>ポール・部材詳細</strong>
-            </button>
             <button class="case-card product-card" type="button" data-case-title="ジョイント部" data-case-image="images/product/panel-joint-detail.webp" data-case-srcset="images/product/panel-joint-detail.webp 588w">
-              <span class="image-frame case-image" data-fallback="No Image">
-                <img src="images/product/panel-joint-detail.webp" srcset="images/product/panel-joint-detail.webp 588w" sizes="(max-width: 760px) 72vw, 260px" alt="アメリカンフェンスのジョイント部" loading="lazy" decoding="async">
-              </span>
+              <span class="image-frame case-image" data-fallback="No Image"><img src="images/product/panel-joint-detail.webp" srcset="images/product/panel-joint-detail.webp 588w" sizes="(max-width: 760px) 44vw, 220px" alt="アメリカンフェンスのジョイント部" loading="lazy" decoding="async"></span>
               <strong>ジョイント部</strong>
             </button>
             <button class="case-card product-card" type="button" data-case-title="パネル端部" data-case-image="images/product/panel-corner-detail.webp" data-case-srcset="images/product/panel-corner-detail.webp 588w">
-              <span class="image-frame case-image" data-fallback="No Image">
-                <img src="images/product/panel-corner-detail.webp" srcset="images/product/panel-corner-detail.webp 588w" sizes="(max-width: 760px) 72vw, 260px" alt="アメリカンフェンスのパネル端部" loading="lazy" decoding="async">
-              </span>
+              <span class="image-frame case-image" data-fallback="No Image"><img src="images/product/panel-corner-detail.webp" srcset="images/product/panel-corner-detail.webp 588w" sizes="(max-width: 760px) 44vw, 220px" alt="アメリカンフェンスのパネル端部" loading="lazy" decoding="async"></span>
               <strong>パネル端部</strong>
             </button>
-          </div>
-        </div>
-
-        <div class="product-group product-group-compact">
-          <h3>門扉関連部材</h3>
-          <div class="product-scroller">
             <button class="case-card product-card" type="button" data-case-title="ドアラッチ・ヒンジ" data-case-image="images/product/parts-overview.png" data-case-srcset="images/product/parts-overview.png 1707w">
-              <span class="image-frame case-image" data-fallback="No Image">
-                <img src="images/product/parts-overview.png" srcset="images/product/parts-overview.png 1707w" sizes="(max-width: 760px) 72vw, 260px" alt="アメリカンフェンスのドアラッチとヒンジ" loading="lazy" decoding="async">
-              </span>
+              <span class="image-frame case-image" data-fallback="No Image"><img src="images/product/parts-overview.png" srcset="images/product/parts-overview.png 1707w" sizes="(max-width: 760px) 44vw, 220px" alt="アメリカンフェンスのドアラッチとヒンジ" loading="lazy" decoding="async"></span>
               <strong>ドアラッチ・ヒンジ</strong>
             </button>
           </div>
-          <p>ドアラッチとヒンジで、フェンスをドアとしても使用できます。</p>
-        </div>
+        </details>
       </div>
-
-      <button id="productEstimateButton" class="primary-button full-button" type="button">この商品で見積もりする</button>
     </section>
 
     <section id="estimateInput" class="card input-card" aria-labelledby="inputTitle">
