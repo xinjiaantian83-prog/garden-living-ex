@@ -977,18 +977,39 @@ h2 {
   scroll-margin-top: 18px;
 }
 
-.action-card {
-  border-color: #c9ddd1;
-  background:
-    linear-gradient(135deg, rgba(15, 106, 67, 0.08), transparent 46%),
-    #ffffff;
+.shipping-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
 }
 
-.shipping-card-content p:not(.section-kicker):not(.copy-status) {
-  color: var(--muted);
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 1.65;
+.shipping-inline button {
+  min-height: 40px;
+  border: 0;
+  background: transparent;
+  color: var(--accent-dark);
+  padding: 0 4px;
+  font-size: 12px;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.shipping-inline .copy-status {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.shipping-inline .copy-status:empty {
+  display: none;
 }
 
 .sub-metrics {
