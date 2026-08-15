@@ -1434,6 +1434,45 @@ h2 {
   margin-top: 0;
 }
 
+.notice-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.notice-details summary {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.4;
+  cursor: pointer;
+  list-style: none;
+}
+
+.notice-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.notice-details summary::after {
+  content: "+";
+  margin-left: 12px;
+  color: var(--accent);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.notice-details[open] summary::after {
+  content: "−";
+}
+
+.notice-details-content {
+  padding: 0 18px 18px;
+}
+
 .inquiry-note {
   margin: 0 0 6px;
   color: var(--muted);
