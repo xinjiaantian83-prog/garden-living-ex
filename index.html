@@ -195,6 +195,12 @@
       <p id="shippingStatus" class="copy-status" role="status" aria-live="polite"></p>
     </div>
 
+    <div class="share-inline" aria-label="見積URL共有">
+      <input id="shareUrl" type="hidden">
+      <button id="shareButton" type="button">見積URLをコピー</button>
+      <p id="shareStatus" class="copy-status" role="status" aria-live="polite"></p>
+    </div>
+
     <section class="card order-flow-card" aria-labelledby="orderFlowTitle">
       <div class="section-head order-flow-head">
         <h2 id="orderFlowTitle">ご注文の流れ</h2>
@@ -232,15 +238,6 @@
       <a id="lineInquiryButton" class="primary-button full-button inquiry-button" href="#" target="_blank" rel="noopener">この見積内容でLINE相談する</a>
       <a id="emailInquiryButton" class="ghost-button full-button inquiry-button inquiry-button-secondary" href="#">メールで問い合わせる</a>
       <p id="inquiryStatus" class="copy-status" role="status" aria-live="polite"></p>
-    </section>
-
-    <section class="card share-card" aria-labelledby="shareTitle">
-      <div class="section-head">
-        <h2 id="shareTitle">URL共有</h2>
-      </div>
-      <input id="shareUrl" class="share-url" type="text" readonly aria-label="共有URL">
-      <button id="shareButton" class="ghost-button full-button" type="button">共有URLをコピー</button>
-      <p id="shareStatus" class="copy-status" role="status" aria-live="polite"></p>
     </section>
 
     <section class="card notice-card" aria-labelledby="noticeTitle">

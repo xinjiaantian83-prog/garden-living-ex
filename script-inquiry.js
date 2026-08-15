@@ -1566,14 +1566,27 @@ function setupImages() {
 
 async function copyShareUrl() {
   elements.shareStatus.textContent = "";
+  let copied = false;
 
   try {
     await navigator.clipboard.writeText(elements.shareUrl.value);
-    elements.shareStatus.textContent = "共有URLをコピーしました。";
+    copied = true;
   } catch {
-    elements.shareUrl.focus();
-    elements.shareUrl.select();
-    elements.shareStatus.textContent = "コピーできませんでした。URLを選択したので手動でコピーしてください。";
+    const fallback = document.createElement("textarea");
+    fallback.value = elements.shareUrl.value;
+    fallback.style.position = "fixed";
+    fallback.style.opacity = "0";
+    document.body.appendChild(fallback);
+    fallback.select();
+    copied = document.execCommand("copy");
+    fallback.remove();
+  }
+
+  if (copied) {
+    elements.shareStatus.textContent = "コピーしました";
+    window.setTimeout(() => {
+      elements.shareStatus.textContent = "";
+    }, 2000);
   }
 }
 
