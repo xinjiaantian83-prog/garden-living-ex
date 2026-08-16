@@ -1836,3 +1836,433 @@ h2 {
     grid-column: 2;
   }
 }
+
+/* Estimate simulator: architectural material palette */
+#estimateInput,
+.drawing-card,
+.dimensions-card,
+.parts-card,
+.summary-grid,
+.shipping-inline,
+.share-inline,
+.inquiry-card {
+  --estimate-ink: #1c1c1a;
+  --estimate-muted: #77746e;
+  --estimate-line: #d8d4cc;
+  --estimate-soft: #f3f0e9;
+  --estimate-paper: #fffdf8;
+}
+
+#estimateInput,
+.drawing-card,
+.dimensions-card,
+.parts-card,
+.inquiry-card {
+  color: var(--estimate-ink);
+}
+
+#estimateInput {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: var(--estimate-line);
+  border-radius: 4px;
+  background: var(--estimate-paper);
+  box-shadow: 0 14px 40px rgba(35, 33, 29, 0.07);
+}
+
+#estimateInput::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  width: 58%;
+  height: 190px;
+  background: url("images/product/american-fence-residence.webp") center / cover no-repeat;
+  filter: grayscale(1);
+  opacity: 0.12;
+}
+
+#estimateInput::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: linear-gradient(100deg, var(--estimate-paper) 0 38%, rgba(255, 253, 248, 0.86) 70%, rgba(255, 253, 248, 0.68));
+  pointer-events: none;
+}
+
+#estimateInput > * {
+  position: relative;
+  z-index: 1;
+}
+
+#estimateInput .section-head {
+  min-height: 76px;
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--estimate-line);
+  padding-bottom: 14px;
+}
+
+#estimateInput .section-head h2 {
+  color: var(--estimate-ink);
+  font-size: clamp(25px, 5vw, 34px);
+  letter-spacing: 0.02em;
+}
+
+.shape-picker {
+  gap: 0;
+  margin-top: 22px;
+  border: 1px solid var(--estimate-line);
+}
+
+.shape-picker legend {
+  margin-bottom: 10px;
+  color: var(--estimate-ink);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.shape-button {
+  min-height: 52px;
+  border: 0;
+  border-right: 1px solid var(--estimate-line);
+  border-bottom: 1px solid var(--estimate-line);
+  border-radius: 0;
+  background: rgba(255, 253, 248, 0.84);
+  color: #5f5d58;
+  padding: 8px 10px;
+}
+
+.shape-button:nth-of-type(2n) {
+  border-right: 0;
+}
+
+.shape-button:nth-last-of-type(-n + 2) {
+  border-bottom: 0;
+}
+
+.shape-button.is-active {
+  border-color: transparent;
+  background: var(--estimate-ink);
+  color: #fffdf8;
+  box-shadow: none;
+}
+
+.shape-icon {
+  width: 27px;
+  height: 19px;
+}
+
+.shape-line,
+.shape-l,
+.shape-u,
+.shape-box {
+  border-width: 2px;
+}
+
+.segment-nav {
+  min-height: 96px;
+  border: 0;
+  border-bottom: 1px solid var(--estimate-line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.segment-nav-line.is-empty {
+  stroke: #bbb7af;
+}
+
+.segment-nav-line.is-complete {
+  stroke: #817e77;
+}
+
+.segment-nav-line.is-selected,
+.segment-nav-item:focus-visible .segment-nav-line {
+  stroke: var(--estimate-ink);
+}
+
+.segment-nav-label,
+.segment-nav-label.is-selected {
+  fill: var(--estimate-ink);
+}
+
+.segment-apply-button {
+  min-height: 42px;
+  border-color: var(--estimate-line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--estimate-ink);
+}
+
+.segment-apply-status {
+  border-radius: 2px;
+  background: #ece9e2;
+  color: #494741;
+}
+
+.segment-input-card,
+.segment-input-card.is-selected {
+  border-color: var(--estimate-line);
+  border-radius: 2px;
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: none;
+}
+
+.segment-input-card.is-selected {
+  border-left: 3px solid var(--estimate-ink);
+}
+
+.segment-input-head {
+  min-height: 52px;
+  padding: 10px 12px;
+}
+
+.segment-input-head h3,
+.selected-segment-card h3,
+.dimension-row strong {
+  color: var(--estimate-ink);
+}
+
+.segment-input-head span,
+.segment-input-head small,
+.field-row span,
+.proposal-option span {
+  color: var(--estimate-muted);
+}
+
+.field-row input,
+.field-row select {
+  min-height: 44px;
+  border: 1px solid var(--estimate-line);
+  border-radius: 2px;
+  background: #fffefa;
+}
+
+.field-row input:focus,
+.field-row select:focus {
+  border-color: var(--estimate-ink);
+  outline: 2px solid rgba(28, 28, 26, 0.1);
+}
+
+.gate-controls,
+.proposal-option {
+  border-color: var(--estimate-line);
+  border-radius: 2px;
+  background: #fffefa;
+}
+
+.toggle-row input,
+.proposal-option input {
+  accent-color: #282825;
+}
+
+#resetButton {
+  min-height: 44px;
+  border: 1px solid var(--estimate-line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--estimate-ink);
+  font-size: 14px;
+}
+
+.drawing-card,
+.dimensions-card,
+.parts-card {
+  border-color: var(--estimate-line);
+  border-radius: 4px;
+  background: var(--estimate-paper);
+  box-shadow: 0 10px 30px rgba(35, 33, 29, 0.05);
+}
+
+.drawing-card .section-head,
+.dimensions-card .section-head {
+  border-bottom: 1px solid var(--estimate-line);
+  padding-bottom: 10px;
+}
+
+.drawing-card .section-head h2,
+#dimensionsTitle {
+  color: var(--estimate-ink);
+  font-size: 19px;
+  letter-spacing: 0.06em;
+}
+
+.drawing-canvas {
+  border: 0;
+  border-radius: 0;
+  background: var(--estimate-paper);
+}
+
+.svg-paper {
+  fill: #fffdf8;
+  stroke: transparent;
+}
+
+.svg-panel-900 {
+  stroke: #252523;
+}
+
+.svg-panel-1500 {
+  stroke: #8f8b83;
+}
+
+.svg-gate {
+  stroke: #b49363;
+}
+
+.svg-post,
+.svg-post.is-selected {
+  fill: #fffdf8;
+  stroke: #1c1c1a;
+}
+
+.svg-dimension-line,
+.svg-dimension-guide {
+  stroke: #77736c;
+}
+
+.drawing-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  border-top: 1px solid var(--estimate-line);
+  padding-top: 10px;
+  color: var(--estimate-muted);
+  font-size: 11px;
+}
+
+.drawing-legend i {
+  border-radius: 0;
+}
+
+.legend-post { background: #252523; }
+.legend-panel900 { background: #252523; }
+.legend-panel1500 { background: #8f8b83; }
+.legend-gate { background: #b49363; }
+
+.selected-segment-card,
+.dimension-row,
+.part-card {
+  border-color: var(--estimate-line);
+  border-radius: 2px;
+  background: #fffefa;
+}
+
+.parts-card summary {
+  min-height: 48px;
+  border: 0;
+  border-bottom: 1px solid var(--estimate-line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--estimate-ink);
+}
+
+.parts-card summary::after,
+.notice-details summary::after {
+  color: var(--estimate-ink);
+}
+
+.total-card {
+  border: 0;
+  border-top: 1px solid var(--estimate-ink);
+  border-bottom: 1px solid var(--estimate-line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 22px 8px 24px;
+}
+
+.total-card span {
+  color: var(--estimate-muted);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+}
+
+.total-card strong {
+  color: var(--estimate-ink);
+  font-size: clamp(46px, 13vw, 76px);
+  letter-spacing: -0.04em;
+}
+
+.shipping-inline,
+.share-inline {
+  color: var(--estimate-muted);
+}
+
+.shipping-inline button,
+.share-inline button {
+  color: var(--estimate-ink);
+}
+
+.inquiry-card .primary-button {
+  border-radius: 2px;
+  background: #222220;
+  color: #fff;
+}
+
+.inquiry-card .ghost-button {
+  border: 1px solid #393936;
+  border-radius: 2px;
+  color: #222220;
+}
+
+@media (min-width: 760px) {
+  .shape-button {
+    border-right: 1px solid var(--estimate-line);
+    border-bottom: 0;
+  }
+
+  .shape-button:nth-of-type(2n) {
+    border-right: 1px solid var(--estimate-line);
+  }
+
+  .shape-button:last-of-type {
+    border-right: 0;
+  }
+
+  #estimateInput {
+    padding: 32px;
+  }
+
+  #estimateInput::before {
+    width: 48%;
+    height: 220px;
+  }
+}
+
+@media (max-width: 420px) {
+  #estimateInput,
+  .drawing-card,
+  .dimensions-card,
+  .parts-card {
+    padding: 17px;
+  }
+
+  #estimateInput::before {
+    width: 72%;
+    height: 155px;
+  }
+
+  #estimateInput .section-head {
+    min-height: 64px;
+  }
+
+  .shape-button {
+    grid-template-columns: 26px 1fr;
+    gap: 7px;
+    min-height: 48px;
+  }
+
+  .shape-button strong {
+    font-size: 14px;
+  }
+
+  .drawing-legend {
+    display: flex;
+    gap: 7px 12px;
+  }
+}
