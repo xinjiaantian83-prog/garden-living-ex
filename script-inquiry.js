@@ -63,7 +63,9 @@ const elements = {
   drawingCanvas: $("drawingCanvas"),
   oppositeDimensionNotice: $("oppositeDimensionNotice"),
   selectedSegmentDetail: $("selectedSegmentDetail"),
+  manufacturerTotalTaxIn: $("manufacturerTotalTaxIn"),
   customerTotalTaxIn: $("customerTotalTaxIn"),
+  savingsTotal: $("savingsTotal"),
   startEstimateButton: $("startEstimateButton"),
   productEstimateButton: $("productEstimateButton"),
   shippingButton: $("shippingButton"),
@@ -1275,13 +1277,15 @@ function renderParts(layout) {
   elements.partsList.innerHTML = layout.items.map((item) => {
     const segmentLabel = item.segmentIds && item.segmentIds.length ? `${item.segmentIds.join("・")}辺` : "全体";
     const gateNote = isGateRelatedItem(item) ? '<span class="parts-note parts-gate-note">門扉用</span>' : "";
+    const manufacturerSubtotalTaxIn = Math.round(item.subtotal * (1 + TAX_RATE));
     const customerSubtotalTaxIn = Math.round(item.subtotal * CUSTOMER_RATE * (1 + TAX_RATE));
     return `
       <div class="part-card">
         <h3>${escapeHtml(item.name)}${gateNote}<small class="parts-note">対象辺：${escapeHtml(segmentLabel)}</small></h3>
         <div class="part-values customer-part-values">
           <span><small>数量</small><strong>${item.qty.toLocaleString("ja-JP")}</strong></span>
-          <span><small>税込小計</small><strong>${yen(customerSubtotalTaxIn)}</strong></span>
+          <span class="manufacturer-part-price"><small>メーカー定価（税込）</small><del>${yen(manufacturerSubtotalTaxIn)}</del></span>
+          <span class="sales-part-price"><small>販売価格（税込）</small><strong>${yen(customerSubtotalTaxIn)}</strong></span>
         </div>
       </div>
     `;
@@ -1289,7 +1293,11 @@ function renderParts(layout) {
 }
 
 function renderPrice(price) {
+  const manufacturerTotalTaxIn = Math.round(price.listTotal * (1 + TAX_RATE));
+  const savings = Math.max(0, manufacturerTotalTaxIn - price.customerTotalTaxIn);
+  elements.manufacturerTotalTaxIn.textContent = yenMark(manufacturerTotalTaxIn);
   elements.customerTotalTaxIn.textContent = yenMark(price.customerTotalTaxIn);
+  elements.savingsTotal.textContent = `${yen(savings)}お得`;
 }
 
 function getCustomerWarningMessage(warning, segment) {

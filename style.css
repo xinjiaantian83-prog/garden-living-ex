@@ -1397,7 +1397,7 @@ h2 {
 }
 
 .customer-part-values {
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  grid-template-columns: minmax(54px, 0.55fr) minmax(0, 1fr) minmax(0, 1fr);
 }
 
 .part-values span {
@@ -1420,6 +1420,20 @@ h2 {
   font-size: 17px;
   line-height: 1.15;
   overflow-wrap: anywhere;
+}
+
+.part-values del {
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  opacity: 0.78;
+}
+
+.sales-part-price strong {
+  color: var(--estimate-ink, var(--text));
+  font-weight: 900;
 }
 
 .notice {
@@ -1824,6 +1838,19 @@ h2 {
     grid-template-columns: 1fr;
   }
 
+  .customer-part-values {
+    grid-template-columns: minmax(46px, 0.5fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .customer-part-values small {
+    font-size: 10px;
+  }
+
+  .customer-part-values strong,
+  .customer-part-values del {
+    font-size: 13px;
+  }
+
   .drawing-legend {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2182,10 +2209,42 @@ h2 {
   letter-spacing: 0.12em;
 }
 
+.manufacturer-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.manufacturer-total span {
+  display: inline;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.manufacturer-total del {
+  color: var(--estimate-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 16px;
+  opacity: 0.75;
+}
+
 .total-card strong {
   color: var(--estimate-ink);
   font-size: clamp(46px, 13vw, 76px);
   letter-spacing: -0.04em;
+}
+
+.savings-total {
+  display: inline-block;
+  margin: 13px 0 0;
+  padding: 5px 10px;
+  color: var(--estimate-ink);
+  border: 1px solid var(--estimate-line);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
 }
 
 .shipping-inline,
