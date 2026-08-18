@@ -1271,21 +1271,32 @@ function isGateRelatedItem(item) {
   return item.category === "gate" || item.sku === "hinge" || item.sku === "latch" || name.includes("門扉") || name.includes("ヒンジ") || name.includes("ラッチ");
 }
 
+function getPartPurchaseInfo(item) {
+  if (item.category === "panel") return { unit: "枚", message: "1枚から購入できます", officialSku: item.sku };
+  if (item.category === "post") return { unit: "本", message: "1本から購入できます", officialSku: item.sku };
+  const officialSku = item.sku === "hinge" ? "ST2-OAMHNJ" : item.sku === "latch" ? "ST2-OAMDRL" : item.sku;
+  return { unit: "個", message: "必要数だけ購入できます", officialSku };
+}
+
 function renderParts(layout) {
   const itemCount = layout.items.length;
   elements.partsSummary.textContent = itemCount > 0 ? `部材一覧を見る（${itemCount}品目）` : "部材一覧を見る";
   elements.partsList.innerHTML = layout.items.map((item) => {
     const segmentLabel = item.segmentIds && item.segmentIds.length ? `${item.segmentIds.join("・")}辺` : "全体";
     const gateNote = isGateRelatedItem(item) ? '<span class="parts-note parts-gate-note">門扉用</span>' : "";
-    const manufacturerSubtotalTaxIn = Math.round(item.subtotal * (1 + TAX_RATE));
+    const purchase = getPartPurchaseInfo(item);
+    const manufacturerUnitTaxIn = Math.round(item.unitPrice * (1 + TAX_RATE));
+    const customerUnitTaxIn = Math.round(item.unitPrice * CUSTOMER_RATE * (1 + TAX_RATE));
     const customerSubtotalTaxIn = Math.round(item.subtotal * CUSTOMER_RATE * (1 + TAX_RATE));
     return `
       <div class="part-card">
-        <h3>${escapeHtml(item.name)}${gateNote}<small class="parts-note">対象辺：${escapeHtml(segmentLabel)}</small></h3>
+        <h3>${escapeHtml(item.name)}${gateNote}<small class="parts-note">型番：${escapeHtml(purchase.officialSku)} ／ 対象辺：${escapeHtml(segmentLabel)}</small></h3>
+        <p class="single-purchase-badge">${purchase.message}</p>
         <div class="part-values customer-part-values">
-          <span><small>数量</small><strong>${item.qty.toLocaleString("ja-JP")}</strong></span>
-          <span class="manufacturer-part-price"><small>メーカー定価（税込）</small><del>${yen(manufacturerSubtotalTaxIn)}</del></span>
-          <span class="sales-part-price"><small>販売価格（税込）</small><strong>${yen(customerSubtotalTaxIn)}</strong></span>
+          <span><small>数量</small><strong>${item.qty.toLocaleString("ja-JP")}${purchase.unit}</strong></span>
+          <span class="manufacturer-part-price"><small>メーカー定価／1${purchase.unit}（税込）</small><del>${yen(manufacturerUnitTaxIn)}</del></span>
+          <span class="sales-part-price"><small>販売単価／1${purchase.unit}（税込）</small><strong>${yen(customerUnitTaxIn)}</strong></span>
+          <span class="sales-part-subtotal"><small>販売価格小計（税込）</small><strong>${yen(customerSubtotalTaxIn)}</strong></span>
         </div>
       </div>
     `;
