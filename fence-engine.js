@@ -788,7 +788,9 @@
     let panelEntries = [];
     let search = { pruned: false };
 
-    if (!Number.isFinite(targetMm) || targetMm <= 0) {
+    const compareTarget = segment.compareTarget !== false;
+
+    if (compareTarget && (!Number.isFinite(targetMm) || targetMm <= 0)) {
       pushWarning(warnings, "NON_POSITIVE_DIMENSION", "寸法0以下です。", { segmentId: id, targetMm: segment.targetMm });
     }
 
@@ -829,13 +831,14 @@
     const items = buildSegmentItems(id, panelEntries, validGateEntries, postSku, stats.posts, joints);
     const vector = getSegmentVector(config.shape, index);
 
-    warnForDifference(warnings, id, differenceMm);
+    if (compareTarget) warnForDifference(warnings, id, differenceMm);
 
     return {
       id,
       targetMm: safeTargetMm,
       actualMm,
       differenceMm,
+      compareTarget,
       mode,
       panels: panelEntries,
       gates: validGateEntries.map((gate) => ({

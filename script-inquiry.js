@@ -373,8 +373,9 @@ function resolveSegmentForEstimate(segment) {
     const panels = segment.panels.filter((panel) => panel.qty > 0);
     return {
       id: segment.id,
-      targetMm: segment.targetMm,
+      targetMm: 0,
       mode: "manual",
+      compareTarget: false,
       panels,
       gates: buildGatesForSegment(segment, panels.reduce((total, panel) => total + panel.qty, 0))
     };
@@ -386,6 +387,7 @@ function resolveSegmentForEstimate(segment) {
     id: segment.id,
     targetMm: segment.targetMm,
     mode: "manual",
+    compareTarget: true,
     panels,
     gates: buildGatesForSegment(segment, proposal ? proposal.panelCount : 0)
   };
@@ -1231,6 +1233,7 @@ function renderOppositeDimensionNotice(layout) {
 
 function renderSelectedSegmentDetail(layout) {
   const segment = layout.segments.find((item) => item.id === state.selectedSegmentId) || layout.segments[0];
+  const sourceSegment = state.segments.find((item) => item.id === segment?.id);
   if (!segment) {
     elements.selectedSegmentDetail.innerHTML = "";
     return;
@@ -1240,8 +1243,10 @@ function renderSelectedSegmentDetail(layout) {
     ? segment.panels.map((panel) => `<li>${panel.sku === "ST2-OAMF09" ? "900パネル" : "1500パネル"} × ${panel.qty}</li>`).join("")
     : "<li>パネルなし</li>";
   const gateLine = segment.gates.length ? `<li>門扉 × ${segment.gates.length}</li>` : "";
+  const comparesTarget = sourceSegment?.mode === "auto";
   const diff = segment.differenceMm === 0 ? "差なし" : `${segment.differenceMm > 0 ? "+" : ""}${segment.differenceMm.toLocaleString("ja-JP")}mm`;
-  const warningMessages = getCustomerWarnings({ ...layout, warnings: segment.warnings }, segment);
+  const warningMessages = getCustomerWarnings({ ...layout, warnings: segment.warnings }, segment)
+    .filter((message) => comparesTarget || !message.startsWith("ご希望寸法より"));
   const warningLines = warningMessages.length
     ? `
       <div class="segment-warnings" role="alert">
@@ -1256,8 +1261,9 @@ function renderSelectedSegmentDetail(layout) {
       <ul>
         ${panelLines}
         ${gateLine}
-        <li>設置時の幅目安 約${segment.actualMm.toLocaleString("ja-JP")}mm</li>
-        <li>希望寸法との差 ${diff}</li>
+        ${comparesTarget ? `<li>希望寸法 ${sourceSegment.targetMm.toLocaleString("ja-JP")}mm</li>` : ""}
+        <li>仕上がり目安寸法 約${segment.actualMm.toLocaleString("ja-JP")}mm</li>
+        ${comparesTarget ? `<li>希望寸法との差 ${diff}</li>` : ""}
         <li>柱 ${segment.posts}本</li>
         <li>ジョイント ${segment.joints}個</li>
       </ul>
