@@ -414,6 +414,29 @@ function getSerializableState() {
   };
 }
 
+const MERCHANT_PRODUCT_SKUS = new Set([
+  "ST2-OAMF09",
+  "ST2-OAMF15",
+  "ST2-OAMP15",
+  "ST2-OAMP20",
+  "ST2-OAMJNT",
+  "ST2-OAMHNJ",
+  "ST2-OAMDRL"
+]);
+
+function revealMerchantProductFromHash() {
+  const sku = decodeURIComponent(window.location.hash.slice(1));
+  if (!MERCHANT_PRODUCT_SKUS.has(sku)) return;
+  const target = document.getElementById(sku);
+  if (!target) return;
+  const details = target.closest("details");
+  if (details) details.open = true;
+  window.requestAnimationFrame(() => target.scrollIntoView({ block: "center" }));
+}
+
+window.addEventListener("hashchange", revealMerchantProductFromHash);
+revealMerchantProductFromHash();
+
 function calculateLayout() {
   return fenceEngine.estimateFenceLayout(buildLayoutInput());
 }

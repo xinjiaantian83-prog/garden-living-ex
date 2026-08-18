@@ -429,6 +429,14 @@ h2 {
 .sku-table td:first-child { font-weight: 800; }
 .sku-table small { display: block; color: var(--muted); font-size: 10px; }
 
+.sku-table tr[id] {
+  scroll-margin-top: 20px;
+}
+
+.sku-table tr[id]:target td {
+  background: var(--accent-soft);
+}
+
 .product-gallery {
   display: grid;
   gap: 18px;
