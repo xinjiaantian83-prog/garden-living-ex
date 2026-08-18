@@ -1284,6 +1284,20 @@ function getPartPurchaseInfo(item) {
   return { unit: "個", message: "必要数だけ購入できます", officialSku };
 }
 
+function getPartImage(officialSku) {
+  const base = "images/products/american-fence/official/thumbs/";
+  const images = {
+    "ST2-OAMF09": "american-fence-panel-900x900-product.jpg",
+    "ST2-OAMF15": "american-fence-panel-1500x900-product.jpg",
+    "ST2-OAMP15": "american-fence-pole-h1500-h2000-product.jpg",
+    "ST2-OAMP20": "american-fence-pole-h1500-h2000-product.jpg",
+    "ST2-OAMJNT": "american-fence-joint-product.jpg",
+    "ST2-OAMHNJ": "american-fence-hinge-product.jpg",
+    "ST2-OAMDRL": "american-fence-door-latch-product.jpg"
+  };
+  return images[officialSku] ? `${base}${images[officialSku]}` : "";
+}
+
 function renderParts(layout) {
   const itemCount = layout.items.length;
   elements.partsSummary.textContent = itemCount > 0 ? `部材一覧を見る（${itemCount}品目）` : "部材一覧を見る";
@@ -1291,12 +1305,16 @@ function renderParts(layout) {
     const segmentLabel = item.segmentIds && item.segmentIds.length ? `${item.segmentIds.join("・")}辺` : "全体";
     const gateNote = isGateRelatedItem(item) ? '<span class="parts-note parts-gate-note">門扉用</span>' : "";
     const purchase = getPartPurchaseInfo(item);
+    const partImage = getPartImage(purchase.officialSku);
     const manufacturerUnitTaxIn = Math.round(item.unitPrice * (1 + TAX_RATE));
     const customerUnitTaxIn = Math.round(item.unitPrice * CUSTOMER_RATE * (1 + TAX_RATE));
     const customerSubtotalTaxIn = Math.round(item.subtotal * CUSTOMER_RATE * (1 + TAX_RATE));
     return `
       <div class="part-card">
-        <h3>${escapeHtml(item.name)}${gateNote}<small class="parts-note">型番：${escapeHtml(purchase.officialSku)} ／ 対象辺：${escapeHtml(segmentLabel)}</small></h3>
+        <div class="part-card-head">
+          ${partImage ? `<img src="${partImage}" alt="OnlyOne Club ${escapeHtml(item.name)} ${escapeHtml(purchase.officialSku)}の商品画像" loading="lazy" decoding="async" width="800" height="800">` : ""}
+          <h3>${escapeHtml(item.name)}${gateNote}<small class="parts-note">型番：${escapeHtml(purchase.officialSku)} ／ 対象辺：${escapeHtml(segmentLabel)}</small></h3>
+        </div>
         <p class="single-purchase-badge">${purchase.message}</p>
         <div class="part-values customer-part-values">
           <span><small>数量</small><strong>${item.qty.toLocaleString("ja-JP")}${purchase.unit}</strong></span>
@@ -1571,7 +1589,7 @@ function setupImages() {
       elements.caseModalTitle.textContent = card.dataset.caseTitle || "施工事例";
       elements.caseModalImage.srcset = card.dataset.caseSrcset || "";
       elements.caseModalImage.src = card.dataset.caseImage || "";
-      elements.caseModalImage.alt = `${elements.caseModalTitle.textContent}の施工事例`;
+      elements.caseModalImage.alt = `${elements.caseModalTitle.textContent}の拡大画像`;
       elements.caseModalImage.closest(".image-frame")?.classList.remove("is-missing");
       elements.caseModal.hidden = false;
       elements.closeCaseModal.focus();

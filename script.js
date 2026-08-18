@@ -1510,7 +1510,7 @@ function setupImages() {
       elements.caseModalTitle.textContent = card.dataset.caseTitle || "施工事例";
       elements.caseModalImage.srcset = card.dataset.caseSrcset || "";
       elements.caseModalImage.src = card.dataset.caseImage || "";
-      elements.caseModalImage.alt = `${elements.caseModalTitle.textContent}の施工事例`;
+      elements.caseModalImage.alt = `${elements.caseModalTitle.textContent}の拡大画像`;
       elements.caseModalImage.closest(".image-frame")?.classList.remove("is-missing");
       elements.caseModal.hidden = false;
       elements.closeCaseModal.focus();
