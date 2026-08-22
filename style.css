@@ -2122,6 +2122,44 @@ h2 {
   }
 }
 
+.seo-entry-card {
+  margin: 18px 0;
+  padding: 20px;
+  border: 1px solid #dfe5e1;
+  border-radius: 14px;
+  background: #f7faf8;
+}
+
+.seo-entry-card h2 {
+  margin: 2px 0 14px;
+  font-size: 20px;
+  line-height: 1.45;
+}
+
+.seo-entry-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.seo-entry-links a {
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid #cfd9d3;
+  border-radius: 9px;
+  background: #fff;
+  color: #214c3a;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+@media (max-width: 520px) {
+  .seo-entry-card { padding: 17px; }
+  .seo-entry-links { grid-template-columns: 1fr; }
+}
+
 @media (min-width: 760px) {
   .app {
     max-width: 1040px;
