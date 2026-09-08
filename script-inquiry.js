@@ -1660,10 +1660,17 @@ function handleInquiryClick(event) {
   const reason = event.currentTarget.dataset.disabledReason;
   if (!reason) {
     const isLineInquiry = event.currentTarget === elements.lineInquiryButton;
-    trackAnalyticsEvent(isLineInquiry ? "line_inquiry_click" : "other_inquiry_click", {
+    trackAnalyticsEvent("click_estimate_contact", {
       product_name: "アメリカンフェンス",
       inquiry_method: isLineInquiry ? "line" : "email"
     });
+    if (!isLineInquiry) {
+      trackAnalyticsEvent("click_mail", {
+        product_name: "アメリカンフェンス",
+        inquiry_method: "email",
+        contact_location: "estimate_result"
+      });
+    }
     const shouldCopy = event.currentTarget.dataset.copyOnClick === "true";
     const message = event.currentTarget.dataset.inquiryMessage || "";
     if (shouldCopy) {

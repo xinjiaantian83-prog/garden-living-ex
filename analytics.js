@@ -26,6 +26,41 @@
   window.gtag("js", new Date());
   window.gtag("config", GA4_MEASUREMENT_ID, { send_page_view: true });
 
+  function cleanText(element) {
+    return (element.textContent || "").replace(/\s+/g, " ").trim().slice(0, 100);
+  }
+
+  function trackLinkEvent(eventName, element) {
+    window.glAnalytics.track(eventName, {
+      link_text: cleanText(element),
+      link_url: element.href || "",
+      page_location: window.location.href
+    });
+  }
+
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest("a[href]");
+    if (!link || link.dataset.gaSkipAuto === "true") return;
+
+    var eventName = link.dataset.gaEvent || "";
+    var href = link.getAttribute("href") || "";
+
+    if (!eventName && /(^|\.)lin\.ee$/i.test(link.hostname)) eventName = "click_line";
+    if (!eventName && href.indexOf("tel:") === 0) eventName = "click_tel";
+    if (!eventName && href.indexOf("mailto:") === 0) eventName = "click_mail";
+
+    if (eventName) trackLinkEvent(eventName, link);
+  });
+
+  document.addEventListener("submit", function (event) {
+    var form = event.target.closest("form[data-contact-form]");
+    if (!form) return;
+    window.glAnalytics.track("submit_contact", {
+      form_id: form.id || "contact_form",
+      page_location: window.location.href
+    });
+  });
+
   var script = document.createElement("script");
   script.async = true;
   script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GA4_MEASUREMENT_ID);
