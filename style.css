@@ -2291,7 +2291,7 @@ h2 {
 .share-inline,
 .inquiry-card {
   --estimate-ink: #1c1c1a;
-  --estimate-muted: #77746e;
+  --estimate-muted: #62645f;
   --estimate-line: #d8d4cc;
   --estimate-soft: #f3f0e9;
   --estimate-paper: #fffdf8;
@@ -2644,7 +2644,7 @@ h2 {
   color: var(--estimate-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 16px;
-  opacity: 0.75;
+  opacity: 1;
 }
 
 .total-card strong {

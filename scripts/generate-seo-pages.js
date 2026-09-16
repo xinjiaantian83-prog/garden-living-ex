@@ -29,11 +29,16 @@ const uses = [
 const imageBase = '/images/products/american-fence/official/';
 const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const productBySlug = Object.fromEntries(products.map(p=>[p.slug,p]));
-const org = {"@context":"https://schema.org","@type":"Organization","@id":`${base}/#organization`,name:'EXた組',url:'https://ex-takumi.net/',brand:{"@type":"Brand",name:'Garden Living',url:`${base}/`}};
+const siteName = 'ガーデンリビング';
+const org = {"@context":"https://schema.org","@type":"Organization","@id":`${base}/#organization`,name:'EXた組',url:'https://ex-takumi.net/',brand:{"@type":"Brand",name:siteName,alternateName:'Garden Living',url:`${base}/`}};
+
+function breadcrumb(items){
+  return {"@context":"https://schema.org","@type":"BreadcrumbList",itemListElement:items.map((item,index)=>({"@type":"ListItem",position:index+1,name:item.name,item:item.url}))};
+}
 
 function shell({title,description,canonical,image,body,jsonLd,type='website'}){
   const data = Array.isArray(jsonLd)?jsonLd:[org,jsonLd].filter(Boolean);
-  return `<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${canonical}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:type" content="${type}"><meta property="og:url" content="${canonical}"><meta property="og:site_name" content="Garden Living"><meta property="og:image" content="${image}"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">${JSON.stringify(data)}</script><link rel="stylesheet" href="/seo-pages.css"><script src="/analytics.js"></script></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/">Garden Living</a><nav class="nav"><a href="/products/">商品一覧</a><a href="/uses/">用途から選ぶ</a><a href="/#estimateInput">自動見積</a></nav></div></header>${body}<footer class="site-footer">運営：EXた組｜<a href="/legal/">特定商取引法に基づく表記</a>｜<a href="/returns/">返品・交換</a>｜<a href="${contractorUrl}" data-ga-event="click_contractor_recruit">施工店・業者の方はこちら</a></footer></body></html>`;
+  return `<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${canonical}"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:type" content="${type}"><meta property="og:url" content="${canonical}"><meta property="og:site_name" content="${siteName}｜Garden Living"><meta property="og:image" content="${image}"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">${JSON.stringify(data)}</script><link rel="stylesheet" href="/seo-pages.css"><script src="/analytics.js"></script></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/">${siteName}<small>Garden Living</small></a><nav class="nav"><a href="/products/">商品一覧</a><a href="/uses/">用途から選ぶ</a><a href="/#estimateInput">自動見積</a></nav></div></header>${body}<footer class="site-footer">運営：EXた組｜<a href="/legal/">特定商取引法に基づく表記</a>｜<a href="/returns/">返品・交換</a>｜<a href="${contractorUrl}" data-ga-event="click_contractor_recruit">施工店・業者の方はこちら</a></footer></body></html>`;
 }
 
 function relatedCards(slugs){return slugs.map(slug=>{const p=productBySlug[slug];return `<article class="card"><h3>${esc(p.name)}</h3><p>${esc(p.sku)}｜税込 ${p.price}円</p><a class="text-link" href="/products/${p.slug}/">商品詳細を見る</a></article>`}).join('')}
@@ -41,9 +46,9 @@ function relatedCards(slugs){return slugs.map(slug=>{const p=productBySlug[slug]
 function productPage(p){
   const canonical=`${base}/products/${p.slug}/`, image=`${base}${imageBase}${p.image}`;
   const desc=`OnlyOne Club ${p.name}（${p.sku}）を1点から全国配送。販売価格は税込${p.price}円。用途、必要部材、自動見積・LINE相談をご案内します。`;
-  const ld={"@context":"https://schema.org","@type":"Product",name:`OnlyOne Club ${p.name}`,sku:p.sku,brand:{"@type":"Brand",name:'OnlyOne Club'},image,description:desc,offers:{"@type":"Offer",url:canonical,priceCurrency:'JPY',price:p.rawPrice,seller:{"@type":"Organization",name:'Garden Living'}}};
+  const ld={"@context":"https://schema.org","@type":"Product",name:`OnlyOne Club ${p.name}`,sku:p.sku,brand:{"@type":"Brand",name:'OnlyOne Club'},image,description:desc,offers:{"@type":"Offer",url:canonical,priceCurrency:'JPY',price:p.rawPrice,seller:{"@type":"Organization",name:siteName}}};
   const body=`<main class="page"><nav class="breadcrumbs"><a href="/">トップ</a> / <a href="/products/">商品一覧</a> / ${esc(p.name)}</nav><section class="hero"><div><p class="eyebrow">ONLYONE CLUB / AMERICAN FENCE</p><h1>${esc(p.name)}</h1><p class="lead">${esc(p.use)}</p><div class="price-box"><small>Garden Living販売価格・税込／1点</small><div class="price">${p.price}円 <span>送料込（離島・一部地域を除く）</span></div><small>型番 ${esc(p.sku)}</small></div><div class="actions"><a class="btn" href="/#estimateInput">必要数を自動見積</a><a class="btn secondary" href="${lineUrl}" target="_blank" rel="noopener">この商品について相談する</a></div></div><figure class="hero-media"><img src="${imageBase}${p.image}" alt="OnlyOne Club ${esc(p.name)} ${esc(p.sku)}" width="800" height="800"></figure></section><section class="section"><h2>用途・必要部材</h2><ul class="facts"><li><strong>主な用途</strong>${esc(p.use)}</li><li><strong>必要部材</strong>${esc(p.parts)}</li><li><strong>購入単位</strong>1点から必要数だけ購入できます。</li><li><strong>配送</strong>全国配送。離島・一部地域は事前確認が必要です。</li></ul></section><section class="section"><h2>一緒に確認される商品</h2><div class="grid">${relatedCards(p.related)}</div></section><p class="note section">既存の返品・交換条件が適用されます。屋外設置は、地面・風当たり・境界条件に合う施工方法をご確認ください。</p><section class="cta"><h2>寸法から必要部材を確認</h2><p>設置形状と寸法を入力すると、パネル・ポール・ジョイントの目安を約30秒で確認できます。</p><div class="actions"><a class="btn" href="/#estimateInput">概算を確認して相談する</a></div></section></main>`;
-  return shell({title:`${p.name} ${p.sku}・価格｜Garden Living`,description:desc,canonical,image,body,jsonLd:[org,ld]});
+  return shell({title:`${p.name} ${p.sku}・価格｜${siteName}`,description:desc,canonical,image,body,jsonLd:[org,breadcrumb([{name:'トップ',url:`${base}/`},{name:'商品一覧',url:`${base}/products/`},{name:p.name,url:canonical}]),ld]});
 }
 
 function usePage(u){
@@ -53,7 +58,7 @@ function usePage(u){
   const desc=`${u.title}を検討中の方向けに、サイズ選び、必要部材、設置前の確認点、購入・見積方法を現場目線で簡潔に案内します。`;
   const body=`<main class="page"><nav class="breadcrumbs"><a href="/">トップ</a> / <a href="/uses/">用途から選ぶ</a> / ${esc(u.title)}</nav><section class="hero"><div><p class="eyebrow">AMERICAN FENCE IDEAS</p><h1>${esc(u.title)}</h1><p class="lead">${esc(u.desc)}</p><div class="actions"><a class="btn" href="/#estimateInput">寸法から自動見積</a><a class="btn secondary" href="${lineUrl}" target="_blank" rel="noopener">LINEで相談</a></div></div><figure class="hero-media"><img src="${imgPath}" alt="${esc(u.title)}の施工イメージ"></figure></section><section class="section"><h2>計画するときの確認ポイント</h2><ul class="facts">${u.points.map((x,i)=>`<li><strong>POINT ${i+1}</strong>${esc(x)}</li>`).join('')}</ul></section><section class="section"><h2>この用途で確認したい商品</h2><div class="grid">${relatedCards(u.links)}</div></section><section class="cta"><h2>必要数と価格をすぐ確認</h2><p>形状と寸法からパネル構成、必要部材、Garden Living価格を確認できます。</p><div class="actions"><a class="btn" href="/#estimateInput">自動見積もりを始める</a></div></section></main>`;
   const ld={"@context":"https://schema.org","@type":"Article",headline:u.title,description:desc,image,author:{"@id":`${base}/#organization`},publisher:{"@id":`${base}/#organization`},mainEntityOfPage:canonical};
-  return shell({title:`${u.title}｜Garden Living`,description:desc,canonical,image,body,jsonLd:[org,ld],type:'article'});
+  return shell({title:`${u.title}｜${siteName}`,description:desc,canonical,image,body,jsonLd:[org,breadcrumb([{name:'トップ',url:`${base}/`},{name:'用途から選ぶ',url:`${base}/uses/`},{name:u.title,url:canonical}]),ld],type:'article'});
 }
 
 function listing(kind){
@@ -66,7 +71,7 @@ function listing(kind){
   const body=`<main class="page"><nav class="breadcrumbs"><a href="/">トップ</a> / ${title}</nav><section class="hero copy-only"><div><p class="eyebrow">GARDEN LIVING</p><h1>${title}</h1><p class="lead">${description}</p></div></section><section class="section"><div class="grid">${cards}${extra}</div></section><section class="cta"><h2>どれを選ぶか迷ったら</h2><p>設置寸法から必要部材を自動計算できます。</p><div class="actions"><a class="btn" href="/#estimateInput">自動見積もりを開く</a></div></section></main>`;
   const canonical=`${base}/${kind}/`;
   const itemList={"@context":"https://schema.org","@type":"ItemList",name:title,itemListElement:items.map((x,i)=>({"@type":"ListItem",position:i+1,url:`${canonical}${x.slug}/`}))};
-  return shell({title:`${title}｜Garden Living`,description,canonical,image:`${base}/images/hero-1600.jpg`,body,jsonLd:[org,itemList]});
+  return shell({title:`${title}｜${siteName}`,description,canonical,image:`${base}/images/hero-1600.jpg`,body,jsonLd:[org,breadcrumb([{name:'トップ',url:`${base}/`},{name:title,url:canonical}]),itemList]});
 }
 
 function guide(kind){
@@ -77,7 +82,7 @@ function guide(kind){
   const facts=diy?['設置形状と各辺の寸法を測る','パネルの高さ・張り方向を選ぶ','自動見積でポール・ジョイント数を確認する','LINEまたはメールで配送可否・納期を確認する']:['表示価格は送料込（離島・一部地域を除く）','大型商品のため配送先・搬入条件を事前確認','配送可否と納期は注文確定前にご案内','破損や誤配送は返品・交換条件に沿って対応'];
   const body=`<main class="page"><nav class="breadcrumbs"><a href="/">トップ</a> / ${title}</nav><section class="hero copy-only"><div><p class="eyebrow">BUY & SHIPPING GUIDE</p><h1>${title}</h1><p class="lead">${desc}</p><div class="actions"><a class="btn" href="/#estimateInput">自動見積もりを開く</a><a class="btn secondary" href="${lineUrl}" target="_blank" rel="noopener">LINEで相談</a></div></div></section><section class="section"><h2>${diy?'購入までの4ステップ':'配送前にご確認ください'}</h2><ul class="facts">${facts.map((x,i)=>`<li><strong>${diy?'STEP':'CHECK'} ${i+1}</strong>${x}</li>`).join('')}</ul></section><section class="section"><h2>主な商品</h2><div class="grid">${relatedCards(['fence-900x900','fence-1500x900','joint'])}</div></section><p class="note section">価格・型番・返品条件は各商品ページおよび返品・交換ページをご確認ください。</p></main>`;
   const ld={"@context":"https://schema.org","@type":"WebPage",name:title,description:desc,url:canonical,about:{"@type":"Product",name:'OnlyOne Club アメリカンフェンス'}};
-  return shell({title:`${title}｜Garden Living`,description:desc,canonical,image:`${base}/images/hero-1600.jpg`,body,jsonLd:[org,ld]});
+  return shell({title:`${title}｜${siteName}`,description:desc,canonical,image:`${base}/images/hero-1600.jpg`,body,jsonLd:[org,breadcrumb([{name:'トップ',url:`${base}/`},{name:title,url:canonical}]),ld]});
 }
 
 function write(rel,html){const file=path.join(root,rel,'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,html)}
