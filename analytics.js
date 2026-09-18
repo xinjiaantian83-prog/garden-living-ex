@@ -31,11 +31,14 @@
   }
 
   function trackLinkEvent(eventName, element) {
-    window.glAnalytics.track(eventName, {
+    var parameters = {
       link_text: cleanText(element),
       link_url: element.href || "",
       page_location: window.location.href
-    });
+    };
+    if (element.dataset.gaProductSku) parameters.product_sku = element.dataset.gaProductSku;
+    if (element.dataset.gaProductName) parameters.product_name = element.dataset.gaProductName;
+    window.glAnalytics.track(eventName, parameters);
   }
 
   document.addEventListener("click", function (event) {

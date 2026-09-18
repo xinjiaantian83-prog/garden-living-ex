@@ -23,11 +23,23 @@ const LINE_URL = "https://lin.ee/sQNwZUv";
 const CONTACT_EMAIL = "xinjiaantian83@gmail.com";
 let estimateTrackingStarted = false;
 let lastTrackedEstimateSignature = "";
+let estimateStartTracked = false;
 
 function trackAnalyticsEvent(eventName, parameters = {}) {
   if (window.glAnalytics && typeof window.glAnalytics.track === "function") {
     window.glAnalytics.track(eventName, parameters);
   }
+}
+
+function trackEstimateStart(startLocation, extra = {}) {
+  if (estimateStartTracked) return;
+  estimateStartTracked = true;
+  estimateTrackingStarted = true;
+  trackAnalyticsEvent("estimate_start", {
+    product_name: "アメリカンフェンス",
+    start_location: startLocation,
+    ...extra
+  });
 }
 
 function trackEstimateResult(layout, price) {
@@ -265,6 +277,15 @@ function migrateLegacyState(legacy) {
 function loadState() {
   const stateFromUrl = urlState.readStateFromUrl(window.location.search, INITIAL_STATE);
   if (stateFromUrl) return normalizeState(stateFromUrl);
+
+  const params = new URLSearchParams(window.location.search);
+  const requestedSku = params.get("panel");
+  if (requestedSku === "ST2-OAMF09" || requestedSku === "ST2-OAMF15") {
+    const preset = normalizeState(INITIAL_STATE);
+    preset.segments[0].targetMm = requestedSku === "ST2-OAMF09" ? 900 : 1500;
+    preset.segments[0].adoptedProposal = "large";
+    return preset;
+  }
 
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
@@ -757,6 +778,7 @@ function scheduleDeferredRender() {
 function handleSegmentInput(event) {
   const control = event.target.closest("[data-segment][data-field]");
   if (!control) return;
+  trackEstimateStart("estimate_input");
   if (event.type === "input" && isDeferredNumericControl(control)) {
     pendingNumericEdits.set(getNumericEditKey(control.dataset.segment, control.dataset.field), control.value);
     return;
@@ -817,6 +839,7 @@ function handleSegmentApplyClick(event) {
 }
 
 function updateShape(shape) {
+  trackEstimateStart("shape_selector");
   commitActiveNumericEdit(false);
   commitPendingNumericEditsForSegment(state.selectedSegmentId, false);
   const currentById = new Map(state.segments.map((segment) => [segment.id, segment]));
@@ -1509,20 +1532,14 @@ function render() {
 
 function setupInputs() {
   elements.startEstimateButton.addEventListener("click", () => {
-    estimateTrackingStarted = true;
-    trackAnalyticsEvent("estimate_start", {
-      product_name: "アメリカンフェンス",
-      start_location: "hero"
-    });
+    trackEstimateStart("hero");
+    trackEstimateResult(calculateLayout(), calculatePrice(calculateLayout()));
     document.getElementById("estimateInput").scrollIntoView({ behavior: "smooth", block: "start" });
   });
   if (elements.productEstimateButton) {
     elements.productEstimateButton.addEventListener("click", () => {
-      estimateTrackingStarted = true;
-      trackAnalyticsEvent("estimate_start", {
-        product_name: "アメリカンフェンス",
-        start_location: "product_section"
-      });
+      trackEstimateStart("product_section");
+      trackEstimateResult(calculateLayout(), calculatePrice(calculateLayout()));
       document.getElementById("estimateInput").scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }
@@ -1660,17 +1677,12 @@ function handleInquiryClick(event) {
   const reason = event.currentTarget.dataset.disabledReason;
   if (!reason) {
     const isLineInquiry = event.currentTarget === elements.lineInquiryButton;
-    trackAnalyticsEvent("click_estimate_contact", {
+    trackAnalyticsEvent(isLineInquiry ? "estimate_line_click" : "estimate_email_click", {
       product_name: "アメリカンフェンス",
-      inquiry_method: isLineInquiry ? "line" : "email"
+      inquiry_method: isLineInquiry ? "line" : "email",
+      estimate_total: calculatePrice(calculateLayout()).customerTotalTaxIn,
+      currency: "JPY"
     });
-    if (!isLineInquiry) {
-      trackAnalyticsEvent("click_mail", {
-        product_name: "アメリカンフェンス",
-        inquiry_method: "email",
-        contact_location: "estimate_result"
-      });
-    }
     const shouldCopy = event.currentTarget.dataset.copyOnClick === "true";
     const message = event.currentTarget.dataset.inquiryMessage || "";
     if (shouldCopy) {
@@ -1698,6 +1710,12 @@ function handleInquiryClick(event) {
 
 setupInputs();
 setupImages();
+const initialParams = new URLSearchParams(window.location.search);
+if (initialParams.has(urlState.PARAM_NAME)) {
+  trackEstimateStart("shared_estimate_url");
+} else if (initialParams.get("panel")) {
+  trackEstimateStart("product_page", { product_sku: initialParams.get("panel") });
+}
 trackAnalyticsEvent("american_fence_product_view", {
   product_name: "アメリカンフェンス",
   page_type: "product_estimate"
