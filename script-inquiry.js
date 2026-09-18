@@ -1683,6 +1683,15 @@ function handleInquiryClick(event) {
       estimate_total: calculatePrice(calculateLayout()).customerTotalTaxIn,
       currency: "JPY"
     });
+    if (!isLineInquiry) {
+      event.preventDefault();
+      const emailUrl = event.currentTarget.href;
+      window.setTimeout(() => {
+        window.location.href = emailUrl;
+      }, 180);
+      elements.inquiryStatus.textContent = "";
+      return;
+    }
     const shouldCopy = event.currentTarget.dataset.copyOnClick === "true";
     const message = event.currentTarget.dataset.inquiryMessage || "";
     if (shouldCopy) {
